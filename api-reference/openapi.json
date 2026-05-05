@@ -557,7 +557,8 @@
         "summary": "Получить список доступных моделей",
         "tags": [
           "Модели"
-        ]
+        ],
+        "security": []
       }
     },
     "/v1/models/catalog": {
@@ -720,7 +721,8 @@
         "summary": "Получить каталог моделей с фильтрацией",
         "tags": [
           "Модели"
-        ]
+        ],
+        "security": []
       }
     },
     "/v1/models/{path}": {
@@ -4083,13 +4085,13 @@
           "cost_rub": {
             "type": "object",
             "description": "Стоимость запроса в рублях",
-            "example": 0.00001,
+            "example": 1e-05,
             "nullable": true
           },
           "cost": {
             "type": "object",
             "description": "Стоимость запроса в рублях (alias для cost_rub)",
-            "example": 0.00001,
+            "example": 1e-05,
             "nullable": true
           }
         },
