@@ -3,6 +3,7 @@ title: "Статистика хранилища"
 description: "Получение статистики использования хранилища"
 openapi: GET /v1/storage/stats
 playground: interactive
+icon: "chart-pie"
 ---
 
 Этот эндпоинт доступен только пользователям с ролью admin в организации. Обычный API-ключ не подойдёт — требуется JWT-авторизация через консоль.
@@ -10,7 +11,7 @@ playground: interactive
 ## Пример
 
 ```bash
-curl "https://polza.ai/api/v1/storage/stats" \
+curl "https://speshu.ai/api/v1/storage/stats" \
   -H "Authorization: Bearer YOUR_JWT_TOKEN"
 ```
 

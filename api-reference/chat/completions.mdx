@@ -1,5 +1,5 @@
 ---
-title: "Chat Completions"
+title: "Запрос чату"
 description: "Основной эндпоинт для генерации текста и диалогов"
 openapi: /openapi.json POST /v1/chat/completions
 playground: interactive
@@ -117,7 +117,7 @@ icon: "message"
 
 <CodeGroup>
     ```bash cURL theme={null}
-    curl -X POST "https://polza.ai/api/v1/chat/completions" \
+    curl -X POST "https://speshu.ai/api/v1/chat/completions" \
     -H "Authorization: Bearer YOUR_API_KEY" \
     -H "Content-Type: application/json" \
     -d '{
@@ -130,7 +130,7 @@ icon: "message"
     from openai import OpenAI
 
     client = OpenAI(
-    base_url="https://polza.ai/api/v1",
+    base_url="https://speshu.ai/api/v1",
     api_key="YOUR_API_KEY"
     )
 
@@ -147,7 +147,7 @@ icon: "message"
     import OpenAI from 'openai';
 
     const client = new OpenAI({
-    baseURL: 'https://polza.ai/api/v1',
+    baseURL: 'https://speshu.ai/api/v1',
     apiKey: 'YOUR_API_KEY'
 });
 

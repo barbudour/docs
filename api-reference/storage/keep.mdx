@@ -3,6 +3,7 @@ title: "Сохранить файл навсегда"
 description: "Перевод файла в постоянное хранение"
 openapi: PATCH /v1/storage/files/{id}/keep
 playground: interactive
+icon: "floppy-disk"
 ---
 
 ## Описание
@@ -17,7 +18,7 @@ playground: interactive
 ## Пример
 
 ```bash
-curl -X PATCH "https://polza.ai/api/v1/storage/files/file_abc123/keep" \
+curl -X PATCH "https://speshu.ai/api/v1/storage/files/file_abc123/keep" \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
@@ -30,7 +31,7 @@ curl -X PATCH "https://polza.ai/api/v1/storage/files/file_abc123/keep" \
   "mimeType": "image/png",
   "source": "AI_GENERATION",
   "storagePolicy": "PERMANENT",
-  "url": "https://cdn.polza.ai/files/file_abc123.png",
+  "url": "https://cdn.speshu.ai/files/file_abc123.png",
   "size": 245760,
   "externalUserId": null,
   "expiresAt": null,

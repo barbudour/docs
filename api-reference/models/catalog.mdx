@@ -1,8 +1,9 @@
 ---
-title: "GET Models Catalog"
+title: "Models Catalog"
 description: "Каталог моделей с фильтрацией и пагинацией"
 openapi: GET /v1/models/catalog
 playground: interactive
+icon: "table-cells"
 ---
 
 ## О каталоге моделей
@@ -28,15 +29,15 @@ playground: interactive
 ## Примеры
 
 ```bash
-curl "https://polza.ai/api/v1/models/catalog?search=claude&type=chat"
+curl "https://speshu.ai/api/v1/models/catalog?search=claude&type=chat"
 ```
 
 ```bash
-curl "https://polza.ai/api/v1/models/catalog?inputModalities=image&type=chat&sortBy=price&sortOrder=asc"
+curl "https://speshu.ai/api/v1/models/catalog?inputModalities=image&type=chat&sortBy=price&sortOrder=asc"
 ```
 
 ```bash
-curl "https://polza.ai/api/v1/models/catalog?type=chat&page=2&limit=10"
+curl "https://speshu.ai/api/v1/models/catalog?type=chat&page=2&limit=10"
 ```
 
 ## Ответ (200)

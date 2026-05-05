@@ -1,16 +1,16 @@
 ---
 title: "Начало работы"
-description: "Регистрация, получение API ключа и первые шаги с Polza.ai"
+description: "Регистрация, получение API ключа и первые шаги с Speshu"
 icon: "rocket"
 ---
 
-В этом гайде вы узнаете как зарегистрироваться в Polza.ai, создать организацию, получить API ключ и пополнить баланс.
+В этом гайде вы узнаете как зарегистрироваться в Speshu, создать организацию, получить API ключ и пополнить баланс.
 
 ## Регистрация и создание организации
 
 <Steps>
   <Step title="Зарегистрируйтесь">
-    Перейдите на [polza.ai/dashboard](https://polza.ai/dashboard) и создайте аккаунт.
+    Перейдите на [speshu.ai/dashboard](https://speshu.ai/dashboard) и создайте аккаунт.
   </Step>
 
   <Step title="Создайте организацию">
@@ -22,7 +22,7 @@ icon: "rocket"
 
 <Steps>
   <Step title="Перейдите в раздел API Keys">
-    Откройте [polza.ai/dashboard/api-keys](https://polza.ai/dashboard/api-keys) в личном кабинете.
+    Откройте [speshu.ai/dashboard/api-keys](https://speshu.ai/dashboard/api-keys) в личном кабинете.
   </Step>
 
   <Step title="Создайте новый ключ">
@@ -40,13 +40,13 @@ icon: "rocket"
 
 ## Пополнение баланса
 
-Polza.ai работает по модели оплаты за использование (pay-as-you-go). Пополните баланс одним из способов:
+Speshu работает по модели оплаты за использование (pay-as-you-go). Пополните баланс одним из способов:
 
 <AccordionGroup>
   <Accordion title="Банковская карта" icon="credit-card">
     Мгновенное пополнение картами Visa, Mastercard, МИР. Минимальная сумма — 100 рублей.
 
-    1. Перейдите в раздел [Баланс](https://polza.ai/dashboard/billing)
+    1. Перейдите в раздел [Баланс](https://speshu.ai/dashboard/billing)
     2. Нажмите «Пополнить баланс»
     3. Введите сумму и оплатите картой
   </Accordion>
@@ -72,7 +72,7 @@ Polza.ai работает по модели оплаты за использов
 
 Чтобы не пропустить момент, когда баланс заканчивается, настройте уведомления:
 
-1. Перейдите в [Настройки](https://polza.ai/dashboard/billing)
+1. Перейдите в [Настройки](https://speshu.ai/dashboard/billing)
 2. В разделе «Уведомления» включите опцию «Уведомлять о низком балансе»
 3. Укажите порог баланса (например, 500 рублей)
 
@@ -84,9 +84,9 @@ Polza.ai работает по модели оплаты за использов
 
 <CodeGroup>
   ```typescript TypeScript theme={null}
-  const response = await fetch('https://polza.ai/api/v1/balance', {
+  const response = await fetch('https://speshu.ai/api/v1/balance', {
     headers: {
-      'Authorization': 'Bearer <POLZA_AI_API_KEY>'
+      'Authorization': 'Bearer <SPESHU_AI_API_KEY>'
     }
   });
 
@@ -99,8 +99,8 @@ Polza.ai работает по модели оплаты за использов
   import requests
 
   response = requests.get(
-      'https://polza.ai/api/v1/balance',
-      headers={'Authorization': 'Bearer <POLZA_AI_API_KEY>'}
+      'https://speshu.ai/api/v1/balance',
+      headers={'Authorization': 'Bearer <SPESHU_AI_API_KEY>'}
   )
 
   data = response.json()
@@ -109,8 +109,8 @@ Polza.ai работает по модели оплаты за использов
   ```
 
   ```bash cURL theme={null}
-  curl "https://polza.ai/api/v1/balance" \
-    -H "Authorization: Bearer <POLZA_AI_API_KEY>"
+  curl "https://speshu.ai/api/v1/balance" \
+    -H "Authorization: Bearer <SPESHU_AI_API_KEY>"
   ```
 </CodeGroup>
 

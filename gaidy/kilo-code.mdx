@@ -1,6 +1,6 @@
 ---
 title: "Kilo Code (VS Code / PyCharm)"
-description: "Интеграция Polza.ai с Kilo Code — AI-ассистент для VS Code и PyCharm"
+description: "Интеграция Speshu с Kilo Code — AI-ассистент для VS Code и PyCharm"
 icon: "k"
 ---
 
@@ -10,7 +10,7 @@ Kilo Code — open source AI-ассистент с поддержкой авто
 
 * VS Code или PyCharm (Community / Professional)
 * Расширение / плагин Kilo Code
-* API-ключ [polza.ai](https://polza.ai/dashboard)
+* API-ключ [speshu.ai](https://speshu.ai/dashboard)
 
 <Tabs>
     <Tab title="VS Code">
@@ -30,7 +30,7 @@ Kilo Code — open source AI-ассистент с поддержкой авто
         4. **Откройте Kilo Code**
         После установки нажмите на иконку Kilo Code в боковой панели.
 
-        ## Настройка подключения к Polza.ai
+        ## Настройка подключения к Speshu
 
         1. **Откройте настройки Kilo Code**
         Нажмите на иконку шестерёнки в панели Kilo Code — откроется **Kilo Settings**.
@@ -45,17 +45,17 @@ Kilo Code — open source AI-ассистент с поддержкой авто
 
         4. **Заполните настройки подключения**
 
-        * **Provider ID:** `polza`
-        * **Display name:** `Polza.ai`
-        * **Base URL:** `https://polza.ai/api/v1`
-        * **API key:** Ваш ключ с [polza.ai/dashboard](https://polza.ai/dashboard)
+        * **Provider ID:** `speshu`
+        * **Display name:** `Speshu`
+        * **Base URL:** `https://speshu.ai/api/v1`
+        * **API key:** Ваш ключ с [speshu.ai/dashboard](https://speshu.ai/dashboard)
         * **Models:** Например, `moonshotai/kimi-k2.5`
 
         <Note>
             После ввода Base URL список моделей подгрузится автоматически. Если этого не произошло — введите Model ID вручную.
         </Note>
 
-        <img src="https://mintcdn.com/polza/zYHtnihje8-Izexu/images/kilo-code/kilocode-connection-settings.png?fit=max&auto=format&n=zYHtnihje8-Izexu&q=85&s=276e52e00377a855ba8d6daf0f01f4f1" alt="Настройки подключения Polza.ai в Kilo Code" width="1538" height="986" data-path="images/kilo-code/kilocode-connection-settings.png" />
+        <img src="https://mintcdn.com/polza/zYHtnihje8-Izexu/images/kilo-code/kilocode-connection-settings.png?fit=max&auto=format&n=zYHtnihje8-Izexu&q=85&s=276e52e00377a855ba8d6daf0f01f4f1" alt="Настройки подключения Speshu в Kilo Code" width="1538" height="986" data-path="images/kilo-code/kilocode-connection-settings.png" />
 
         ## Возможности
 
@@ -72,12 +72,12 @@ Kilo Code — open source AI-ассистент с поддержкой авто
             <Accordion title="Ошибка аутентификации">
                 * Проверьте правильность API-ключа
                 * Убедитесь в наличии средств на балансе
-                * Проверьте Base URL: `https://polza.ai/api/v1`
+                * Проверьте Base URL: `https://speshu.ai/api/v1`
             </Accordion>
 
             <Accordion title="Модель не найдена">
                 * Проверьте правильность Model ID
-                * Актуальный список: [polza.ai/models](https://polza.ai/models)
+                * Актуальный список: [speshu.ai/models](https://speshu.ai/models)
                 * Попробуйте ввести Base URL повторно — список моделей подгрузится заново
             </Accordion>
 
@@ -115,7 +115,7 @@ Kilo Code — open source AI-ассистент с поддержкой авто
         5. **Примените изменения**
         Нажмите **OK** и перезапустите PyCharm если потребуется.
 
-        ## Настройка подключения к Polza.ai
+        ## Настройка подключения к Speshu
 
         1. **Откройте панель Kilo Code**
         После установки иконка Kilo Code появится на правой боковой панели PyCharm. Нажмите на неё.
@@ -124,20 +124,20 @@ Kilo Code — open source AI-ассистент с поддержкой авто
         В панели Kilo Code нажмите на иконку настроек (**Settings**).
 
         3. **Создайте Configuration Profile**
-        В разделе **Providers** нажмите **+** рядом с полем **Configuration Profile**. Введите название, например `Polza.ai`.
+        В разделе **Providers** нажмите **+** рядом с полем **Configuration Profile**. Введите название, например `Speshu`.
 
         4. **Заполните настройки подключения**
 
         * **API Provider:** выберите `OpenAI Compatible`
-        * **Base URL:** `https://polza.ai/api/v1`
-        * **API Key:** Ваш ключ с [polza.ai/dashboard](https://polza.ai/dashboard)
+        * **Base URL:** `https://speshu.ai/api/v1`
+        * **API Key:** Ваш ключ с [speshu.ai/dashboard](https://speshu.ai/dashboard)
         * **Model:** выберите из списка или введите вручную, например `moonshotai/kimi-k2.5`
 
         <Note>
             После ввода Base URL список моделей подгрузится автоматически.
         </Note>
 
-        <img src="https://mintcdn.com/polza/zYHtnihje8-Izexu/images/kilo-code/kilocode-pycharm-provider-settings.png?fit=max&auto=format&n=zYHtnihje8-Izexu&q=85&s=7cadfd9c46bf85e58d003f3170d9a06e" alt="Настройки провайдера Polza.ai в Kilo Code для PyCharm" width="1634" height="926" data-path="images/kilo-code/kilocode-pycharm-provider-settings.png" />
+        <img src="https://mintcdn.com/polza/zYHtnihje8-Izexu/images/kilo-code/kilocode-pycharm-provider-settings.png?fit=max&auto=format&n=zYHtnihje8-Izexu&q=85&s=7cadfd9c46bf85e58d003f3170d9a06e" alt="Настройки провайдера Speshu в Kilo Code для PyCharm" width="1634" height="926" data-path="images/kilo-code/kilocode-pycharm-provider-settings.png" />
 
         5. **Сохраните настройки**
         Нажмите **Save**.
@@ -157,12 +157,12 @@ Kilo Code — open source AI-ассистент с поддержкой авто
             <Accordion title="Ошибка аутентификации">
                 * Проверьте правильность API-ключа
                 * Убедитесь в наличии средств на балансе
-                * Проверьте Base URL: `https://polza.ai/api/v1`
+                * Проверьте Base URL: `https://speshu.ai/api/v1`
             </Accordion>
 
             <Accordion title="Модель не найдена">
                 * Проверьте правильность Model ID
-                * Актуальный список: [polza.ai/models](https://polza.ai/models)
+                * Актуальный список: [speshu.ai/models](https://speshu.ai/models)
                 * Попробуйте ввести Base URL повторно — список моделей подгрузится заново
             </Accordion>
 
@@ -191,5 +191,5 @@ Kilo Code — open source AI-ассистент с поддержкой авто
 | DeepSeek V3       | `deepseek/deepseek-v3`        | 72–74%    | Самая экономичная из топовых         |
 
 <Note>
-    Актуальный список всех моделей: [polza.ai/models](https://polza.ai/models)
+    Актуальный список всех моделей: [speshu.ai/models](https://speshu.ai/models)
 </Note>

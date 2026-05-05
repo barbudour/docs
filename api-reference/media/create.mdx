@@ -1,8 +1,9 @@
 ---
-title: "POST Media"
+title: "Media"
 description: "Универсальный API генерации медиа (изображения, видео, аудио)"
 openapi: POST /v1/media
 playground: interactive
+icon: "photo-film"
 ---
 
 ## О Media API
@@ -31,8 +32,8 @@ playground: interactive
 #### Пример с base64
 
 ```bash
-curl -X POST "https://polza.ai/api/v1/media" \
-  -H "Authorization: Bearer <POLZA_AI_API_KEY>" \
+curl -X POST "https://speshu.ai/api/v1/media" \
+  -H "Authorization: Bearer <SPESHU_AI_API_KEY>" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "seedream-3",
@@ -74,7 +75,7 @@ Base64 поддерживается как с data URI (`data:image/png;base64,.
 
 ### Хранение результатов
 
-При генерации медиа контента Polza.ai автоматически:
+При генерации медиа контента Speshu автоматически:
 
 1. Скачивает результат у AI провайдера на собственное хранилище
 2. Хранит файлы 7 дней для повторного доступа

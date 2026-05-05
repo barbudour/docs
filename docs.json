@@ -1,7 +1,16 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "speshu_docs",
+  "name": "Документация SpeShu.AI",
+  "api": {
+    "mdx": {
+      "server": "https://speshu.ai/api/v1",
+      "auth": {
+        "method": "bearer",
+        "name": "Authorization"
+      }
+    }
+  },
   "colors": {
     "primary": "#16A34A",
     "light": "#07C983",
@@ -141,61 +150,18 @@
                   "api-reference/chat/completions"
                 ]
               },
-              {
-                "group": "Изображения",
-                "pages": [
-                  "POST /v2/images/generations"
-                ]
-              },
-              {
-                "group": "Медиа",
-                "pages": [
-                  "POST /v1/media",
-                  "GET /v1/media/{id}",
-                  "POST /v1/media/{id}/operations"
-                ]
-              },
-              {
-                "group": "Аудио",
-                "pages": [
-                  "POST /v1/audio/transcriptions",
-                  "POST /v1/audio/speech"
-                ]
-              },
-              {
-                "group": "Эмбеддинги",
-                "pages": [
-                  "POST /v1/embeddings"
-                ]
-              },
+
               {
                 "group": "Модели",
                 "pages": [
-                  "GET /v1/models",
-                  "GET /v1/models/catalog"
+                  "api-reference/models/list"
                 ]
               },
-              {
-                "group": "Хранилище",
-                "pages": [
-                  "POST /v1/storage/upload",
-                  "GET /v1/storage/files",
-                  "GET /v1/storage/files/{id}",
-                  "DELETE /v1/storage/files/{id}",
-                  "PATCH /v1/storage/files/{id}/keep",
-                  "GET /v1/storage/stats"
-                ]
-              },
-              {
-                "group": "История",
-                "pages": [
-                  "GET /v1/history/generations"
-                ]
-              },
+
               {
                 "group": "Другое",
                 "pages": [
-                  "GET /v1/balance"
+                  "api-reference/other/balance"
                 ]
               }
             ]

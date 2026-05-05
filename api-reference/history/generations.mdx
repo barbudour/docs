@@ -3,6 +3,7 @@ title: "История генераций"
 description: "Получение истории генераций с фильтрацией и пагинацией"
 openapi: GET /v1/history/generations
 playground: interactive
+icon: "clock-rotate-left"
 ---
 
 ## Авторизация
@@ -43,12 +44,12 @@ playground: interactive
 ## Примеры
 
 ```bash
-curl "https://polza.ai/api/v1/history/generations" \
+curl "https://speshu.ai/api/v1/history/generations" \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
 ```bash
-curl "https://polza.ai/api/v1/history/generations?requestType=chat&status=completed&dateFrom=2025-01-01T00:00:00Z&limit=50" \
+curl "https://speshu.ai/api/v1/history/generations?requestType=chat&status=completed&dateFrom=2025-01-01T00:00:00Z&limit=50" \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
@@ -56,7 +57,7 @@ curl "https://polza.ai/api/v1/history/generations?requestType=chat&status=comple
 import requests
 
 response = requests.get(
-    'https://polza.ai/api/v1/history/generations',
+    'https://speshu.ai/api/v1/history/generations',
     headers={'Authorization': 'Bearer YOUR_API_KEY'},
     params={
         'requestType': 'chat',
@@ -136,7 +137,7 @@ GET /v1/history/generations/{id}
 ### Пример
 
 ```bash
-curl "https://polza.ai/api/v1/history/generations/gen_581761234567890123" \
+curl "https://speshu.ai/api/v1/history/generations/gen_581761234567890123" \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 

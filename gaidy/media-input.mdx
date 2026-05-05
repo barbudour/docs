@@ -51,8 +51,8 @@ completion = client.chat.completions.create(
 ```
 
 ```bash
-curl -X POST "https://polza.ai/api/v1/chat/completions" \
-  -H "Authorization: Bearer <POLZA_AI_API_KEY>" \
+curl -X POST "https://speshu.ai/api/v1/chat/completions" \
+  -H "Authorization: Bearer <SPESHU_AI_API_KEY>" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "openai/gpt-4o",
@@ -120,7 +120,7 @@ completion = client.chat.completions.create(
 
 ### 3. Загрузка в хранилище
 
-Для больших файлов рекомендуется сначала загрузить в хранилище Polza.ai, а затем использовать полученный URL:
+Для больших файлов рекомендуется сначала загрузить в хранилище Speshu, а затем использовать полученный URL:
 
 **Внимание:** Хранилище поддерживает только изображения, видео и аудио. Для документов (PDF, DOCX, TXT) используйте base64 напрямую.
 
@@ -130,9 +130,9 @@ const formData = new FormData();
 formData.append('file', fileBlob, 'photo.jpg');
 formData.append('purpose', 'assistants');
 
-const uploadResponse = await fetch('https://polza.ai/api/v1/storage/upload', {
+const uploadResponse = await fetch('https://speshu.ai/api/v1/storage/upload', {
   method: 'POST',
-  headers: { 'Authorization': 'Bearer <POLZA_AI_API_KEY>' },
+  headers: { 'Authorization': 'Bearer <SPESHU_AI_API_KEY>' },
   body: formData
 });
 
@@ -160,8 +160,8 @@ const completion = await openai.chat.completions.create({
 # 1. Загрузка изображения в хранилище
 with open("photo.jpg", "rb") as f:
     upload_response = requests.post(
-        "https://polza.ai/api/v1/storage/upload",
-        headers={"Authorization": "Bearer <POLZA_AI_API_KEY>"},
+        "https://speshu.ai/api/v1/storage/upload",
+        headers={"Authorization": "Bearer <SPESHU_AI_API_KEY>"},
         files={"file": ("photo.jpg", f, "image/jpeg")},
         data={"purpose": "assistants"}
     )
@@ -438,7 +438,7 @@ completion = client.chat.completions.create(
 Не все модели поддерживают все типы медиа. Проверяйте поле `input_modalities` в ответе `/v1/models`:
 
 ```bash
-curl https://polza.ai/api/v1/models | jq '.data[] | select(.architecture.input_modalities | contains(["image"]))'
+curl https://speshu.ai/api/v1/models | jq '.data[] | select(.architecture.input_modalities | contains(["image"]))'
 ```
 
 **Добавляйте контекст в промпте**

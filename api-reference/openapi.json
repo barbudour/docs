@@ -1506,17 +1506,17 @@
           {
             "lang": "bash",
             "label": "cURL",
-            "source": "curl --request POST \\\n  --url https://polza.ai/api/v1/media \\\n  --header 'Authorization: Bearer <POLZA_AI_API_KEY>' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"model\": \"google/gemini-3.1-flash-image-preview\",\n    \"input\": {\n      \"prompt\": \"Фотореалистичный портрет бизнесмена в современном офисе\",\n      \"aspect_ratio\": \"1:1\",\n      \"image_resolution\": \"2K\",\n      \"output_format\": \"png\"\n    }\n  }'"
+            "source": "curl --request POST \\\n  --url https://speshu.ai/api/v1/media \\\n  --header 'Authorization: Bearer <SPESHU_AI_API_KEY>' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"model\": \"google/gemini-3.1-flash-image-preview\",\n    \"input\": {\n      \"prompt\": \"Фотореалистичный портрет бизнесмена в современном офисе\",\n      \"aspect_ratio\": \"1:1\",\n      \"image_resolution\": \"2K\",\n      \"output_format\": \"png\"\n    }\n  }'"
           },
           {
             "lang": "python",
             "label": "Python",
-            "source": "import requests\n\nresponse = requests.post(\n    'https://polza.ai/api/v1/media',\n    headers={'Authorization': 'Bearer <POLZA_AI_API_KEY>'},\n    json={\n        'model': 'google/gemini-3.1-flash-image-preview',\n        'input': {\n            'prompt': 'Фотореалистичный портрет бизнесмена в современном офисе',\n            'aspect_ratio': '1:1',\n            'image_resolution': '2K',\n            'output_format': 'png'\n        }\n    }\n)\nprint(response.json())"
+            "source": "import requests\n\nresponse = requests.post(\n    'https://speshu.ai/api/v1/media',\n    headers={'Authorization': 'Bearer <SPESHU_AI_API_KEY>'},\n    json={\n        'model': 'google/gemini-3.1-flash-image-preview',\n        'input': {\n            'prompt': 'Фотореалистичный портрет бизнесмена в современном офисе',\n            'aspect_ratio': '1:1',\n            'image_resolution': '2K',\n            'output_format': 'png'\n        }\n    }\n)\nprint(response.json())"
           },
           {
             "lang": "javascript",
             "label": "TypeScript",
-            "source": "const response = await fetch('https://polza.ai/api/v1/media', {\n  method: 'POST',\n  headers: {\n    'Authorization': 'Bearer <POLZA_AI_API_KEY>',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    model: 'google/gemini-3.1-flash-image-preview',\n    input: {\n      prompt: 'Фотореалистичный портрет бизнесмена в современном офисе',\n      aspect_ratio: '1:1',\n      image_resolution: '2K',\n      output_format: 'png'\n    }\n  })\n});\nconst result = await response.json();"
+            "source": "const response = await fetch('https://speshu.ai/api/v1/media', {\n  method: 'POST',\n  headers: {\n    'Authorization': 'Bearer <SPESHU_AI_API_KEY>',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    model: 'google/gemini-3.1-flash-image-preview',\n    input: {\n      prompt: 'Фотореалистичный портрет бизнесмена в современном офисе',\n      aspect_ratio: '1:1',\n      image_resolution: '2K',\n      output_format: 'png'\n    }\n  })\n});\nconst result = await response.json();"
           }
         ],
         "responses": {
@@ -1544,7 +1544,7 @@
     }
   },
   "info": {
-    "title": "Polza.ai API",
+    "title": "Speshu API",
     "description": "AI агрегатор — унифицированный доступ к сотням AI моделей",
     "version": "1.0",
     "contact": {}
@@ -1552,7 +1552,7 @@
   "tags": [],
   "servers": [
     {
-      "url": "https://polza.ai/api",
+      "url": "https://speshu.ai/api",
       "description": "Production"
     }
   ],
@@ -1562,7 +1562,7 @@
         "scheme": "bearer",
         "bearerFormat": "API Key",
         "type": "http",
-        "description": "API ключ передаётся в заголовке: Authorization: Bearer <POLZA_AI_API_KEY>"
+        "description": "API ключ передаётся в заголовке: Authorization: Bearer <SPESHU_AI_API_KEY>"
       }
     },
     "schemas": {
@@ -1602,7 +1602,7 @@
           },
           "url": {
             "type": "string",
-            "example": "https://s3.polza.ai/f/211837/2026/01/t_c2446f3cf93ac9f5.png",
+            "example": "https://s3.speshu.ai/f/211837/2026/01/t_c2446f3cf93ac9f5.png",
             "description": "URL файла"
           },
           "size": {
@@ -5557,8 +5557,8 @@
           "files": {
             "description": "URL файлов результата генерации (изображения, видео)",
             "example": [
-              "https://storage.polza.ai/files/image1.png",
-              "https://storage.polza.ai/files/image2.png"
+              "https://storage.speshu.ai/files/image1.png",
+              "https://storage.speshu.ai/files/image2.png"
             ],
             "nullable": true,
             "type": "array",

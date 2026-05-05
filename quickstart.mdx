@@ -5,9 +5,9 @@ description: "Начните работу за несколько минут"
 
 ## Шаг 1: Получите API ключ
 
-1. Зарегистрируйтесь на [polza.ai/dashboard](https://polza.ai/dashboard)
+1. Зарегистрируйтесь на [speshu.ai/dashboard](https://speshu.ai/dashboard)
 2. Пополните баланс в личном кабинете
-3. Создайте API-ключ в разделе [API Keys](https://polza.ai/dashboard/api-keys)
+3. Создайте API-ключ в разделе [API Keys](https://speshu.ai/dashboard/api-keys)
 
 ## Шаг 2: Используйте API
 
@@ -16,8 +16,8 @@ description: "Начните работу за несколько минут"
   import OpenAI from 'openai';
 
   const openai = new OpenAI({
-    baseURL: 'https://polza.ai/api/v1',
-    apiKey: '<POLZA_AI_API_KEY>'
+    baseURL: 'https://speshu.ai/api/v1',
+    apiKey: '<SPESHU_AI_API_KEY>'
   });
 
   async function main() {
@@ -38,8 +38,8 @@ description: "Начните работу за несколько минут"
   from openai import OpenAI
 
   client = OpenAI(
-    base_url="https://polza.ai/api/v1",
-    api_key="<POLZA_AI_API_KEY>",
+    base_url="https://speshu.ai/api/v1",
+    api_key="<SPESHU_AI_API_KEY>",
   )
 
   completion = client.chat.completions.create(
@@ -54,8 +54,8 @@ description: "Начните работу за несколько минут"
   ```
 
   ```bash cURL theme={null}
-  curl -X POST "https://polza.ai/api/v1/chat/completions" \
-    -H "Authorization: Bearer <POLZA_AI_API_KEY>" \
+  curl -X POST "https://speshu.ai/api/v1/chat/completions" \
+    -H "Authorization: Bearer <SPESHU_AI_API_KEY>" \
     -H "Content-Type: application/json" \
     -d '{
       "model": "openai/gpt-4o",
@@ -66,10 +66,10 @@ description: "Начните работу за несколько минут"
 
 ## Шаг 3: Выберите модель
 
-Полный каталог моделей доступен на [polza.ai/models](https://polza.ai/models) или через API:
+Полный каталог моделей доступен на [speshu.ai/models](https://speshu.ai/models) или через API:
 
 ```bash theme={null}
-curl https://polza.ai/api/v1/models
+curl https://speshu.ai/api/v1/models
 ```
 
 ### Популярные модели

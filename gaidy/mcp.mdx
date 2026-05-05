@@ -1,10 +1,10 @@
 ---
 title: "MCP-сервер"
-description: "Подключение AI-агентов к аккаунту Polza.AI через Model Context Protocol"
+description: "Подключение AI-агентов к аккаунту Speshu через Model Context Protocol"
 icon: "plug"
 ---
 
-MCP (Model Context Protocol) — открытый стандарт, который позволяет AI-агентам взаимодействовать с внешними сервисами через структурированные инструменты. MCP-сервер Polza.AI даёт вашему агенту доступ к управлению аккаунтом: баланс, API-ключи, организации, история генераций и другое.
+MCP (Model Context Protocol) — открытый стандарт, который позволяет AI-агентам взаимодействовать с внешними сервисами через структурированные инструменты. MCP-сервер Speshu даёт вашему агенту доступ к управлению аккаунтом: баланс, API-ключи, организации, история генераций и другое.
 
 <Note>
     MCP-сервер работает в режиме бета-тестирования. Возможны изменения в API и ограничениях.
@@ -12,14 +12,14 @@ MCP (Model Context Protocol) — открытый стандарт, которы
 
 ## Требования
 
-* Аккаунт [Polza.AI](https://polza.ai/dashboard) с пополненным балансом
+* Аккаунт [Speshu](https://speshu.ai/dashboard) с пополненным балансом
 * AI-агент с поддержкой MCP (Claude Code, Cursor, Cline, Windsurf и др.)
 
 ## Создание токена
 
 <Steps>
     <Step title="Откройте раздел MCP">
-        Перейдите в [polza.ai/dashboard/mcp](https://polza.ai/dashboard/mcp) и нажмите «Создать токен».
+        Перейдите в [speshu.ai/dashboard/mcp](https://speshu.ai/dashboard/mcp) и нажмите «Создать токен».
     </Step>
 
     <Step title="Настройте токен">
@@ -42,7 +42,7 @@ MCP (Model Context Protocol) — открытый стандарт, которы
         Выполните команду в терминале:
 
         ```bash theme={null}
-        claude mcp add --transport http polza-ai https://polza.ai/api/mcp \
+        claude mcp add --transport http speshu-ai https://speshu.ai/api/mcp \
         --header "Authorization: Bearer <ваш-токен>"
         ```
 
@@ -63,9 +63,9 @@ MCP (Model Context Protocol) — открытый стандарт, которы
         ```json theme={null}
         {
             "mcpServers": {
-            "polza-ai": {
+            "speshu-ai": {
             "type": "http",
-            "url": "https://polza.ai/api/mcp",
+            "url": "https://speshu.ai/api/mcp",
             "headers": {
             "Authorization": "Bearer <ваш-токен>"
         }
@@ -90,7 +90,7 @@ MCP (Model Context Protocol) — открытый стандарт, которы
 
 | Параметр    | Значение                            |
 | ----------- | ----------------------------------- |
-| URL         | `https://polza.ai/api/mcp`          |
+| URL         | `https://speshu.ai/api/mcp`          |
 | Транспорт   | HTTP (Streamable HTTP)              |
 | Авторизация | `Authorization: Bearer <ваш-токен>` |
 
@@ -142,7 +142,7 @@ MCP (Model Context Protocol) — открытый стандарт, которы
 
 ## Управление токенами
 
-* **Просмотр** — все активные токены отображаются на странице [MCP](https://polza.ai/dashboard/mcp) с датой создания и последнего использования
+* **Просмотр** — все активные токены отображаются на странице [MCP](https://speshu.ai/dashboard/mcp) с датой создания и последнего использования
 * **Отзыв** — нажмите «Отозвать» рядом с токеном. Действие необратимо — агент немедленно потеряет доступ
 * **Срок действия** — при создании можно указать дату истечения. После неё токен перестанет работать автоматически
 
@@ -151,7 +151,7 @@ MCP (Model Context Protocol) — открытый стандарт, которы
 <AccordionGroup>
     <Accordion title="Ошибка аутентификации (401)">
         * Убедитесь что токен скопирован полностью, без лишних пробелов
-        * Проверьте что токен не был отозван на странице [MCP](https://polza.ai/dashboard/mcp)
+        * Проверьте что токен не был отозван на странице [MCP](https://speshu.ai/dashboard/mcp)
         * Если указан срок действия — убедитесь что токен не истёк
     </Accordion>
 
@@ -167,7 +167,7 @@ MCP (Model Context Protocol) — открытый стандарт, которы
     </Accordion>
 
     <Accordion title="MCP-сервер не подключается">
-        * Убедитесь что используете URL `https://polza.ai/api/mcp`
+        * Убедитесь что используете URL `https://speshu.ai/api/mcp`
         * Проверьте что заголовок авторизации передаётся в формате `Authorization: Bearer <токен>`
         * Убедитесь что ваш клиент поддерживает HTTP-транспорт (Streamable HTTP)
     </Accordion>
@@ -177,7 +177,7 @@ MCP (Model Context Protocol) — открытый стандарт, которы
 
 <CardGroup cols={2}>
     <Card title="Claude Code" icon="terminal" href="/integracii/claude-code">
-        Настройте Claude Code для работы через Polza.AI
+        Настройте Claude Code для работы через Speshu
     </Card>
 
     <Card title="Начало работы" icon="rocket" href="/gaidy/getting-started">

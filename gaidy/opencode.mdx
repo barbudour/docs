@@ -1,6 +1,6 @@
 ---
 title: "OpenCode"
-description: "Интеграция Polza.ai с OpenCode — терминальным AI-ассистентом"
+description: "Интеграция Speshu с OpenCode — терминальным AI-ассистентом"
 icon: "terminal"
 ---
 
@@ -40,10 +40,10 @@ icon: "terminal"
 
 ## Быстрая настройка
 
-Используйте скрипт автонастройки для подключения Polza.ai к OpenCode:
+Используйте скрипт автонастройки для подключения Speshu к OpenCode:
 
 ```bash theme={null}
-curl -fsSL https://s3.polza.ai/scripts/opencode.sh | bash
+curl -fsSL https://s3.speshu.ai/scripts/opencode.sh | bash
 ```
 
 <Steps>
@@ -52,7 +52,7 @@ curl -fsSL https://s3.polza.ai/scripts/opencode.sh | bash
     </Step>
 
     <Step title="Введите API-ключ">
-        Получите ключ в [личном кабинете](https://polza.ai/dashboard/api-keys) и вставьте его в терминал.
+        Получите ключ в [личном кабинете](https://speshu.ai/dashboard/api-keys) и вставьте его в терминал.
     </Step>
 
     <Step title="Готово">
@@ -60,7 +60,7 @@ curl -fsSL https://s3.polza.ai/scripts/opencode.sh | bash
 
         * Проверит валидность ключа
         * Загрузит список доступных моделей
-        * Создаст или обновит `opencode.json` с провайдером `polza`
+        * Создаст или обновит `opencode.json` с провайдером `speshu`
     </Step>
 </Steps>
 
@@ -71,11 +71,11 @@ curl -fsSL https://s3.polza.ai/scripts/opencode.sh | bash
 ```json theme={null}
 {
   "provider": {
-    "polza": {
+    "speshu": {
       "npm": "@ai-sdk/openai-compatible",
       "options": {
-        "baseURL": "https://polza.ai/api/v1",
-        "apiKey": "<POLZA_AI_API_KEY>"
+        "baseURL": "https://speshu.ai/api/v1",
+        "apiKey": "<SPESHU_AI_API_KEY>"
       },
       "models": {
         "anthropic/claude-sonnet-4": {
@@ -141,12 +141,12 @@ opencode
 
     <Accordion title="Ошибка аутентификации">
         * Проверьте правильность API-ключа
-        * Убедитесь в наличии средств на [балансе](https://polza.ai/dashboard)
+        * Убедитесь в наличии средств на [балансе](https://speshu.ai/dashboard)
     </Accordion>
 
     <Accordion title="Модель не найдена">
         * Проверьте правильность Model ID
-        * Актуальный список моделей: [polza.ai/models](https://polza.ai/models)
+        * Актуальный список моделей: [speshu.ai/models](https://speshu.ai/models)
         * Перезапустите скрипт настройки для обновления списка
     </Accordion>
 
@@ -165,4 +165,4 @@ opencode
 ## Поддержка
 
 * [Документация OpenCode](https://opencode.ai/docs)
-* [Страница поддержки Polza.ai](/glavnoe/support)
+* [Страница поддержки Speshu](/glavnoe/support)

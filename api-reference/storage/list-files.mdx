@@ -3,6 +3,7 @@ title: "Список файлов"
 description: "Получение списка файлов с фильтрацией и пагинацией"
 openapi: GET /v1/storage/files
 playground: interactive
+icon: "list"
 ---
 
 ## Параметры запроса
@@ -33,7 +34,7 @@ playground: interactive
 ## Пример
 
 ```bash
-curl "https://polza.ai/api/v1/storage/files?fileType=IMAGE&page=1&limit=10&sortBy=createdAt&sortOrder=desc" \
+curl "https://speshu.ai/api/v1/storage/files?fileType=IMAGE&page=1&limit=10&sortBy=createdAt&sortOrder=desc" \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
@@ -48,7 +49,7 @@ curl "https://polza.ai/api/v1/storage/files?fileType=IMAGE&page=1&limit=10&sortB
       "mimeType": "image/png",
       "source": "USER_UPLOAD",
       "storagePolicy": "PERMANENT",
-      "url": "https://cdn.polza.ai/files/file_abc123.png",
+      "url": "https://cdn.speshu.ai/files/file_abc123.png",
       "size": 245760,
       "externalUserId": null,
       "expiresAt": null,

@@ -22,8 +22,8 @@ icon: "plug"
 import OpenAI from 'openai';
 
 const openai = new OpenAI({
-  baseURL: 'https://polza.ai/api/v1',
-  apiKey: '<POLZA_AI_API_KEY>'
+  baseURL: 'https://speshu.ai/api/v1',
+  apiKey: '<SPESHU_AI_API_KEY>'
 });
 
 const completion = await openai.chat.completions.create({
@@ -42,8 +42,8 @@ const completion = await openai.chat.completions.create({
 from openai import OpenAI
 
 client = OpenAI(
-    base_url="https://polza.ai/api/v1",
-    api_key="<POLZA_AI_API_KEY>"
+    base_url="https://speshu.ai/api/v1",
+    api_key="<SPESHU_AI_API_KEY>"
 )
 
 completion = client.chat.completions.create(

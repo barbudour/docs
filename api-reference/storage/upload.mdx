@@ -3,6 +3,7 @@ title: "Загрузить файл"
 description: "Загрузка файла в хранилище"
 openapi: POST /v1/storage/upload
 playground: interactive
+icon: "upload"
 ---
 
 ## Способы загрузки
@@ -34,14 +35,14 @@ Storage API поддерживает два способа загрузки фа
 ## Примеры
 
 ```bash
-curl -X POST "https://polza.ai/api/v1/storage/upload" \
+curl -X POST "https://speshu.ai/api/v1/storage/upload" \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -F "file=@image.png" \
   -F "storagePolicy=PERMANENT"
 ```
 
 ```bash
-curl -X POST "https://polza.ai/api/v1/storage/upload" \
+curl -X POST "https://speshu.ai/api/v1/storage/upload" \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -60,7 +61,7 @@ curl -X POST "https://polza.ai/api/v1/storage/upload" \
   "mimeType": "image/png",
   "source": "USER_UPLOAD",
   "storagePolicy": "PERMANENT",
-  "url": "https://cdn.polza.ai/files/file_abc123.png",
+  "url": "https://cdn.speshu.ai/files/file_abc123.png",
   "size": 245760,
   "externalUserId": null,
   "expiresAt": null,

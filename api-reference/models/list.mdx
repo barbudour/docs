@@ -1,8 +1,9 @@
 ---
-title: "GET Models"
+title: "Список моделей"
 description: "Получение списка доступных моделей"
 openapi: GET /v1/models
 playground: interactive
+icon: "list"
 ---
 
 Этот эндпоинт не требует аутентификации и доступен всем пользователям.
@@ -17,22 +18,22 @@ playground: interactive
 ## Примеры
 
 ```bash
-curl "https://polza.ai/api/v1/models"
+curl "https://speshu.ai/api/v1/models"
 ```
 
 ```bash
-curl "https://polza.ai/api/v1/models?type=chat"
+curl "https://speshu.ai/api/v1/models?type=chat"
 ```
 
 ```bash
-curl "https://polza.ai/api/v1/models?type=chat&include_providers=true"
+curl "https://speshu.ai/api/v1/models?type=chat&include_providers=true"
 ```
 
 ```python
 from openai import OpenAI
 
 client = OpenAI(
-    base_url="https://polza.ai/api/v1",
+    base_url="https://speshu.ai/api/v1",
     api_key="YOUR_API_KEY"
 )
 

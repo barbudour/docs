@@ -1,0 +1,68 @@
+{
+  "menu": [
+    {
+      "group": "Изображения",
+      "pages": [
+        "api-reference/images/generations"
+      ]
+    },
+    {
+      "group": "Медиа",
+      "pages": [
+        "api-reference/media/create",
+        "api-reference/media/status",
+        "api-reference/media/operations"
+      ]
+    },
+    {
+      "group": "Аудио",
+      "pages": [
+        "api-reference/audio/transcriptions",
+        "api-reference/audio/speech"
+      ]
+    },
+    {
+      "group": "Эмбеддинги",
+      "pages": ["api-reference/embeddings/create"]
+    },
+    {
+      "group": "Хранилище",
+      "pages": [
+        "api-reference/storage/upload",
+        "api-reference/storage/list-files",
+        "api-reference/storage/get-file",
+        "api-reference/storage/delete-file",
+        "api-reference/storage/keep",
+        "api-reference/storage/stats"
+      ]
+    },
+    {
+      "group": "История",
+      "pages": [
+        "api-reference/history/generations"
+      ]
+    },
+    {
+      "group": "Текстовая генерация",
+      "pages": [
+        "api-reference/chat/completions",
+        "api-reference/responses/create"
+      ]
+    },
+
+    {
+      "group": "Модели",
+      "pages": [
+        "api-reference/models/list",
+        "api-reference/models/catalog"
+      ]
+    },
+
+    {
+      "group": "Другое",
+      "pages": [
+        "api-reference/other/balance"
+      ]
+    }
+  ]
+}

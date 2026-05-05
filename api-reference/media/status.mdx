@@ -1,8 +1,9 @@
 ---
-title: "GET Media Status"
+title: "Media Status"
 description: "Получение статуса генерации медиа"
 openapi: GET /v1/media/{id}
 playground: interactive
+icon: "spinner"
 ---
 
 ## Polling
@@ -28,7 +29,7 @@ playground: interactive
   "created": 1703001244,
   "model": "google/gemini-2.5-flash-image",
   "data": {
-    "url": "https://s3.polza.ai/f/205141/2026/03/aig_abc123.jpg"
+    "url": "https://s3.speshu.ai/f/205141/2026/03/aig_abc123.jpg"
   },
   "usage": {
     "output_units": 1,
@@ -45,7 +46,7 @@ import requests
 import time
 
 def wait_for_media(api_key, media_id, interval=5, max_wait=300):
-    url = f'https://polza.ai/api/v1/media/{media_id}'
+    url = f'https://speshu.ai/api/v1/media/{media_id}'
     headers = {'Authorization': f'Bearer {api_key}'}
     elapsed = 0
 
@@ -69,7 +70,7 @@ print(f"Результат: {result['data']['url']}")
 
 ```javascript
 async function waitForMedia(apiKey, mediaId, interval = 5000, maxWait = 300000) {
-  const url = `https://polza.ai/api/v1/media/${mediaId}`;
+  const url = `https://speshu.ai/api/v1/media/${mediaId}`;
   let elapsed = 0;
 
   while (elapsed < maxWait) {

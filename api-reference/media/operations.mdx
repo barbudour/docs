@@ -1,8 +1,9 @@
 ---
-title: "POST Media Operations"
+title: "Media Operations"
 description: "Выполнение операций над существующими медиа (extend, upscale)"
 openapi: POST /v1/media/{id}/operations
 playground: interactive
+icon: "wand-magic-sparkles"
 ---
 
 ## Операции над медиа
@@ -29,7 +30,7 @@ playground: interactive
   "created": 1703001244,
   "model": "google/gemini-2.5-flash-image",
   "data": {
-    "url": "https://storage.polza.ai/video_1080p.mp4"
+    "url": "https://storage.speshu.ai/video_1080p.mp4"
   }
 }
 ```
@@ -60,7 +61,7 @@ playground: interactive
 ### Продление видео (extend)
 
 ```bash
-curl -X POST "https://polza.ai/api/v1/media/aig_abc123/operations" \
+curl -X POST "https://speshu.ai/api/v1/media/aig_abc123/operations" \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -74,7 +75,7 @@ curl -X POST "https://polza.ai/api/v1/media/aig_abc123/operations" \
 ### Увеличение разрешения (upscale)
 
 ```bash
-curl -X POST "https://polza.ai/api/v1/media/aig_abc123/operations" \
+curl -X POST "https://speshu.ai/api/v1/media/aig_abc123/operations" \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{

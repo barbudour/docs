@@ -3,12 +3,13 @@ title: "Информация о файле"
 description: "Получение информации о конкретном файле"
 openapi: GET /v1/storage/files/{id}
 playground: interactive
+icon: "file"
 ---
 
 ## Пример
 
 ```bash
-curl "https://polza.ai/api/v1/storage/files/file_abc123" \
+curl "https://speshu.ai/api/v1/storage/files/file_abc123" \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
@@ -21,7 +22,7 @@ curl "https://polza.ai/api/v1/storage/files/file_abc123" \
   "mimeType": "image/png",
   "source": "USER_UPLOAD",
   "storagePolicy": "PERMANENT",
-  "url": "https://cdn.polza.ai/files/file_abc123.png",
+  "url": "https://cdn.speshu.ai/files/file_abc123.png",
   "size": 245760,
   "externalUserId": null,
   "expiresAt": null,
