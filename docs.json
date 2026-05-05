@@ -196,14 +196,14 @@
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "label": "Поддержка",
+        "href": "https://speshu.ai/"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Консоль",
+      "href": "https://speshu.ai/"
     }
   },
   "contextual": {
@@ -220,9 +220,7 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "telegram": "https://speshu.ai/"
     }
   }
 }
