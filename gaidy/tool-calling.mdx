@@ -92,7 +92,7 @@ const openai = new OpenAI({
 });
 
 const completion = await openai.chat.completions.create({
-  model: 'openai/gpt-5.4',
+  model: 'openai/gpt-5.5',
   messages: [
     { role: 'user', content: 'Какая погода в Москве?' }
   ],
@@ -120,7 +120,7 @@ const weatherData = await getWeather(args.city, args.units);
 
 // Отправляем результат обратно модели
 const finalCompletion = await openai.chat.completions.create({
-  model: 'openai/gpt-5.4',
+  model: 'openai/gpt-5.5',
   messages: [
     { role: 'user', content: 'Какая погода в Москве?' },
     completion.choices[0].message,

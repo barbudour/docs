@@ -44,7 +44,7 @@ curl -X POST "https://speshu.ai/api/v1/responses" \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "openai/gpt-5.4",
+    "model": "openai/gpt-5.5",
     "input": "Расскажи о квантовых компьютерах"
   }'
 ```
@@ -56,7 +56,7 @@ response = requests.post(
     'https://speshu.ai/api/v1/responses',
     headers={'Authorization': 'Bearer YOUR_API_KEY'},
     json={
-        'model': 'openai/gpt-5.4',
+        'model': 'openai/gpt-5.5',
         'input': [
             {"role": "user", "content": "Привет!"}
         ],

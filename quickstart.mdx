@@ -24,7 +24,7 @@ OpenAI-совместимый API без изменений в коде
 
   async function main() {
     const completion = await openai.chat.completions.create({
-      model: 'openai/gpt-5.4',
+      model: 'openai/gpt-5.5',
       messages: [{
         role: 'user',
         content: 'Что думаешь об этой жизни?',
@@ -45,7 +45,7 @@ OpenAI-совместимый API без изменений в коде
   )
 
   completion = client.chat.completions.create(
-    model="openai/gpt-5.4",
+    model="openai/gpt-5.5",
     messages=[{
       "role": "user",
       "content": "Что думаешь об этой жизни?"
@@ -60,7 +60,7 @@ OpenAI-совместимый API без изменений в коде
     -H "Authorization: Bearer <SPESHU_AI_API_KEY>" \
     -H "Content-Type: application/json" \
     -d '{
-      "model": "openai/gpt-5.4",
+      "model": "openai/gpt-5.5",
       "messages": [{"role": "user", "content": "Привет!"}]
     }'
   ```
@@ -78,7 +78,7 @@ curl https://speshu.ai/api/v1/models
 
 | Модель            | ID                              | Описание                  |
 | ----------------- | ------------------------------- | ------------------------- |
-| GPT-5.4           | `openai/gpt-5.4`                | Флагманская модель OpenAI |
+| GPT-5.4           | `openai/gpt-5.5`                | Флагманская модель OpenAI |
 | Claude Sonnet 4.6 | `anthropic/claude-sonnet-4.6`   | Лучший баланс Anthropic   |
 | Gemini 3.1 Pro    | `google/gemini-3.1-pro`         | Продвинутая модель Google |
 

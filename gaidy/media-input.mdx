@@ -26,7 +26,7 @@ icon: "upload"
 
 ```typescript
 const completion = await openai.chat.completions.create({
-  model: 'openai/gpt-5.4',
+  model: 'openai/gpt-5.5',
   messages: [
     {
       role: 'user',
@@ -41,7 +41,7 @@ const completion = await openai.chat.completions.create({
 
 ```python
 completion = client.chat.completions.create(
-    model="openai/gpt-5.4",
+    model="openai/gpt-5.5",
     messages=[
         {
             "role": "user",
@@ -59,7 +59,7 @@ curl -X POST "https://speshu.ai/api/v1/chat/completions" \
   -H "Authorization: Bearer <SPESHU_AI_API_KEY>" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "openai/gpt-5.4",
+    "model": "openai/gpt-5.5",
     "messages": [
       {
         "role": "user",
@@ -83,7 +83,7 @@ const imageBuffer = fs.readFileSync('local-image.jpg');
 const base64Image = imageBuffer.toString('base64');
 
 const completion = await openai.chat.completions.create({
-  model: 'openai/gpt-5.4',
+  model: 'openai/gpt-5.5',
   messages: [
     {
       role: 'user',
@@ -106,7 +106,7 @@ with open("local-image.jpg", "rb") as image_file:
     base64_image = base64.standard_b64encode(image_file.read()).decode("utf-8")
 
 completion = client.chat.completions.create(
-    model="openai/gpt-5.4",
+    model="openai/gpt-5.5",
     messages=[
         {
             "role": "user",
@@ -146,7 +146,7 @@ const { url } = await uploadResponse.json();
 
 // 2. Использование URL файла в запросе
 const completion = await openai.chat.completions.create({
-  model: 'openai/gpt-5.4',
+  model: 'openai/gpt-5.5',
   messages: [
     {
       role: 'user',
@@ -176,7 +176,7 @@ file_url = upload_response.json()["url"]
 
 # 2. Использование URL файла в запросе
 completion = client.chat.completions.create(
-    model="openai/gpt-5.4",
+    model="openai/gpt-5.5",
     messages=[
         {
             "role": "user",
@@ -227,7 +227,7 @@ completion = client.chat.completions.create(
 
 ```typescript
 const completion = await openai.chat.completions.create({
-  model: 'openai/gpt-5.4',
+  model: 'openai/gpt-5.5',
   messages: [
     {
       role: 'user',
@@ -243,7 +243,7 @@ const completion = await openai.chat.completions.create({
 
 ```python
 completion = client.chat.completions.create(
-    model="openai/gpt-5.4",
+    model="openai/gpt-5.5",
     messages=[
         {
             "role": "user",
@@ -270,7 +270,7 @@ const pdfBuffer = fs.readFileSync('report.pdf');
 const base64Pdf = pdfBuffer.toString('base64');
 
 const completion = await openai.chat.completions.create({
-  model: 'openai/gpt-5.4',
+  model: 'openai/gpt-5.5',
   messages: [
     {
       role: 'user',
@@ -296,7 +296,7 @@ with open("report.pdf", "rb") as f:
     base64_pdf = base64.standard_b64encode(f.read()).decode("utf-8")
 
 completion = client.chat.completions.create(
-    model="openai/gpt-5.4",
+    model="openai/gpt-5.5",
     messages=[
         {
             "role": "user",
@@ -334,7 +334,7 @@ const audioBuffer = fs.readFileSync('recording.wav');
 const base64Audio = audioBuffer.toString('base64');
 
 const completion = await openai.chat.completions.create({
-  model: 'openai/gpt-5.4',
+  model: 'openai/gpt-5.5',
   messages: [
     {
       role: 'user',
@@ -360,7 +360,7 @@ with open("recording.wav", "rb") as f:
     base64_audio = base64.standard_b64encode(f.read()).decode("utf-8")
 
 completion = client.chat.completions.create(
-    model="openai/gpt-5.4",
+    model="openai/gpt-5.5",
     messages=[
         {
             "role": "user",
