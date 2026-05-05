@@ -134,6 +134,7 @@
           },
           {
             "tab": "API Reference",
+            "openapi": "api-reference/openapi.json",
             "groups": [
               {
                 "group": "API documentation",

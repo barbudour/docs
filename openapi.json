@@ -12,11 +12,7 @@
       "description": "Production"
     }
   ],
-  "security": [
-    {
-      "bearer": []
-    }
-  ],
+  "security": [],
   "tags": [],
   "paths": {
     "/v1/chat/completions": {
