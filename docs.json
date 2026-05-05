@@ -134,12 +134,12 @@
           },
           {
             "tab": "API Reference",
-            "openapi": "api-reference/openapi.json",
+            "openapi": "/openapi.json",
             "groups": [
               {
                 "group": "Текстовая генерация",
                 "pages": [
-                  "POST /v1/chat/completions",
+                  "api-reference/chat/completions",
                   "POST /v1/responses"
                 ]
               },
