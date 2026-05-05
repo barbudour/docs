@@ -137,16 +137,11 @@
             "openapi": "api-reference/openapi.json",
             "groups": [
               {
-                "group": "API documentation",
-                "pages": [
-                  "api-reference/introduction"
-                ]
-              },
-              {
                 "group": "Текстовая генерация",
                 "pages": [
-                  "api-reference/chat/completions",
-                  "api-reference/responses/create"
+                  "GET /v1/chat/completions",
+                  "POST /v1/chat/completions",
+                  "POST /v1/responses"
                 ]
               }
             ]
