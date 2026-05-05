@@ -12,12 +12,18 @@
       "description": "Production"
     }
   ],
-  "security": [],
+  "security": [
+    {
+      "bearer": []
+    }
+  ],
   "tags": [],
   "paths": {
     "/v1/chat/completions": {
       "post": {
-        "tags": ["Чат"],
+        "tags": [
+          "Чат"
+        ],
         "summary": "Создать chat completion",
         "operationId": "ChatController_createChatCompletion",
         "parameters": [],
@@ -61,7 +67,9 @@
     },
     "/v1/responses": {
       "post": {
-        "tags": ["Текстовая генерация"],
+        "tags": [
+          "Текстовая генерация"
+        ],
         "summary": "Создать response (Responses API)",
         "operationId": "ResponsesController_createResponse",
         "requestBody": {
@@ -90,7 +98,9 @@
     },
     "/v2/images/generations": {
       "post": {
-        "tags": ["Изображения"],
+        "tags": [
+          "Изображения"
+        ],
         "summary": "Создать генерацию изображения",
         "operationId": "ImagesController_createGeneration",
         "requestBody": {
@@ -119,7 +129,9 @@
     },
     "/v1/media": {
       "post": {
-        "tags": ["Медиа"],
+        "tags": [
+          "Медиа"
+        ],
         "summary": "Создать генерацию медиа",
         "operationId": "MediaController_createGeneration",
         "requestBody": {
@@ -148,7 +160,9 @@
     },
     "/v1/media/{id}": {
       "get": {
-        "tags": ["Медиа"],
+        "tags": [
+          "Медиа"
+        ],
         "summary": "Получить статус генерации",
         "operationId": "MediaController_getGenerationStatus",
         "parameters": [
@@ -177,7 +191,9 @@
     },
     "/v1/media/{id}/operations": {
       "post": {
-        "tags": ["Медиа"],
+        "tags": [
+          "Медиа"
+        ],
         "summary": "Выполнить операцию над медиа",
         "operationId": "MediaController_executeOperation",
         "parameters": [
@@ -216,7 +232,9 @@
     },
     "/v1/audio/transcriptions": {
       "post": {
-        "tags": ["Аудио"],
+        "tags": [
+          "Аудио"
+        ],
         "summary": "Транскрибировать аудио в текст (STT)",
         "operationId": "AudioSttController_createTranscription",
         "requestBody": {
@@ -245,7 +263,9 @@
     },
     "/v1/audio/speech": {
       "post": {
-        "tags": ["Аудио"],
+        "tags": [
+          "Аудио"
+        ],
         "summary": "Сгенерировать речь из текста (TTS)",
         "operationId": "AudioTtsController_createSpeech",
         "requestBody": {
@@ -274,7 +294,9 @@
     },
     "/v1/embeddings": {
       "post": {
-        "tags": ["Эмбеддинги"],
+        "tags": [
+          "Эмбеддинги"
+        ],
         "summary": "Создать эмбеддинги",
         "operationId": "EmbeddingsController_createEmbeddings",
         "requestBody": {
@@ -303,7 +325,9 @@
     },
     "/v1/models": {
       "get": {
-        "tags": ["Модели"],
+        "tags": [
+          "Модели"
+        ],
         "summary": "Получить список доступных моделей",
         "operationId": "ModelsController_getModels",
         "parameters": [
@@ -338,7 +362,9 @@
     },
     "/v1/models/catalog": {
       "get": {
-        "tags": ["Модели"],
+        "tags": [
+          "Модели"
+        ],
         "summary": "Получить каталог моделей с фильтрацией",
         "operationId": "ModelsController_getModelsCatalog",
         "parameters": [
@@ -377,7 +403,11 @@
             "in": "query",
             "schema": {
               "type": "string",
-              "enum": ["price", "name", "createdAt"]
+              "enum": [
+                "price",
+                "name",
+                "createdAt"
+              ]
             }
           },
           {
@@ -385,7 +415,10 @@
             "in": "query",
             "schema": {
               "type": "string",
-              "enum": ["asc", "desc"],
+              "enum": [
+                "asc",
+                "desc"
+              ],
               "default": "desc"
             }
           }
@@ -406,7 +439,9 @@
     },
     "/v1/storage/upload": {
       "post": {
-        "tags": ["Хранилище"],
+        "tags": [
+          "Хранилище"
+        ],
         "summary": "Загрузить файл",
         "operationId": "StorageController_uploadFile",
         "requestBody": {
@@ -422,7 +457,10 @@
                   },
                   "storagePolicy": {
                     "type": "string",
-                    "enum": ["TEMP_UPLOAD", "PERMANENT"]
+                    "enum": [
+                      "TEMP_UPLOAD",
+                      "PERMANENT"
+                    ]
                   }
                 }
               }
@@ -439,7 +477,10 @@
                   },
                   "storagePolicy": {
                     "type": "string",
-                    "enum": ["TEMP_UPLOAD", "PERMANENT"]
+                    "enum": [
+                      "TEMP_UPLOAD",
+                      "PERMANENT"
+                    ]
                   }
                 }
               }
@@ -462,7 +503,9 @@
     },
     "/v1/storage/files": {
       "get": {
-        "tags": ["Хранилище"],
+        "tags": [
+          "Хранилище"
+        ],
         "summary": "Получить список файлов",
         "operationId": "StorageController_listFiles",
         "parameters": [
@@ -487,7 +530,11 @@
             "in": "query",
             "schema": {
               "type": "string",
-              "enum": ["IMAGE", "VIDEO", "AUDIO"]
+              "enum": [
+                "IMAGE",
+                "VIDEO",
+                "AUDIO"
+              ]
             }
           },
           {
@@ -495,7 +542,11 @@
             "in": "query",
             "schema": {
               "type": "string",
-              "enum": ["TEMP_UPLOAD", "TEMP_GENERATION", "PERMANENT"]
+              "enum": [
+                "TEMP_UPLOAD",
+                "TEMP_GENERATION",
+                "PERMANENT"
+              ]
             }
           }
         ],
@@ -518,7 +569,9 @@
     },
     "/v1/storage/files/{id}": {
       "get": {
-        "tags": ["Хранилище"],
+        "tags": [
+          "Хранилище"
+        ],
         "summary": "Получить информацию о файле",
         "operationId": "StorageController_getFile",
         "parameters": [
@@ -545,7 +598,9 @@
         }
       },
       "delete": {
-        "tags": ["Хранилище"],
+        "tags": [
+          "Хранилище"
+        ],
         "summary": "Удалить файл",
         "operationId": "StorageController_deleteFile",
         "parameters": [
@@ -567,7 +622,9 @@
     },
     "/v1/storage/files/{id}/keep": {
       "patch": {
-        "tags": ["Хранилище"],
+        "tags": [
+          "Хранилище"
+        ],
         "summary": "Перевести файл в постоянное хранение",
         "operationId": "StorageController_markAsPermanent",
         "parameters": [
@@ -596,7 +653,9 @@
     },
     "/v1/storage/stats": {
       "get": {
-        "tags": ["Хранилище"],
+        "tags": [
+          "Хранилище"
+        ],
         "summary": "Получить статистику хранилища",
         "operationId": "StorageController_getStats",
         "responses": {
@@ -615,7 +674,9 @@
     },
     "/v1/history/generations": {
       "get": {
-        "tags": ["История"],
+        "tags": [
+          "История"
+        ],
         "summary": "Получить историю генераций",
         "operationId": "HistoryController_getGenerations",
         "parameters": [
@@ -680,7 +741,9 @@
     },
     "/v1/history/generations/{id}": {
       "get": {
-        "tags": ["История"],
+        "tags": [
+          "История"
+        ],
         "summary": "Получить детали генерации",
         "operationId": "HistoryController_getGenerationDetails",
         "parameters": [
@@ -709,7 +772,9 @@
     },
     "/v1/balance": {
       "get": {
-        "tags": ["Другое"],
+        "tags": [
+          "Другое"
+        ],
         "summary": "Запрос текущего баланса",
         "operationId": "V1LegacyController_getUserBalance",
         "responses": {
@@ -856,7 +921,9 @@
           },
           "stop": {
             "description": "Последовательности, при которых модель прекращает генерацию",
-            "example": ["|+"],
+            "example": [
+              "|+"
+            ],
             "oneOf": [
               {
                 "type": "string"
@@ -921,10 +988,17 @@
           "modalities": {
             "type": "array",
             "description": "Типы вывода модели",
-            "example": ["text", "audio"],
+            "example": [
+              "text",
+              "audio"
+            ],
             "items": {
               "type": "string",
-              "enum": ["text", "image", "audio"]
+              "enum": [
+                "text",
+                "image",
+                "audio"
+              ]
             }
           },
           "audio": {
@@ -944,7 +1018,10 @@
             }
           }
         },
-        "required": ["model", "messages"]
+        "required": [
+          "model",
+          "messages"
+        ]
       },
       "ChatCompletionPresenter": {
         "type": "object",
@@ -990,7 +1067,13 @@
             ]
           }
         },
-        "required": ["id", "object", "created", "model", "choices"]
+        "required": [
+          "id",
+          "object",
+          "created",
+          "model",
+          "choices"
+        ]
       },
       "MessageDto": {
         "type": "object",
@@ -998,7 +1081,13 @@
           "role": {
             "type": "string",
             "description": "Роль отправителя сообщения",
-            "enum": ["user", "assistant", "system", "developer", "tool"],
+            "enum": [
+              "user",
+              "assistant",
+              "system",
+              "developer",
+              "tool"
+            ],
             "example": "user"
           },
           "content": {
@@ -1044,7 +1133,10 @@
             }
           }
         },
-        "required": ["role", "content"]
+        "required": [
+          "role",
+          "content"
+        ]
       },
       "ProviderDto": {
         "type": "object",
@@ -1056,7 +1148,10 @@
           },
           "order": {
             "description": "Упорядоченный список slug провайдеров для использования",
-            "example": ["OpenAI", "Anthropic"],
+            "example": [
+              "OpenAI",
+              "Anthropic"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -1064,7 +1159,10 @@
           },
           "only": {
             "description": "Список разрешенных slug провайдеров",
-            "example": ["OpenAI", "Google"],
+            "example": [
+              "OpenAI",
+              "Google"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -1072,7 +1170,9 @@
           },
           "ignore": {
             "description": "Список игнорируемых slug провайдеров",
-            "example": ["DeepInfra"],
+            "example": [
+              "DeepInfra"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -1081,7 +1181,11 @@
           "sort": {
             "type": "string",
             "description": "Критерий сортировки провайдеров",
-            "enum": ["price", "throughput", "latency"],
+            "enum": [
+              "price",
+              "throughput",
+              "latency"
+            ],
             "example": "price"
           },
           "max_price": {
@@ -1101,7 +1205,9 @@
             "type": "string",
             "description": "Тип инструмента",
             "example": "function",
-            "enum": ["function"]
+            "enum": [
+              "function"
+            ]
           },
           "function": {
             "description": "Определение функции",
@@ -1112,7 +1218,10 @@
             ]
           }
         },
-        "required": ["type", "function"]
+        "required": [
+          "type",
+          "function"
+        ]
       },
       "ReasoningDto": {
         "type": "object",
@@ -1120,13 +1229,25 @@
           "effort": {
             "type": "string",
             "description": "Уровень усилий reasoning модели",
-            "enum": ["xhigh", "high", "medium", "low", "minimal", "none"],
+            "enum": [
+              "xhigh",
+              "high",
+              "medium",
+              "low",
+              "minimal",
+              "none"
+            ],
             "example": "medium"
           },
           "summary": {
             "type": "string",
             "description": "Уровень детализации резюме reasoning",
-            "enum": ["auto", "concise", "detailed", "none"],
+            "enum": [
+              "auto",
+              "concise",
+              "detailed",
+              "none"
+            ],
             "example": "auto"
           },
           "enabled": {
@@ -1152,7 +1273,11 @@
           "search_context_size": {
             "type": "string",
             "description": "Размер контекста поиска для моделей со встроенным веб-поиском",
-            "enum": ["low", "medium", "high"],
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ],
             "example": "medium"
           }
         }
@@ -1177,7 +1302,13 @@
             "type": "string",
             "description": "Причина завершения генерации",
             "example": "stop",
-            "enum": ["stop", "length", "content_filter", "error", "tool_calls"],
+            "enum": [
+              "stop",
+              "length",
+              "content_filter",
+              "error",
+              "tool_calls"
+            ],
             "nullable": true
           },
           "reasoning_details": {
@@ -1194,7 +1325,11 @@
             ]
           }
         },
-        "required": ["index", "message", "finish_reason"]
+        "required": [
+          "index",
+          "message",
+          "finish_reason"
+        ]
       },
       "UsagePresenter": {
         "type": "object",
@@ -1281,7 +1416,11 @@
             "example": true
           }
         },
-        "required": ["prompt_tokens", "completion_tokens", "total_tokens"]
+        "required": [
+          "prompt_tokens",
+          "completion_tokens",
+          "total_tokens"
+        ]
       },
       "ToolCallDto": {
         "type": "object",
@@ -1294,7 +1433,9 @@
           "type": {
             "type": "string",
             "description": "Тип вызова инструмента",
-            "enum": ["function"],
+            "enum": [
+              "function"
+            ],
             "example": "function"
           },
           "function": {
@@ -1306,7 +1447,11 @@
             ]
           }
         },
-        "required": ["id", "type", "function"]
+        "required": [
+          "id",
+          "type",
+          "function"
+        ]
       },
       "ProviderMaxPriceDto": {
         "type": "object",
@@ -1363,10 +1508,15 @@
                 },
                 "unit": {
                   "type": "string",
-                  "enum": ["celsius", "fahrenheit"]
+                  "enum": [
+                    "celsius",
+                    "fahrenheit"
+                  ]
                 }
               },
-              "required": ["location"]
+              "required": [
+                "location"
+              ]
             }
           },
           "strict": {
@@ -1375,7 +1525,9 @@
             "example": false
           }
         },
-        "required": ["name"]
+        "required": [
+          "name"
+        ]
       },
       "MessagePresenter": {
         "type": "object",
@@ -1446,7 +1598,10 @@
             }
           }
         },
-        "required": ["role", "content"]
+        "required": [
+          "role",
+          "content"
+        ]
       },
       "ChatMessageTokenLogprobsPresenter": {
         "type": "object",
@@ -1468,7 +1623,10 @@
             }
           }
         },
-        "required": ["content", "refusal"]
+        "required": [
+          "content",
+          "refusal"
+        ]
       },
       "CompletionTokensDetailsPresenter": {
         "type": "object",
@@ -1549,7 +1707,10 @@
             "example": "{\"location\": \"Moscow\", \"unit\": \"celsius\"}"
           }
         },
-        "required": ["name", "arguments"]
+        "required": [
+          "name",
+          "arguments"
+        ]
       },
       "ToolCallPresenter": {
         "type": "object",
@@ -1573,7 +1734,11 @@
             ]
           }
         },
-        "required": ["id", "type", "function"]
+        "required": [
+          "id",
+          "type",
+          "function"
+        ]
       },
       "ChatMessageTokenLogprobPresenter": {
         "type": "object",
@@ -1591,7 +1756,13 @@
           "bytes": {
             "type": "object",
             "description": "Байты токена",
-            "example": [104, 101, 108, 108, 111],
+            "example": [
+              104,
+              101,
+              108,
+              108,
+              111
+            ],
             "nullable": true
           },
           "top_logprobs": {
@@ -1602,7 +1773,12 @@
             }
           }
         },
-        "required": ["token", "logprob", "bytes", "top_logprobs"]
+        "required": [
+          "token",
+          "logprob",
+          "bytes",
+          "top_logprobs"
+        ]
       },
       "ToolCallFunctionPresenter": {
         "type": "object",
@@ -1618,7 +1794,10 @@
             "example": "{\"location\": \"Moscow\"}"
           }
         },
-        "required": ["name", "arguments"]
+        "required": [
+          "name",
+          "arguments"
+        ]
       },
       "ChatMessageTokenLogprobTopItemPresenter": {
         "type": "object",
@@ -1636,15 +1815,28 @@
           "bytes": {
             "type": "object",
             "description": "Байты токена",
-            "example": [104, 101, 108, 108, 111],
+            "example": [
+              104,
+              101,
+              108,
+              108,
+              111
+            ],
             "nullable": true
           }
         },
-        "required": ["token", "logprob", "bytes"]
+        "required": [
+          "token",
+          "logprob",
+          "bytes"
+        ]
       },
       "ResponseRequestDto": {
         "type": "object",
-        "required": ["model", "input"],
+        "required": [
+          "model",
+          "input"
+        ],
         "properties": {
           "model": {
             "type": "string"
@@ -1687,7 +1879,10 @@
       },
       "ImageGenerationRequestDto": {
         "type": "object",
-        "required": ["model", "prompt"],
+        "required": [
+          "model",
+          "prompt"
+        ],
         "properties": {
           "model": {
             "type": "string"
@@ -1703,15 +1898,34 @@
           },
           "size": {
             "type": "string",
-            "enum": ["auto", "256x256", "512x512", "1024x1024", "1536x1024", "1024x1536", "1792x1024", "1024x1792"]
+            "enum": [
+              "auto",
+              "256x256",
+              "512x512",
+              "1024x1024",
+              "1536x1024",
+              "1024x1536",
+              "1792x1024",
+              "1024x1792"
+            ]
           },
           "quality": {
             "type": "string",
-            "enum": ["auto", "low", "medium", "high", "standard", "hd"]
+            "enum": [
+              "auto",
+              "low",
+              "medium",
+              "high",
+              "standard",
+              "hd"
+            ]
           },
           "response_format": {
             "type": "string",
-            "enum": ["url", "b64_json"]
+            "enum": [
+              "url",
+              "b64_json"
+            ]
           }
         }
       },
@@ -1742,7 +1956,10 @@
       },
       "MediaRequestDto": {
         "type": "object",
-        "required": ["model", "input"],
+        "required": [
+          "model",
+          "input"
+        ],
         "properties": {
           "model": {
             "type": "string"
@@ -1770,7 +1987,12 @@
           },
           "status": {
             "type": "string",
-            "enum": ["pending", "processing", "completed", "failed"]
+            "enum": [
+              "pending",
+              "processing",
+              "completed",
+              "failed"
+            ]
           },
           "created": {
             "type": "number"
@@ -1799,11 +2021,17 @@
       },
       "MediaOperationRequestDto": {
         "type": "object",
-        "required": ["operation"],
+        "required": [
+          "operation"
+        ],
         "properties": {
           "operation": {
             "type": "string",
-            "enum": ["extend", "upscale_1080p", "upscale_4k"]
+            "enum": [
+              "extend",
+              "upscale_1080p",
+              "upscale_4k"
+            ]
           },
           "params": {
             "type": "object"
@@ -1815,7 +2043,9 @@
       },
       "AudioTranscriptionDto": {
         "type": "object",
-        "required": ["file"],
+        "required": [
+          "file"
+        ],
         "properties": {
           "file": {
             "type": "string"
@@ -1829,7 +2059,14 @@
           },
           "response_format": {
             "type": "string",
-            "enum": ["json", "text", "srt", "vtt", "verbose_json", "diarized_json"]
+            "enum": [
+              "json",
+              "text",
+              "srt",
+              "vtt",
+              "verbose_json",
+              "diarized_json"
+            ]
           }
         }
       },
@@ -1849,7 +2086,10 @@
       },
       "AudioSpeechDto": {
         "type": "object",
-        "required": ["input", "voice"],
+        "required": [
+          "input",
+          "voice"
+        ],
         "properties": {
           "model": {
             "type": "string",
@@ -1864,7 +2104,14 @@
           },
           "response_format": {
             "type": "string",
-            "enum": ["mp3", "opus", "aac", "flac", "wav", "pcm"]
+            "enum": [
+              "mp3",
+              "opus",
+              "aac",
+              "flac",
+              "wav",
+              "pcm"
+            ]
           },
           "speed": {
             "type": "number",
@@ -1904,7 +2151,10 @@
       },
       "EmbeddingRequestDto": {
         "type": "object",
-        "required": ["model", "input"],
+        "required": [
+          "model",
+          "input"
+        ],
         "properties": {
           "model": {
             "type": "string"
@@ -1924,7 +2174,10 @@
           },
           "encoding_format": {
             "type": "string",
-            "enum": ["float", "base64"]
+            "enum": [
+              "float",
+              "base64"
+            ]
           }
         }
       },
