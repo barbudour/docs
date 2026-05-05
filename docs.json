@@ -214,8 +214,23 @@
     ]
   },
   "footer": {
-    "socials": {
-      "telegram": "https://speshu.ai/"
-    }
+    "links": [
+      {
+        "items": [
+          {
+            "label": "Начать сотрудничество",
+            "href": "mailto::info@speshu.ai"
+          },
+          {
+            "label": "Написать в ТГ",
+            "href": "https://t.me/speshuforbusiness"
+          },
+          {
+            "label": "Клуб AI-Профи",
+            "href": "https://t.me/+9Fkgdpnm3axlN2Ji"
+          }
+        ]
+      }
+    ]
   }
 }
