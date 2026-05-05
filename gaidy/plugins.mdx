@@ -1,0 +1,104 @@
+---
+title: "Плагины"
+description: "Расширение возможностей моделей с помощью плагинов"
+icon: "plug"
+---
+
+Плагины расширяют возможности любой модели, добавляя функции поиска в интернете, обработки PDF и автоматического исправления JSON. Плагины подключаются через параметр `plugins` в запросе.
+
+## Доступные плагины
+
+| Плагин              | ID                 | Описание                                              |
+| ------------------- | ------------------ | ----------------------------------------------------- |
+| Поиск в интернете   | `web`              | Дополнение ответов актуальными данными из интернета   |
+| Парсинг файлов      | `file-parser`      | Извлечение текста из PDF документов                   |
+| Исправление ответов | `response-healing` | Автоматическое исправление невалидного JSON в ответах |
+
+## Подключение плагинов
+
+Добавьте массив `plugins` в запрос к `/v1/chat/completions`:
+
+```typescript
+import OpenAI from 'openai';
+
+const openai = new OpenAI({
+  baseURL: 'https://polza.ai/api/v1',
+  apiKey: '<POLZA_AI_API_KEY>'
+});
+
+const completion = await openai.chat.completions.create({
+  model: 'openai/gpt-4o',
+  messages: [
+    { role: 'user', content: 'Какие последние новости в сфере AI?' }
+  ],
+  // @ts-ignore — plugins не входит в типы OpenAI SDK
+  plugins: [
+    { id: 'web' }
+  ]
+});
+```
+
+```python
+from openai import OpenAI
+
+client = OpenAI(
+    base_url="https://polza.ai/api/v1",
+    api_key="<POLZA_AI_API_KEY>"
+)
+
+completion = client.chat.completions.create(
+    model="openai/gpt-4o",
+    messages=[
+        {"role": "user", "content": "Какие последние новости в сфере AI?"}
+    ],
+    extra_body={
+        "plugins": [
+            {"id": "web"}
+        ]
+    }
+)
+```
+
+### Несколько плагинов
+
+Можно подключить несколько плагинов одновременно:
+
+```json
+{
+  "model": "openai/gpt-4o",
+  "messages": [...],
+  "plugins": [
+    { "id": "web", "max_results": 3 },
+    { "id": "response-healing" }
+  ],
+  "response_format": {
+    "type": "json_schema",
+    "json_schema": { ... }
+  }
+}
+```
+
+## Поиск в интернете (web)
+
+Плагин `web` дополняет ответ модели актуальными результатами поиска в интернете. Работает с любой моделью — от GPT-5 до Claude и Gemini.
+
+## Парсинг файлов (file-parser)
+
+Плагин `file-parser` извлекает текст из PDF документов для обработки моделью.
+
+| Параметр     | Тип     | Описание                  |
+| ------------ | ------- | ------------------------- |
+| `enabled`    | boolean | Включить/выключить плагин |
+| `pdf.engine` | string  | Движок обработки PDF      |
+
+### Движки обработки PDF
+
+| Значение      | Описание                                     |
+| ------------- | -------------------------------------------- |
+| `pdf-text`    | Извлечение текста из PDF                     |
+| `mistral-ocr` | OCR через Mistral (для сканов и изображений) |
+| `native`      | Встроенная обработка провайдера              |
+
+## Исправление ответов (response-healing)
+
+Плагин `response-healing` автоматически исправляет невалидный JSON в ответах моделей. Полезен при использовании `response_format` с `json_schema`.

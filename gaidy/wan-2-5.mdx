@@ -1,0 +1,59 @@
+---
+title: "Wan 2.5"
+description: "Генерация видео с моделью Wan 2.5"
+icon: "video"
+---
+
+Model for video generation with Wan 2.5. Supports 720p, 1080p resolution and 5 or 10 second duration. Includes seed, negative_prompt, and LLM-based prompt expansion.
+
+**Note:** Full API documentation is available at: [Media Generation](/api-reference/media/create)
+
+## Обзор
+
+| Specification           | Value                        |
+| ---------------------- | ---------------------------- |
+| Model ID               | `wan/2.5`                    |
+| Max prompt             | 800 characters               |
+| aspect_ratio           | 16:9, 9:16, 1:1              |
+| resolution             | 720p, 1080p                  |
+| duration               | 5, 10 sec                    |
+| images                 | 0–1                          |
+| seed                   | -1 – 2147483647              |
+| negative_prompt        | up to 500 characters         |
+| enable_prompt_expansion | true / false               |
+
+## Параметры
+
+| Parameter               | Required | Description                              |
+| ---------------------- | -------- | ---------------------------------------- |
+| `model`                | Yes      | `wan/2.5`                                |
+| `prompt`               | Yes      | Text, up to 800 characters               |
+| `aspect_ratio`         | No       | 16:9, 9:16, 1:1                          |
+| `resolution`           | No       | 720p, 1080p                              |
+| `duration`             | No       | 5, 10                                    |
+| `images`               | No       | 0–1                                      |
+| `seed`                 | No       | Seed for reproducibility                 |
+| `negative_prompt`      | No       | What to exclude, up to 500 characters    |
+| `enable_prompt_expansion` | No    | Enhance prompt with LLM. Default: false  |
+
+## Request Example (cURL)
+
+```bash theme={null}
+curl -X POST "https://polza.ai/api/v1/media" \
+  -H "Authorization: Bearer <POLZA_AI_API_KEY>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "wan/2.5",
+    "input": {
+      "prompt": "Video description",
+      "aspect_ratio": "16:9",
+      "resolution": "720p",
+      "duration": "5",
+      "images": [],
+      "seed": 42,
+      "negative_prompt": "",
+      "enable_prompt_expansion": "false"
+    },
+    "async": true
+  }'
+```

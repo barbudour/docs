@@ -1,0 +1,50 @@
+---
+title: "Qwen Image"
+description: "Генерация изображений с моделью Qwen Image"
+icon: "image"
+---
+
+Модель генерации и редактирования изображений с ID `qwen/image`. Поддерживает text-to-image и image-to-image генерацию.
+
+<Note>
+  Полная документация API: [Генерация медиа](/api-reference/media/create)
+</Note>
+
+## Обзор
+
+| Характеристика     | Значение                      |
+| ------------------ | ----------------------------- |
+| ID модели          | `qwen/image`                  |
+| Тип                | Text-to-image, Image-to-image |
+| aspect_ratio       | 1:1 и другие                  |
+| Выходной формат    | png, jpeg                     |
+| Референс-изображения | до 1                       |
+
+## Параметры
+
+| Параметр         | Обязательный | Описание                              |
+| ---------------- | ------------ | ------------------------------------- |
+| `model`          | Да           | `qwen/image`                          |
+| `prompt`         | Да           | Текстовое описание                    |
+| `aspect_ratio`   | Нет          | Соотношение сторон, например "1:1"    |
+| `output_format`  | Нет          | Формат вывода: png, jpeg              |
+| `strength`       | Нет          | Влияние референсного изображения      |
+| `guidance_scale` | Нет          | Насколько строго следовать промпту   |
+| `images`         | Нет          | URL или данные референсного изображения |
+
+## Пример запроса (cURL)
+
+```bash theme={null}
+curl -X POST "https://polza.ai/api/v1/media" \
+  -H "Authorization: Bearer <POLZA_AI_API_KEY>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "qwen/image",
+    "input": {
+      "prompt": "Описание изображения",
+      "aspect_ratio": "1:1",
+      "output_format": "png"
+    },
+    "async": true
+  }'
+```

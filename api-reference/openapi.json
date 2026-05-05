@@ -1,94 +1,592 @@
 {
-  "openapi": "3.1.0",
+  "openapi": "3.0.0",
   "info": {
-    "title": "OpenAPI Plant Store",
-    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
-    "license": {
-      "name": "MIT"
-    },
-    "version": "1.0.0"
+    "title": "Polza.ai API",
+    "description": "AI агрегатор — унифицированный доступ к сотням AI моделей",
+    "version": "1.0",
+    "contact": {}
   },
   "servers": [
     {
-      "url": "http://sandbox.mintlify.com"
+      "url": "https://polza.ai/api",
+      "description": "Production"
     }
   ],
-  "security": [
-    {
-      "bearerAuth": []
-    }
-  ],
+  "security": [],
+  "tags": [],
   "paths": {
-    "/plants": {
+    "/v1/chat/completions": {
+      "post": {
+        "tags": ["Чат"],
+        "summary": "Создать chat completion",
+        "operationId": "ChatController_createChatCompletion",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChatCompletionRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешный ответ",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatCompletionPresenter"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Ошибка авторизации. Проверьте ключ доступа"
+          },
+          "403": {
+            "description": "Ошибка доступа. Проверьте права доступа ключа"
+          },
+          "500": {
+            "description": "Ошибка сервера. Обратитесь к поставщику услуг"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/responses": {
+      "post": {
+        "tags": ["Текстовая генерация"],
+        "summary": "Создать response (Responses API)",
+        "operationId": "ResponsesController_createResponse",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResponseRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешный ответ",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponsePresenter"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/images/generations": {
+      "post": {
+        "tags": ["Изображения"],
+        "summary": "Создать генерацию изображения",
+        "operationId": "ImagesController_createGeneration",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImageGenerationRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешная генерация изображения",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageGenerationResponsePresenter"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/media": {
+      "post": {
+        "tags": ["Медиа"],
+        "summary": "Создать генерацию медиа",
+        "operationId": "MediaController_createGeneration",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MediaRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешный ответ",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaStatusPresenter"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/media/{id}": {
       "get": {
-        "description": "Returns all plants from the system that the user has access to",
+        "tags": ["Медиа"],
+        "summary": "Получить статус генерации",
+        "operationId": "MediaController_getGenerationStatus",
         "parameters": [
           {
-            "name": "limit",
-            "in": "query",
-            "description": "The maximum number of results to return",
+            "name": "id",
+            "required": true,
+            "in": "path",
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Plant response",
+            "description": "Статус генерации",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaStatusPresenter"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/media/{id}/operations": {
+      "post": {
+        "tags": ["Медиа"],
+        "summary": "Выполнить операцию над медиа",
+        "operationId": "MediaController_executeOperation",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MediaOperationRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Результат операции",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaStatusPresenter"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/audio/transcriptions": {
+      "post": {
+        "tags": ["Аудио"],
+        "summary": "Транскрибировать аудио в текст (STT)",
+        "operationId": "AudioSttController_createTranscription",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AudioTranscriptionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Транскрипция",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AudioTranscriptionPresenter"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/audio/speech": {
+      "post": {
+        "tags": ["Аудио"],
+        "summary": "Сгенерировать речь из текста (TTS)",
+        "operationId": "AudioTtsController_createSpeech",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AudioSpeechDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Аудио ответ",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AudioSpeechPresenter"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/embeddings": {
+      "post": {
+        "tags": ["Эмбеддинги"],
+        "summary": "Создать эмбеддинги",
+        "operationId": "EmbeddingsController_createEmbeddings",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmbeddingRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Эмбеддинги",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmbeddingResponsePresenter"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/models": {
+      "get": {
+        "tags": ["Модели"],
+        "summary": "Получить список доступных моделей",
+        "operationId": "ModelsController_getModels",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "include_providers",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Список моделей",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelListPresenter"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/models/catalog": {
+      "get": {
+        "tags": ["Модели"],
+        "summary": "Получить каталог моделей с фильтрацией",
+        "operationId": "ModelsController_getModelsCatalog",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "default": 20
+            }
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["price", "name", "createdAt"]
+            }
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["asc", "desc"],
+              "default": "desc"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Каталог моделей",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelsCatalogPresenter"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/storage/upload": {
+      "post": {
+        "tags": ["Хранилище"],
+        "summary": "Загрузить файл",
+        "operationId": "StorageController_uploadFile",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "storagePolicy": {
+                    "type": "string",
+                    "enum": ["TEMP_UPLOAD", "PERMANENT"]
+                  }
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "base64": {
+                    "type": "string"
+                  },
+                  "mimeType": {
+                    "type": "string"
+                  },
+                  "storagePolicy": {
+                    "type": "string",
+                    "enum": ["TEMP_UPLOAD", "PERMANENT"]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Информация о загруженном файле",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StorageFilePresenter"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/storage/files": {
+      "get": {
+        "tags": ["Хранилище"],
+        "summary": "Получить список файлов",
+        "operationId": "StorageController_listFiles",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "default": 20
+            }
+          },
+          {
+            "name": "fileType",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["IMAGE", "VIDEO", "AUDIO"]
+            }
+          },
+          {
+            "name": "storagePolicy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["TEMP_UPLOAD", "TEMP_GENERATION", "PERMANENT"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Список файлов",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Plant"
+                    "$ref": "#/components/schemas/StorageFilePresenter"
                   }
                 }
               }
             }
-          },
-          "400": {
-            "description": "Unexpected error",
+          }
+        }
+      }
+    },
+    "/v1/storage/files/{id}": {
+      "get": {
+        "tags": ["Хранилище"],
+        "summary": "Получить информацию о файле",
+        "operationId": "StorageController_getFile",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Информация о файле",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/StorageFilePresenter"
                 }
               }
             }
           }
         }
       },
-      "post": {
-        "description": "Creates a new plant in the store",
-        "requestBody": {
-          "description": "Plant to add to the store",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPlant"
-              }
+      "delete": {
+        "tags": ["Хранилище"],
+        "summary": "Удалить файл",
+        "operationId": "StorageController_deleteFile",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
             }
-          },
-          "required": true
-        },
+          }
+        ],
         "responses": {
           "200": {
-            "description": "plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Plant"
-                }
-              }
+            "description": "Файл удалён"
+          }
+        }
+      }
+    },
+    "/v1/storage/files/{id}/keep": {
+      "patch": {
+        "tags": ["Хранилище"],
+        "summary": "Перевести файл в постоянное хранение",
+        "operationId": "StorageController_markAsPermanent",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
             }
-          },
-          "400": {
-            "description": "unexpected error",
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Файл переведён в постоянное хранение",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/StorageFilePresenter"
                 }
               }
             }
@@ -96,57 +594,140 @@
         }
       }
     },
-    "/plants/{id}": {
-      "delete": {
-        "description": "Deletes a single plant based on the ID supplied",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID of plant to delete",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
+    "/v1/storage/stats": {
+      "get": {
+        "tags": ["Хранилище"],
+        "summary": "Получить статистику хранилища",
+        "operationId": "StorageController_getStats",
         "responses": {
-          "204": {
-            "description": "Plant deleted",
-            "content": {}
-          },
-          "400": {
-            "description": "unexpected error",
+          "200": {
+            "description": "Статистика хранилища",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/StorageStatsPresenter"
                 }
               }
             }
           }
         }
       }
-    }
-  },
-  "webhooks": {
-    "/plant/webhook": {
-      "post": {
-        "description": "Information about a new plant added to the store",
-        "requestBody": {
-          "description": "Plant added to the store",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPlant"
+    },
+    "/v1/history/generations": {
+      "get": {
+        "tags": ["История"],
+        "summary": "Получить историю генераций",
+        "operationId": "HistoryController_getGenerations",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "default": 20
+            }
+          },
+          {
+            "name": "requestType",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dateFrom",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dateTo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "История генераций",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenerationsHistoryPresenter"
+                }
               }
             }
           }
-        },
+        }
+      }
+    },
+    "/v1/history/generations/{id}": {
+      "get": {
+        "tags": ["История"],
+        "summary": "Получить детали генерации",
+        "operationId": "HistoryController_getGenerationDetails",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Return a 200 status to indicate that the data was received successfully"
+            "description": "Детали генерации",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenerationDetailPresenter"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/balance": {
+      "get": {
+        "tags": ["Другое"],
+        "summary": "Запрос текущего баланса",
+        "operationId": "V1LegacyController_getUserBalance",
+        "responses": {
+          "200": {
+            "description": "Баланс аккаунта",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "amount": {
+                      "type": "string",
+                      "example": "9.28591714"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -154,63 +735,1458 @@
   },
   "components": {
     "schemas": {
-      "Plant": {
-        "required": [
-          "name"
-        ],
+      "ChatCompletionRequestDto": {
+        "type": "object",
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "Идентификатор модели для использования",
+            "example": "openai/gpt-4o"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Текстовый промпт (альтернатива messages). Если указан, будет преобразован в messages с role=user",
+            "example": "Напиши стихотворение про кота"
+          },
+          "messages": {
+            "description": "Массив сообщений для отправки модели (обязателен если не указан prompt)",
+            "example": [
+              {
+                "role": "system",
+                "content": "Ты полезный ассистент"
+              },
+              {
+                "role": "user",
+                "content": "Привет! Как дела?"
+              }
+            ],
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MessageDto"
+            }
+          },
+          "max_tokens": {
+            "type": "number",
+            "description": "Максимальное количество токенов для генерации",
+            "example": 1000,
+            "minimum": 1
+          },
+          "max_completion_tokens": {
+            "type": "number",
+            "description": "Максимальное количество токенов для completion (альтернатива max_tokens)",
+            "example": 1000,
+            "minimum": 1
+          },
+          "temperature": {
+            "type": "number",
+            "description": "Температура сэмплинга (0-2). Более высокие значения делают вывод более случайным",
+            "example": 1,
+            "minimum": 0,
+            "maximum": 2
+          },
+          "top_p": {
+            "type": "number",
+            "description": "Nucleus sampling: вероятностная масса для рассмотрения (0-1)",
+            "example": 1,
+            "minimum": 0,
+            "maximum": 1
+          },
+          "frequency_penalty": {
+            "type": "number",
+            "description": "Штраф за частоту использования токенов (-2 до 2)",
+            "example": 0,
+            "minimum": -2,
+            "maximum": 2
+          },
+          "presence_penalty": {
+            "type": "number",
+            "description": "Штраф за присутствие токенов (-2 до 2)",
+            "example": 0,
+            "minimum": -2,
+            "maximum": 2
+          },
+          "response_format": {
+            "type": "object",
+            "description": "Формат ответа модели"
+          },
+          "provider": {
+            "description": "Настройки провайдера для роутинга и фильтрации",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProviderDto"
+              }
+            ]
+          },
+          "tools": {
+            "description": "Определения инструментов (tools) для function calling",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ToolDefinitionDto"
+            }
+          },
+          "tool_choice": {
+            "type": "object",
+            "description": "Выбор инструмента: none, auto, required или named function",
+            "example": "auto"
+          },
+          "reasoning": {
+            "description": "Настройки reasoning для reasoning моделей",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ReasoningDto"
+              }
+            ]
+          },
+          "plugins": {
+            "type": "array",
+            "description": "Плагины для расширения функциональности"
+          },
+          "web_search_options": {
+            "description": "Настройки встроенного веб-поиска (для моделей с нативной поддержкой)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WebSearchOptionsDto"
+              }
+            ]
+          },
+          "user": {
+            "type": "string",
+            "description": "Уникальный идентификатор конечного пользователя для отслеживания и предотвращения злоупотреблений",
+            "example": "user-123"
+          },
+          "stop": {
+            "description": "Последовательности, при которых модель прекращает генерацию",
+            "example": ["|+"],
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "seed": {
+            "type": "number",
+            "description": "Seed для детерминированной генерации (best-effort)",
+            "example": 42
+          },
+          "n": {
+            "type": "number",
+            "description": "Количество вариантов ответа (1-10)",
+            "example": 1,
+            "minimum": 1,
+            "maximum": 10
+          },
+          "stream": {
+            "type": "boolean",
+            "description": "Включить потоковую передачу ответа",
+            "example": false
+          },
+          "logprobs": {
+            "type": "boolean",
+            "description": "Возвращать log probabilities для output токенов",
+            "example": false
+          },
+          "top_logprobs": {
+            "type": "number",
+            "description": "Количество наиболее вероятных токенов для возврата (0-20). Требует logprobs: true",
+            "example": 5,
+            "minimum": 0,
+            "maximum": 20
+          },
+          "logit_bias": {
+            "type": "object",
+            "description": "Смещение вероятностей токенов по их ID (-100 до 100)",
+            "example": {
+              "50256": -100
+            }
+          },
+          "parallel_tool_calls": {
+            "type": "boolean",
+            "description": "Разрешить параллельный вызов нескольких tools",
+            "example": true
+          },
+          "image_config": {
+            "type": "object",
+            "description": "Настройки обработки изображений",
+            "example": {
+              "quality": "high",
+              "size": 512
+            }
+          },
+          "modalities": {
+            "type": "array",
+            "description": "Типы вывода модели",
+            "example": ["text", "audio"],
+            "items": {
+              "type": "string",
+              "enum": ["text", "image", "audio"]
+            }
+          },
+          "audio": {
+            "type": "object",
+            "description": "Настройки аудио выхода для моделей с поддержкой аудио (gpt-audio и др.)",
+            "properties": {
+              "voice": {
+                "type": "string",
+                "example": "alloy",
+                "description": "Голос для генерации аудио"
+              },
+              "format": {
+                "type": "string",
+                "example": "pcm16",
+                "description": "Формат аудио"
+              }
+            }
+          }
+        },
+        "required": ["model", "messages"]
+      },
+      "ChatCompletionPresenter": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентификатор генерации",
+            "example": "gen_581761234567890123"
+          },
+          "object": {
+            "type": "string",
+            "description": "Тип объекта",
+            "example": "chat.completion"
+          },
+          "created": {
+            "type": "number",
+            "description": "Временная метка создания (Unix timestamp)",
+            "example": 1703001234
+          },
+          "model": {
+            "type": "string",
+            "description": "ID модели, которая сгенерировала ответ",
+            "example": "openai/gpt-4o"
+          },
+          "choices": {
+            "description": "Массив вариантов ответа",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChoicePresenter"
+            }
+          },
+          "system_fingerprint": {
+            "type": "string",
+            "description": "System fingerprint от провайдера",
+            "example": "fp_29330a9688"
+          },
+          "usage": {
+            "description": "Информация об использовании токенов",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UsagePresenter"
+              }
+            ]
+          }
+        },
+        "required": ["id", "object", "created", "model", "choices"]
+      },
+      "MessageDto": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string",
+            "description": "Роль отправителя сообщения",
+            "enum": ["user", "assistant", "system", "developer", "tool"],
+            "example": "user"
+          },
+          "content": {
+            "type": "object",
+            "description": "Содержимое сообщения (строка, массив частей контента или null для assistant с tool_calls)",
+            "example": "Привет, как дела?",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Имя отправителя (опционально)",
+            "example": "Иван"
+          },
+          "tool_call_id": {
+            "type": "string",
+            "description": "ID вызова инструмента (только для role=tool)",
+            "example": "call_abc123"
+          },
+          "tool_calls": {
+            "description": "Массив вызовов инструментов (только для role=assistant)",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ToolCallDto"
+            }
+          },
+          "refusal": {
+            "type": "object",
+            "description": "Текст отказа модели от выполнения запроса (только для role=assistant)",
+            "example": "Я не могу помочь с этим запросом",
+            "nullable": true
+          },
+          "reasoning": {
+            "type": "object",
+            "description": "Reasoning текст для моделей с reasoning (только для role=assistant)",
+            "example": "Для решения этой задачи мне нужно...",
+            "nullable": true
+          },
+          "annotations": {
+            "type": "array",
+            "description": "Аннотации из ответа провайдера (для кэширования парсинга PDF и других документов)",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": ["role", "content"]
+      },
+      "ProviderDto": {
+        "type": "object",
+        "properties": {
+          "allow_fallbacks": {
+            "type": "boolean",
+            "description": "Разрешить использование резервных провайдеров",
+            "example": true
+          },
+          "order": {
+            "description": "Упорядоченный список slug провайдеров для использования",
+            "example": ["OpenAI", "Anthropic"],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "only": {
+            "description": "Список разрешенных slug провайдеров",
+            "example": ["OpenAI", "Google"],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ignore": {
+            "description": "Список игнорируемых slug провайдеров",
+            "example": ["DeepInfra"],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sort": {
+            "type": "string",
+            "description": "Критерий сортировки провайдеров",
+            "enum": ["price", "throughput", "latency"],
+            "example": "price"
+          },
+          "max_price": {
+            "description": "Максимальные цены для запроса",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProviderMaxPriceDto"
+              }
+            ]
+          }
+        }
+      },
+      "ToolDefinitionDto": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Тип инструмента",
+            "example": "function",
+            "enum": ["function"]
+          },
+          "function": {
+            "description": "Определение функции",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ToolFunctionDto"
+              }
+            ]
+          }
+        },
+        "required": ["type", "function"]
+      },
+      "ReasoningDto": {
+        "type": "object",
+        "properties": {
+          "effort": {
+            "type": "string",
+            "description": "Уровень усилий reasoning модели",
+            "enum": ["xhigh", "high", "medium", "low", "minimal", "none"],
+            "example": "medium"
+          },
+          "summary": {
+            "type": "string",
+            "description": "Уровень детализации резюме reasoning",
+            "enum": ["auto", "concise", "detailed", "none"],
+            "example": "auto"
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Включить/выключить reasoning. По умолчанию определяется из effort или max_tokens",
+            "example": true
+          },
+          "max_tokens": {
+            "type": "number",
+            "description": "Максимальное количество токенов для reasoning (стиль Anthropic)",
+            "example": 2000
+          },
+          "exclude": {
+            "type": "boolean",
+            "description": "Скрыть reasoning из ответа (модель будет использовать reasoning, но не вернёт его)",
+            "example": false
+          }
+        }
+      },
+      "WebSearchOptionsDto": {
+        "type": "object",
+        "properties": {
+          "search_context_size": {
+            "type": "string",
+            "description": "Размер контекста поиска для моделей со встроенным веб-поиском",
+            "enum": ["low", "medium", "high"],
+            "example": "medium"
+          }
+        }
+      },
+      "ChoicePresenter": {
+        "type": "object",
+        "properties": {
+          "index": {
+            "type": "number",
+            "description": "Индекс выбора в массиве choices",
+            "example": 0
+          },
+          "message": {
+            "description": "Сообщение от модели",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MessagePresenter"
+              }
+            ]
+          },
+          "finish_reason": {
+            "type": "string",
+            "description": "Причина завершения генерации",
+            "example": "stop",
+            "enum": ["stop", "length", "content_filter", "error", "tool_calls"],
+            "nullable": true
+          },
+          "reasoning_details": {
+            "type": "array",
+            "description": "Детали reasoning процесса (для reasoning моделей)"
+          },
+          "logprobs": {
+            "description": "Log probabilities для токенов",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ChatMessageTokenLogprobsPresenter"
+              }
+            ]
+          }
+        },
+        "required": ["index", "message", "finish_reason"]
+      },
+      "UsagePresenter": {
+        "type": "object",
+        "properties": {
+          "prompt_tokens": {
+            "type": "number",
+            "description": "Количество токенов в промпте",
+            "example": 10
+          },
+          "completion_tokens": {
+            "type": "number",
+            "description": "Количество токенов в ответе",
+            "example": 50
+          },
+          "total_tokens": {
+            "type": "number",
+            "description": "Общее количество токенов (prompt + completion)",
+            "example": 60
+          },
+          "completion_tokens_details": {
+            "description": "Детализация токенов completion",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CompletionTokensDetailsPresenter"
+              }
+            ]
+          },
+          "prompt_tokens_details": {
+            "description": "Детализация токенов промпта",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PromptTokensDetailsPresenter"
+              }
+            ]
+          },
+          "server_tool_use": {
+            "description": "Использование серверных инструментов (web search)",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServerToolUsePresenter"
+              }
+            ]
+          },
+          "cost_rub": {
+            "type": "object",
+            "description": "Стоимость запроса в рублях (списано с баланса клиента)",
+            "example": 0.04131306,
+            "nullable": true
+          },
+          "cost": {
+            "type": "object",
+            "description": "Стоимость запроса в рублях (alias для cost_rub)",
+            "example": 0.04131306,
+            "nullable": true
+          },
+          "plugins": {
+            "type": "object",
+            "description": "Детализация серверных плагинов",
+            "example": {
+              "masker": {
+                "operations": [
+                  {
+                    "operation": "mask",
+                    "latency_ms": 15,
+                    "cost_rub": 0.001
+                  },
+                  {
+                    "operation": "unmask",
+                    "latency_ms": 8,
+                    "cost_rub": 0
+                  }
+                ],
+                "total_cost_rub": 0.001
+              }
+            },
+            "nullable": true
+          },
+          "plugin_post_process_error": {
+            "type": "boolean",
+            "description": "Ошибка post-process плагинов (ответ возвращён в замаскированном виде)",
+            "example": true
+          }
+        },
+        "required": ["prompt_tokens", "completion_tokens", "total_tokens"]
+      },
+      "ToolCallDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентификатор вызова инструмента",
+            "example": "call_abc123xyz"
+          },
+          "type": {
+            "type": "string",
+            "description": "Тип вызова инструмента",
+            "enum": ["function"],
+            "example": "function"
+          },
+          "function": {
+            "description": "Информация о вызываемой функции",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ToolCallFunctionDto"
+              }
+            ]
+          }
+        },
+        "required": ["id", "type", "function"]
+      },
+      "ProviderMaxPriceDto": {
+        "type": "object",
+        "properties": {
+          "prompt": {
+            "type": "number",
+            "description": "Максимальная цена за промпт токены (RUB за миллион токенов)",
+            "example": 10
+          },
+          "completion": {
+            "type": "number",
+            "description": "Максимальная цена за completion токены (RUB за миллион токенов)",
+            "example": 20
+          },
+          "image": {
+            "type": "number",
+            "description": "Максимальная цена за изображение (RUB за штуку)",
+            "example": 5
+          },
+          "audio": {
+            "type": "number",
+            "description": "Максимальная цена за аудио (RUB за миллион токенов)",
+            "example": 15
+          },
+          "request": {
+            "type": "number",
+            "description": "Максимальная цена за запрос (RUB за запрос)",
+            "example": 1
+          }
+        }
+      },
+      "ToolFunctionDto": {
         "type": "object",
         "properties": {
           "name": {
-            "description": "The name of the plant",
+            "type": "string",
+            "description": "Название функции",
+            "example": "get_weather"
+          },
+          "description": {
+            "type": "string",
+            "description": "Описание функции",
+            "example": "Получить текущую погоду для указанного местоположения"
+          },
+          "parameters": {
+            "type": "object",
+            "description": "JSON Schema параметров функции",
+            "example": {
+              "type": "object",
+              "properties": {
+                "location": {
+                  "type": "string",
+                  "description": "Название города"
+                },
+                "unit": {
+                  "type": "string",
+                  "enum": ["celsius", "fahrenheit"]
+                }
+              },
+              "required": ["location"]
+            }
+          },
+          "strict": {
+            "type": "boolean",
+            "description": "Строгое соответствие схеме",
+            "example": false
+          }
+        },
+        "required": ["name"]
+      },
+      "MessagePresenter": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string",
+            "description": "Роль отправителя сообщения",
+            "example": "assistant"
+          },
+          "content": {
+            "type": "object",
+            "description": "Содержимое сообщения",
+            "example": "Привет! Я хорошо, спасибо что спросили. Чем могу помочь?",
+            "nullable": true
+          },
+          "name": {
+            "type": "object",
+            "description": "Имя отправителя",
+            "example": "Ассистент",
+            "nullable": true
+          },
+          "tool_calls": {
+            "description": "Вызовы инструментов (tool calls)",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ToolCallPresenter"
+            }
+          },
+          "refusal": {
+            "type": "object",
+            "description": "Отказ модели от выполнения запроса",
+            "example": null,
+            "nullable": true
+          },
+          "reasoning": {
+            "type": "object",
+            "description": "Reasoning текст (для reasoning моделей)",
+            "example": null,
+            "nullable": true
+          },
+          "audio": {
+            "type": "object",
+            "description": "Аудио данные (для моделей с audio output)",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "ID аудио"
+              },
+              "data": {
+                "type": "string",
+                "description": "Base64-encoded аудио данные"
+              },
+              "transcript": {
+                "type": "string",
+                "description": "Текстовая расшифровка"
+              },
+              "expires_at": {
+                "type": "number",
+                "description": "Unix timestamp истечения"
+              }
+            }
+          },
+          "annotations": {
+            "type": "array",
+            "description": "Аннотации (ссылки на источники от web search)",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": ["role", "content"]
+      },
+      "ChatMessageTokenLogprobsPresenter": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "description": "Log probabilities для контента",
+            "nullable": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChatMessageTokenLogprobPresenter"
+            }
+          },
+          "refusal": {
+            "description": "Log probabilities для refusal",
+            "nullable": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChatMessageTokenLogprobPresenter"
+            }
+          }
+        },
+        "required": ["content", "refusal"]
+      },
+      "CompletionTokensDetailsPresenter": {
+        "type": "object",
+        "properties": {
+          "reasoning_tokens": {
+            "type": "object",
+            "description": "Токены reasoning (для reasoning моделей)",
+            "example": 100,
+            "nullable": true
+          },
+          "audio_tokens": {
+            "type": "object",
+            "description": "Аудио токены в ответе",
+            "example": 0,
+            "nullable": true
+          },
+          "image_tokens": {
+            "type": "object",
+            "description": "Токены изображений в ответе",
+            "example": 0,
+            "nullable": true
+          },
+          "accepted_prediction_tokens": {
+            "type": "object",
+            "description": "Принятые токены предсказаний",
+            "example": 0,
+            "nullable": true
+          },
+          "rejected_prediction_tokens": {
+            "type": "object",
+            "description": "Отклоненные токены предсказаний",
+            "example": 0,
+            "nullable": true
+          }
+        }
+      },
+      "PromptTokensDetailsPresenter": {
+        "type": "object",
+        "properties": {
+          "cached_tokens": {
+            "type": "number",
+            "description": "Кэшированные токены",
+            "example": 0
+          },
+          "audio_tokens": {
+            "type": "number",
+            "description": "Аудио токены в промпте",
+            "example": 0
+          },
+          "video_tokens": {
+            "type": "number",
+            "description": "Видео токены в промпте",
+            "example": 0
+          }
+        }
+      },
+      "ServerToolUsePresenter": {
+        "type": "object",
+        "properties": {
+          "web_search_requests": {
+            "type": "number",
+            "description": "Количество вызовов веб-поиска",
+            "example": 1
+          }
+        }
+      },
+      "ToolCallFunctionDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Имя вызываемой функции",
+            "example": "get_weather"
+          },
+          "arguments": {
+            "type": "string",
+            "description": "JSON-строка с аргументами функции",
+            "example": "{\"location\": \"Moscow\", \"unit\": \"celsius\"}"
+          }
+        },
+        "required": ["name", "arguments"]
+      },
+      "ToolCallPresenter": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID вызова функции",
+            "example": "call_abc123"
+          },
+          "type": {
+            "type": "string",
+            "description": "Тип вызова",
+            "example": "function"
+          },
+          "function": {
+            "description": "Информация о функции",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ToolCallFunctionPresenter"
+              }
+            ]
+          }
+        },
+        "required": ["id", "type", "function"]
+      },
+      "ChatMessageTokenLogprobPresenter": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "Токен",
+            "example": "hello"
+          },
+          "logprob": {
+            "type": "number",
+            "description": "Log probability токена",
+            "example": -0.5
+          },
+          "bytes": {
+            "type": "object",
+            "description": "Байты токена",
+            "example": [104, 101, 108, 108, 111],
+            "nullable": true
+          },
+          "top_logprobs": {
+            "description": "Топ наиболее вероятных токенов с их вероятностями",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChatMessageTokenLogprobTopItemPresenter"
+            }
+          }
+        },
+        "required": ["token", "logprob", "bytes", "top_logprobs"]
+      },
+      "ToolCallFunctionPresenter": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Название функции",
+            "example": "get_weather"
+          },
+          "arguments": {
+            "type": "string",
+            "description": "Аргументы функции в JSON формате",
+            "example": "{\"location\": \"Moscow\"}"
+          }
+        },
+        "required": ["name", "arguments"]
+      },
+      "ChatMessageTokenLogprobTopItemPresenter": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "Токен",
+            "example": "hello"
+          },
+          "logprob": {
+            "type": "number",
+            "description": "Log probability токена",
+            "example": -0.5
+          },
+          "bytes": {
+            "type": "object",
+            "description": "Байты токена",
+            "example": [104, 101, 108, 108, 111],
+            "nullable": true
+          }
+        },
+        "required": ["token", "logprob", "bytes"]
+      },
+      "ResponseRequestDto": {
+        "type": "object",
+        "required": ["model", "input"],
+        "properties": {
+          "model": {
             "type": "string"
           },
-          "tag": {
-            "description": "Tag to specify the type",
+          "input": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array"
+              }
+            ]
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "stream": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ResponsePresenter": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "object": {
+            "type": "string",
+            "example": "response"
+          },
+          "output_text": {
+            "type": "string"
+          },
+          "usage": {
+            "$ref": "#/components/schemas/UsagePresenter"
+          }
+        }
+      },
+      "ImageGenerationRequestDto": {
+        "type": "object",
+        "required": ["model", "prompt"],
+        "properties": {
+          "model": {
+            "type": "string"
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "n": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 10,
+            "default": 1
+          },
+          "size": {
+            "type": "string",
+            "enum": ["auto", "256x256", "512x512", "1024x1024", "1536x1024", "1024x1536", "1792x1024", "1024x1792"]
+          },
+          "quality": {
+            "type": "string",
+            "enum": ["auto", "low", "medium", "high", "standard", "hd"]
+          },
+          "response_format": {
+            "type": "string",
+            "enum": ["url", "b64_json"]
+          }
+        }
+      },
+      "ImageGenerationResponsePresenter": {
+        "type": "object",
+        "properties": {
+          "created": {
+            "type": "number"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string"
+                },
+                "revised_prompt": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "usage": {
+            "$ref": "#/components/schemas/UsagePresenter"
+          }
+        }
+      },
+      "MediaRequestDto": {
+        "type": "object",
+        "required": ["model", "input"],
+        "properties": {
+          "model": {
+            "type": "string"
+          },
+          "input": {
+            "type": "object"
+          },
+          "async": {
+            "type": "boolean"
+          },
+          "user": {
             "type": "string"
           }
         }
       },
-      "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Plant"
+      "MediaStatusPresenter": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
           },
-          {
-            "required": [
-              "id"
-            ],
+          "object": {
+            "type": "string",
+            "example": "media.generation"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["pending", "processing", "completed", "failed"]
+          },
+          "created": {
+            "type": "number"
+          },
+          "model": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object"
+          },
+          "error": {
+            "$ref": "#/components/schemas/MediaErrorPresenter"
+          }
+        }
+      },
+      "MediaErrorPresenter": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "MediaOperationRequestDto": {
+        "type": "object",
+        "required": ["operation"],
+        "properties": {
+          "operation": {
+            "type": "string",
+            "enum": ["extend", "upscale_1080p", "upscale_4k"]
+          },
+          "params": {
+            "type": "object"
+          },
+          "async": {
+            "type": "boolean"
+          }
+        }
+      },
+      "AudioTranscriptionDto": {
+        "type": "object",
+        "required": ["file"],
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string",
+            "default": "openai/whisper-1"
+          },
+          "language": {
+            "type": "string"
+          },
+          "response_format": {
+            "type": "string",
+            "enum": ["json", "text", "srt", "vtt", "verbose_json", "diarized_json"]
+          }
+        }
+      },
+      "AudioTranscriptionPresenter": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "duration": {
+            "type": "number"
+          }
+        }
+      },
+      "AudioSpeechDto": {
+        "type": "object",
+        "required": ["input", "voice"],
+        "properties": {
+          "model": {
+            "type": "string",
+            "default": "openai/tts-1"
+          },
+          "input": {
+            "type": "string",
+            "maxLength": 5000
+          },
+          "voice": {
+            "type": "string"
+          },
+          "response_format": {
+            "type": "string",
+            "enum": ["mp3", "opus", "aac", "flac", "wav", "pcm"]
+          },
+          "speed": {
+            "type": "number",
+            "minimum": 0.25,
+            "maximum": 4,
+            "default": 1
+          }
+        }
+      },
+      "AudioSpeechPresenter": {
+        "type": "object",
+        "properties": {
+          "audio": {
+            "type": "string"
+          },
+          "contentType": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "duration": {
+            "type": "number"
+          },
+          "usage": {
             "type": "object",
             "properties": {
-              "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
+              "characters": {
+                "type": "number"
+              },
+              "cost_rub": {
+                "type": "number"
               }
             }
           }
-        ]
+        }
       },
-      "Error": {
-        "required": [
-          "error",
-          "message"
-        ],
+      "EmbeddingRequestDto": {
+        "type": "object",
+        "required": ["model", "input"],
+        "properties": {
+          "model": {
+            "type": "string"
+          },
+          "input": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "encoding_format": {
+            "type": "string",
+            "enum": ["float", "base64"]
+          }
+        }
+      },
+      "EmbeddingResponsePresenter": {
         "type": "object",
         "properties": {
-          "error": {
-            "type": "integer",
-            "format": "int32"
+          "id": {
+            "type": "string"
           },
-          "message": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "embedding": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "index": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "usage": {
+            "$ref": "#/components/schemas/UsagePresenter"
+          }
+        }
+      },
+      "ModelListPresenter": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PublicModelPresenter"
+            }
+          }
+        }
+      },
+      "PublicModelPresenter": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "created": {
+            "type": "number"
+          },
+          "architecture": {
+            "type": "object",
+            "properties": {
+              "input_modalities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "output_modalities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ModelsCatalogPresenter": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PublicModelPresenter"
+            }
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "page": {
+                "type": "number"
+              },
+              "limit": {
+                "type": "number"
+              },
+              "total": {
+                "type": "number"
+              },
+              "totalPages": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      },
+      "StorageFilePresenter": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "fileType": {
+            "type": "string"
+          },
+          "mimeType": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "storagePolicy": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "size": {
+            "type": "number"
+          },
+          "expiresAt": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string"
+          }
+        }
+      },
+      "StorageStatsPresenter": {
+        "type": "object",
+        "properties": {
+          "usedBytes": {
+            "type": "number"
+          },
+          "totalBytes": {
+            "type": "number"
+          },
+          "fileCount": {
+            "type": "number"
+          },
+          "filesByType": {
+            "type": "object"
+          },
+          "filesByPolicy": {
+            "type": "object"
+          },
+          "usagePercent": {
+            "type": "number"
+          }
+        }
+      },
+      "GenerationsHistoryPresenter": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "model": {
+                  "type": "string"
+                },
+                "modelDisplayName": {
+                  "type": "string"
+                },
+                "requestType": {
+                  "type": "string"
+                },
+                "provider": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "cost": {
+                  "type": "string"
+                },
+                "createdAt": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "page": {
+                "type": "number"
+              },
+              "limit": {
+                "type": "number"
+              },
+              "total": {
+                "type": "number"
+              },
+              "totalPages": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      },
+      "GenerationDetailPresenter": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "organizationId": {
+            "type": "string"
+          },
+          "apiKeyId": {
+            "type": "string"
+          },
+          "unifiedModelId": {
+            "type": "string"
+          },
+          "requestType": {
+            "type": "string"
+          },
+          "apiType": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "finishReason": {
+            "type": "string"
+          },
+          "clientCost": {
+            "type": "string"
+          },
+          "usage": {
+            "$ref": "#/components/schemas/UsagePresenter"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "completedAt": {
             "type": "string"
           }
         }
       }
     },
     "securitySchemes": {
-      "bearerAuth": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "API Key",
         "type": "http",
-        "scheme": "bearer"
+        "description": "API ключ передаётся в заголовке: Authorization: Bearer <POLZA_AI_API_KEY>"
       }
     }
   }

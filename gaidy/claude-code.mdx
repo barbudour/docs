@@ -1,0 +1,373 @@
+---
+title: "Claude Code"
+description: "Подключение Claude Code к Polza.AI — полноценный AI-ассистент для разработчиков с отслеживанием расходов"
+icon: "code"
+---
+
+Claude Code — официальный CLI-инструмент от Anthropic для работы с кодом прямо из терминала. Он умеет читать и редактировать файлы, запускать команды, работать с git и решать сложные задачи в несколько шагов.
+
+## Требования
+
+* macOS, Linux, Windows (WSL) или Windows (нативно)
+* Node.js 18 или новее
+* API-ключ [polza.ai](https://polza.ai/dashboard/api-keys)
+
+## Установка Claude Code
+
+```bash theme={null}
+npm install -g @anthropic-ai/claude-code
+```
+
+Или через официальный установщик (только macOS / Linux / WSL):
+
+```bash theme={null}
+curl -fsSL https://claude.ai/install.sh | bash
+```
+
+## Подключение к Polza.AI
+
+Claude Code использует стандартный Anthropic API. Достаточно указать URL Polza в качестве базового адреса.
+
+<Tabs>
+    <Tab title="macOS / Linux / WSL">
+        <Steps>
+            <Step title="Откройте профиль оболочки">
+                ```bash theme={null}
+                nano ~/.zshrc   # zsh (macOS по умолчанию)
+                # или
+                nano ~/.bashrc  # bash
+                ```
+            </Step>
+
+            <Step title="Добавьте переменные окружения">
+                ```bash theme={null}
+                export ANTHROPIC_BASE_URL="https://polza.ai/api"
+                export ANTHROPIC_AUTH_TOKEN="ваш-api-ключ"
+                export ANTHROPIC_API_KEY=""  # Важно: оставьте пустым
+                ```
+
+                Замените `ваш-api-ключ` на ключ из [личного кабинета](https://polza.ai/dashboard/api-keys).
+            </Step>
+
+            <Step title="Перезапустите терминал">
+                ```bash theme={null}
+                source ~/.zshrc
+                ```
+            </Step>
+
+            <Step title="Запустите Claude Code">
+                ```bash theme={null}
+                cd /path/to/your/project
+                claude
+                ```
+            </Step>
+        </Steps>
+    </Tab>
+
+    <Tab title="Windows (нативно)">
+        На Windows Claude Code работает без WSL — через **cmd.exe** или PowerShell. Рекомендуем задавать переменные окружения через `settings.json` (проще и надёжнее) или через системные переменные Windows.
+
+        <Tabs>
+            <Tab title="Через settings.json (рекомендуется)">
+                Создайте или откройте файл `%USERPROFILE%\.claude\settings.json` и добавьте:
+
+                ```json theme={null}
+                {
+                    "env": {
+                    "ANTHROPIC_BASE_URL": "https://polza.ai/api",
+                    "ANTHROPIC_AUTH_TOKEN": "ваш-api-ключ",
+                    "ANTHROPIC_API_KEY": ""
+                }
+                }
+                ```
+
+                Замените `ваш-api-ключ` на ключ из [личного кабинета](https://polza.ai/dashboard/api-keys).
+
+                Это самый простой способ — ничего больше настраивать не нужно. Запустите проект:
+
+                ```cmd theme={null}
+                cd C:\path\to\your\project
+                claude
+                ```
+            </Tab>
+
+            <Tab title="Через системные переменные (cmd.exe)">
+                Откройте **cmd.exe** и выполните:
+
+                ```cmd theme={null}
+                setx ANTHROPIC_BASE_URL "https://polza.ai/api"
+                setx ANTHROPIC_AUTH_TOKEN "ваш-api-ключ"
+                setx ANTHROPIC_API_KEY ""
+                ```
+
+                <Warning>
+                    `setx` записывает переменные постоянно, но они применяются только в **новом** окне cmd.exe. Текущую сессию нужно перезапустить.
+                </Warning>
+
+                После перезапуска cmd.exe:
+
+                ```cmd theme={null}
+                cd C:\path\to\your\project
+                claude
+                ```
+            </Tab>
+
+            <Tab title="Через PowerShell">
+                Добавьте строки в профиль PowerShell (`$PROFILE`):
+
+                ```powershell theme={null}
+                notepad $PROFILE
+                ```
+
+                Вставьте:
+
+                ```powershell theme={null}
+                $env:ANTHROPIC_BASE_URL = "https://polza.ai/api"
+                $env:ANTHROPIC_AUTH_TOKEN = "ваш-api-ключ"
+                $env:ANTHROPIC_API_KEY = ""
+                ```
+
+                Перезапустите PowerShell, затем:
+
+                ```powershell theme={null}
+                cd C:\path\to\your\project
+                claude
+                ```
+
+                <Note>
+                    Некоторые функции Claude Code (интерактивный ввод, цвета терминала) работают лучше в **cmd.exe**, чем в PowerShell. Если возникают проблемы с интерфейсом — запускайте через cmd.exe.
+                </Note>
+            </Tab>
+        </Tabs>
+    </Tab>
+</Tabs>
+
+<img src="https://mintcdn.com/polza/OqXFy8UW4iLFXCio/images/claude-code/welcome-screen.png?fit=max&auto=format&n=OqXFy8UW4iLFXCio&q=85&s=200b24910facacb76873cfcad43d5c2b" alt="Приветственный экран Claude Code с подключённым Polza.AI" width="1922" height="1358" data-path="images/claude-code/welcome-screen.png" />
+
+<Warning>
+    Переменная `ANTHROPIC_API_KEY=""` должна быть явно пустой строкой. Если она не установлена, Claude Code попытается подключиться к серверам Anthropic напрямую.
+</Warning>
+
+## Настройка моделей
+
+По умолчанию Claude Code использует семейство моделей Claude. Вы можете переключить любую роль на любую модель из каталога Polza.AI.
+
+<Tabs>
+    <Tab title="macOS / Linux / WSL">
+        ```bash theme={null}
+        export ANTHROPIC_DEFAULT_SONNET_MODEL="anthropic/claude-sonnet-4.6"
+        export ANTHROPIC_DEFAULT_OPUS_MODEL="anthropic/claude-opus-4.6"
+        export ANTHROPIC_DEFAULT_HAIKU_MODEL="anthropic/claude-haiku-4.5"
+        export CLAUDE_CODE_SUBAGENT_MODEL="anthropic/claude-sonnet-4.6"
+        ```
+    </Tab>
+
+    <Tab title="Windows (cmd.exe)">
+        ```cmd theme={null}
+        setx ANTHROPIC_DEFAULT_SONNET_MODEL "anthropic/claude-sonnet-4.6"
+        setx ANTHROPIC_DEFAULT_OPUS_MODEL "anthropic/claude-opus-4.6"
+        setx ANTHROPIC_DEFAULT_HAIKU_MODEL "anthropic/claude-haiku-4.5"
+        setx CLAUDE_CODE_SUBAGENT_MODEL "anthropic/claude-sonnet-4.6"
+        ```
+    </Tab>
+
+    <Tab title="Windows (settings.json)">
+        ```json theme={null}
+        {
+            "env": {
+            "ANTHROPIC_BASE_URL": "https://polza.ai/api",
+            "ANTHROPIC_AUTH_TOKEN": "ваш-api-ключ",
+            "ANTHROPIC_API_KEY": "",
+            "ANTHROPIC_DEFAULT_SONNET_MODEL": "anthropic/claude-sonnet-4.6",
+            "ANTHROPIC_DEFAULT_OPUS_MODEL": "anthropic/claude-opus-4.6",
+            "ANTHROPIC_DEFAULT_HAIKU_MODEL": "anthropic/claude-haiku-4.5",
+            "CLAUDE_CODE_SUBAGENT_MODEL": "anthropic/claude-sonnet-4.6"
+        }
+        }
+        ```
+    </Tab>
+</Tabs>
+
+| Переменная                       | Применяется для                   |
+| -------------------------------- | --------------------------------- |
+| `ANTHROPIC_DEFAULT_SONNET_MODEL` | Основные задачи (код, анализ)     |
+| `ANTHROPIC_DEFAULT_OPUS_MODEL`   | Сложные и ресурсоёмкие задачи     |
+| `ANTHROPIC_DEFAULT_HAIKU_MODEL`  | Быстрые операции и автодополнение |
+| `CLAUDE_CODE_SUBAGENT_MODEL`     | Субагенты внутри сессии           |
+
+Полный список доступных моделей — в [каталоге](https://polza.ai/models).
+
+## Настройка через settings.json
+
+Альтернативно настройте подключение через файл конфигурации — это работает на всех платформах без изменения переменных окружения.
+
+| Платформа       | Путь к файлу                          |
+| --------------- | ------------------------------------- |
+| macOS / Linux   | `~/.claude/settings.json`             |
+| Windows         | `%USERPROFILE%\.claude\settings.json` |
+| Проект (все ОС) | `.claude/settings.local.json`         |
+
+```json theme={null}
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://polza.ai/api",
+    "ANTHROPIC_AUTH_TOKEN": "ваш-api-ключ",
+    "ANTHROPIC_API_KEY": ""
+  }
+}
+```
+
+<Warning>
+    Не добавляйте `settings.local.json` с API-ключом в git-репозиторий. Добавьте файл в `.gitignore`.
+</Warning>
+
+## Статус-бар с расходами сессии
+
+Polza.AI предоставляет скрипт для отображения в нижней строке Claude Code стоимости текущей сессии, количества токенов, текущей модели и баланса — в реальном времени.
+
+<img src="https://mintcdn.com/polza/OqXFy8UW4iLFXCio/images/claude-code/statusline.png?fit=max&auto=format&n=OqXFy8UW4iLFXCio&q=85&s=d7b0f54899182f5ad4e55c69a60c520b" alt="Статус-бар Claude Code: модель, стоимость сессии, токены и баланс" width="1922" height="1358" data-path="images/claude-code/statusline.png" />
+
+<Tabs>
+    <Tab title="macOS / Linux / WSL">
+        ### Установка
+
+        Скачайте скрипт и сделайте его исполняемым:
+
+        ```bash theme={null}
+        curl -fsSL https://cdn.polza.ai/scripts/claude-statusline.sh -o ~/.local/bin/claude-statusline.sh
+        chmod +x ~/.local/bin/claude-statusline.sh
+        ```
+
+        ### Подключение
+
+        Добавьте в `~/.claude/settings.json`:
+
+        ```json theme={null}
+        {
+            "statusLine": {
+            "type": "command",
+            "command": "/path/to/claude-statusline.sh"
+        }
+        }
+        ```
+
+        Замените путь на фактическое расположение скрипта.
+    </Tab>
+
+    <Tab title="Windows (нативно)">
+        На нативном Windows bash-скрипты недоступны — используйте Node.js-версию статус-бара.
+
+        ### Установка
+
+        Скачайте Node.js-скрипт:
+
+        ```cmd theme={null}
+        curl -fsSL https://s3.polza.ai/scripts/claude-statusline-win.mjs -o %USERPROFILE%\.claude\claude-statusline-win.mjs
+        ```
+
+        Убедитесь, что Node.js 18+ установлен:
+
+        ```cmd theme={null}
+        node --version
+        ```
+
+        ### Подключение
+
+        Добавьте в `%USERPROFILE%\.claude\settings.json`:
+
+        ```json theme={null}
+        {
+            "statusLine": {
+            "type": "command",
+            "command": "\"C:\\Program Files\\nodejs\\node.exe\" \"C:\\Users\\ВАШ_ПОЛЬЗОВАТЕЛЬ\\.claude\\claude-statusline-win.mjs\""
+        }
+        }
+        ```
+
+        Замените `ВАШ_ПОЛЬЗОВАТЕЛЬ` на имя вашей учётной записи Windows.
+
+        <Warning>
+            Используйте **полный абсолютный путь** к `node.exe` и к скрипту. Claude Code запускает статус-бар в окружении без стандартного `PATH`, поэтому команда `node` без полного пути не работает. Переменная `%USERPROFILE%` в поле `command` также не раскрывается.
+        </Warning>
+
+        <Note>
+            Чтобы узнать точный путь к Node.js, выполните в cmd.exe: `where node`
+        </Note>
+    </Tab>
+</Tabs>
+
+### Что показывает статус-бар
+
+| Элемент          | Пример             | Описание                    |
+| ---------------- | ------------------ | --------------------------- |
+| Название сервиса | `polza.ai`         | Всегда отображается         |
+| Модель           | `z-ai/glm-5-turbo` | Текущая модель сессии       |
+| Стоимость        | `₽2.86`            | Суммарные расходы за сессию |
+| Токены           | `47.8k tok`        | Входные + выходные токены   |
+| Кэш              | `(cache: 24.2k)`   | Токены из кэша (если есть)  |
+| Баланс           | `баланс: ₽9993`    | Текущий баланс аккаунта     |
+
+Баланс обновляется не чаще раза в минуту. Стоимость — после каждого завершённого запроса.
+
+## Проверка подключения
+
+После запуска выполните команду `/status` внутри сессии:
+
+```
+> /status
+Auth token: ANTHROPIC_AUTH_TOKEN
+Anthropic base URL: https://polza.ai/api
+```
+
+## Решение проблем
+
+<AccordionGroup>
+    <Accordion title="Ошибка аутентификации (401)">
+        * Убедитесь что `ANTHROPIC_AUTH_TOKEN` содержит ваш ключ Polza
+        * Проверьте что `ANTHROPIC_API_KEY` явно установлен в пустую строку (`""`)
+        * Если ранее выполняли вход через Anthropic — выполните `/logout` внутри Claude Code
+    </Accordion>
+
+    <Accordion title="Claude Code не видит переменные окружения">
+        * **macOS / Linux:** перезапустите терминал после изменения профиля оболочки, проверьте: `echo $ANTHROPIC_BASE_URL`
+        * **Windows (setx):** `setx` применяется только в **новом** окне cmd.exe — текущую сессию нужно закрыть и открыть заново
+        * **Windows (PowerShell):** переменные могут не передаваться в дочерние процессы — используйте `settings.json` вместо профиля PowerShell
+        * Самый надёжный способ на любой платформе — прописать переменные в `~/.claude/settings.json` (macOS/Linux) или `%USERPROFILE%\.claude\settings.json` (Windows)
+    </Accordion>
+
+    <Accordion title="Проблемы с интерфейсом на Windows (цвета, ввод, артефакты)">
+        Claude Code лучше работает в **cmd.exe**, чем в PowerShell. Если интерфейс отображается с артефактами или не реагирует на клавиши:
+
+        * Запускайте `claude` из **cmd.exe**, а не из PowerShell или Windows Terminal с PowerShell-профилем
+        * В Windows Terminal можно добавить профиль cmd.exe и запускать сессии через него
+        * Как альтернатива — использовать WSL с bash/zsh
+    </Accordion>
+
+    <Accordion title="Статус-бар показывает ₽0.00">
+        * Проверьте что `ANTHROPIC_BASE_URL` и `ANTHROPIC_AUTH_TOKEN` передаются скрипту
+        * Стоимость обновляется только после завершения запроса — в процессе генерации показывается предыдущее значение
+        * Проверьте что в папке проекта нет `.claude/settings.json` с другим статус-скриптом
+        * **Windows:** используйте полный путь к `node.exe` (например `C:\\Program Files\\nodejs\\node.exe`) — Claude Code запускает скрипт без стандартного `PATH`, поэтому просто `node` не работает. Узнать путь: `where node` в cmd.exe
+    </Accordion>
+
+    <Accordion title="Ошибка модели (model not found)">
+        * Убедитесь что модель доступна в [каталоге Polza](https://polza.ai/models)
+        * Проверьте правильность написания ID модели (например, `anthropic/claude-sonnet-4.6`)
+    </Accordion>
+</AccordionGroup>
+
+## Следующие шаги
+
+<CardGroup cols={2}>
+    <Card title="Каталог моделей" icon="layer-group" href="/models">
+        Выберите подходящую модель под задачу
+    </Card>
+
+    <Card title="Polza.AI Proxy" icon="server" href="/integracii/proxy">
+        Выбор провайдера и другие расширенные параметры
+    </Card>
+
+    <Card title="Управление балансом" icon="wallet" href="/glavnoe/billing">
+        Пополните баланс и настройте уведомления
+    </Card>
+</CardGroup>

@@ -1,0 +1,114 @@
+---
+title: "N8N"
+description: "Интеграция Polza.ai с N8N для автоматизации рабочих процессов"
+icon: "n"
+---
+
+N8N — это визуальная платформа для автоматизации рабочих процессов. С помощью интеграции Polza.ai вы можете использовать сотни AI-моделей прямо в ваших N8N workflows через стандартный OpenAI-совместимый интерфейс.
+
+## Требования
+
+* Установленный N8N (локально или в облаке)
+* API-ключ Polza.ai из [polza.ai/dashboard](https://polza.ai/dashboard)
+* Базовое знание работы с N8N
+
+## Настройка
+
+<Steps>
+    <Step title="Добавьте OpenAI Chat Model">
+        В N8N найдите и добавьте ноду "OpenAI Chat Model" в ваш workflow. Для этого введите "openai" в поиске при добавлении ноды.
+
+        <Frame>
+            <img src="https://mintcdn.com/polza/5hd_BdpSImo9gQ0k/images/n8n/n8n-search-openai.png?fit=max&auto=format&n=5hd_BdpSImo9gQ0k&q=85&s=bb2f7602cfca3ed05484331078e225c2" alt="Поиск OpenAI Chat Model в N8N" width="4246" height="2550" data-path="images/n8n/n8n-search-openai.png" />
+        </Frame>
+    </Step>
+
+    <Step title="Создайте credentials">
+        Нажмите на создание новых credentials и заполните:
+
+        * **API Key:** Ваш API-ключ Polza.ai
+        * **Base URL:** `https://polza.ai/api/v1`
+
+        <Frame>
+            <img src="https://mintcdn.com/polza/5hd_BdpSImo9gQ0k/images/n8n/n8n-credentials.png?fit=max&auto=format&n=5hd_BdpSImo9gQ0k&q=85&s=a757ff068956fd719037cc2e37a5da07" alt="Настройка credentials для Polza.ai" width="4246" height="2550" data-path="images/n8n/n8n-credentials.png" />
+        </Frame>
+    </Step>
+
+    <Step title="Выберите модель">
+        В поле Model введите ID модели, например:
+
+        * `deepseek/deepseek-r1` — для reasoning задач
+        * `openai/gpt-4o` — универсальная модель
+        * `anthropic/claude-3.5-sonnet` — для кодинга
+        * `google/gemini-2.5-pro-preview` — мультимодальная
+
+        <Frame>
+            <img src="https://mintcdn.com/polza/5hd_BdpSImo9gQ0k/images/n8n/n8n-model-settings.png?fit=max&auto=format&n=5hd_BdpSImo9gQ0k&q=85&s=7eed917e2e91362c0bec42ec4414e47e" alt="Выбор модели в настройках" width="4246" height="2550" data-path="images/n8n/n8n-model-settings.png" />
+        </Frame>
+    </Step>
+
+    <Step title="Готово!">
+        Теперь вы можете использовать AI-модели Polza.ai в ваших N8N workflows.
+
+        <Frame>
+            <img src="https://mintcdn.com/polza/5hd_BdpSImo9gQ0k/images/n8n/n8n-workflow-chat.png?fit=max&auto=format&n=5hd_BdpSImo9gQ0k&q=85&s=f6c859a698e1bb2e11f7026d15030018" alt="Рабочий workflow с чатом" width="4246" height="2550" data-path="images/n8n/n8n-workflow-chat.png" />
+        </Frame>
+    </Step>
+</Steps>
+
+<Note>
+    Polza.ai поддерживает **Responses API** в beta-режиме. Если при использовании возникают проблемы, попробуйте отключить опцию "Use Responses API" в настройках модели.
+</Note>
+
+### Мультимодальные запросы
+
+С мультимодальными моделями (GPT-4o, Claude 3.5) можно обрабатывать изображения.
+
+## Расширенные настройки
+
+В настройках AI Agent доступны параметры:
+
+| Параметр          | Описание                   |
+| ----------------- | -------------------------- |
+| Temperature       | Креативность ответов (0-2) |
+| Max Tokens        | Максимальная длина ответа  |
+| Top P             | Nucleus sampling           |
+| Frequency Penalty | Штраф за повторения        |
+| Presence Penalty  | Штраф за повторные токены  |
+
+## Оптимизация стоимости
+
+<CardGroup cols={2}>
+    <Card title="Выбирайте модель" icon="scale-balanced">
+        Используйте модели соответствующие сложности задачи
+    </Card>
+
+    <Card title="Оптимизируйте промпты" icon="text">
+        Сокращайте промпты для снижения токенов
+    </Card>
+</CardGroup>
+
+## Решение проблем
+
+<AccordionGroup>
+    <Accordion title="Ошибка аутентификации">
+        * Проверьте правильность API-ключа
+        * Убедитесь, что Base URL указан как `https://polza.ai/api/v1`
+        * Проверьте баланс
+    </Accordion>
+
+    <Accordion title="Модель не найдена">
+        * Проверьте правильность написания ID модели
+        * Актуальный список моделей: [polza.ai/models](https://polza.ai/models)
+    </Accordion>
+
+    <Accordion title="Превышен лимит токенов">
+        * Уменьшите значение Max Tokens
+        * Сократите входной текст
+    </Accordion>
+
+    <Accordion title="Проблемы с Responses API">
+        * Отключите опцию "Use Responses API" в настройках модели
+        * Responses API находится в beta-режиме и может работать нестабильно с некоторыми моделями
+    </Accordion>
+</AccordionGroup>

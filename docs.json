@@ -9,63 +9,145 @@
   },
   "favicon": "/favicon.svg",
   "navigation": {
-    "tabs": [
+    "languages": [
       {
-        "tab": "Руководства",
-        "groups": [
+        "language": "ru",
+        "tabs": [
           {
-            "group": "Начало работы",
-            "pages": [
-              "models",
-              "chat-completions"
+            "tab": "Документация",
+            "groups": [
+              {
+                "group": "Главное",
+                "pages": [
+                  "index",
+                  "quickstart",
+                  "principles",
+                  "faq",
+                  "enterprise",
+                  "support",
+                  "providers",
+                  "privacy"
+                ]
+              }
             ]
           },
           {
-            "group": "Customization",
-            "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+            "tab": "Руководства",
+            "groups": [
+              {
+                "group": "Начало работы",
+                "pages": [
+                  "gaidy/getting-started",
+                  "gaidy/models",
+                  "gaidy/chat-completions",
+                  "gaidy/media-input"
+                ]
+              },
+              {
+                "group": "Продвинутое",
+                "pages": [
+                  "gaidy/provider-selection",
+                  "gaidy/tool-calling",
+                  "gaidy/structured-output",
+                  "gaidy/plugins",
+                  "gaidy/web-search",
+                  "gaidy/reasoning-tokens",
+                  "gaidy/caching",
+                  "gaidy/usage",
+                  "gaidy/oauth-pkce",
+                  "gaidy/mcp"
+                ]
+              },
+              {
+                "group": "Генерация медиа",
+                "pages": [
+                  {
+                    "group": "Видео",
+                    "icon": "video",
+                    "pages": [
+                      "gaidy/seedance-1-5-pro",
+                      "gaidy/kling-3",
+                      "gaidy/kling-3-motion-control",
+                      "gaidy/kling-2-6-motion-control",
+                      "gaidy/wan-2-6",
+                      "gaidy/wan-2-5",
+                      "gaidy/sora-2-pro",
+                      "gaidy/sora-2",
+                      "gaidy/kling-2-5-turbo",
+                      "gaidy/veo-3-1"
+                    ]
+                  },
+                  {
+                    "group": "Изображения",
+                    "icon": "image",
+                    "pages": [
+                      "gaidy/topaz-upscale",
+                      "gaidy/seedream-5-lite",
+                      "gaidy/seedream-4-5",
+                      "gaidy/seedream-4",
+                      "gaidy/seedream-3",
+                      "gaidy/flux-2-pro",
+                      "gaidy/flux-2-flex",
+                      "gaidy/gpt-image-1-5",
+                      "gaidy/grok-imagine",
+                      "gaidy/qwen-image",
+                      "gaidy/gpt-5-image-mini",
+                      "gaidy/gpt-5-image",
+                      "gaidy/gpt-5-4-image-2",
+                      "gaidy/nanobanano-pro",
+                      "gaidy/nanobanano-2",
+                      "gaidy/nanobanano"
+                    ]
+                  },
+                  {
+                    "group": "Аудио",
+                    "icon": "volume-high",
+                    "pages": [
+                      "gaidy/elevenlabs-tts-turbo",
+                      "gaidy/elevenlabs-tts-multilingual"
+                    ]
+                  },
+                  {
+                    "group": "Музыка",
+                    "icon": "music",
+                    "pages": [
+                      "gaidy/suno-music"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "Интеграции",
+                "pages": [
+                  "gaidy/claude-code",
+                  "gaidy/cline",
+                  "gaidy/kilo-code",
+                  "gaidy/dify",
+                  "gaidy/roo-code",
+                  "gaidy/n8n",
+                  "gaidy/opencode",
+                  "gaidy/openclaw",
+                  "gaidy/qwen-code"
+                ]
+              }
             ]
           },
           {
-            "group": "Writing content",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/components",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-            "group": "Agent ready",
-            "pages": [
-              "agent-ready/prompt",
-              "agent-ready/visibility",
-              "agent-ready/contextual",
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "API reference",
-        "groups": [
-          {
-            "group": "API documentation",
-            "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Endpoint examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+            "tab": "API Reference",
+            "groups": [
+              {
+                "group": "API documentation",
+                "pages": [
+                  "api-reference/introduction"
+                ]
+              },
+              {
+                "group": "Текстовая генерация",
+                "pages": [
+                  "api-reference/chat/completions",
+                  "api-reference/responses/create"
+                ]
+              }
             ]
           }
         ]
@@ -74,14 +156,19 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
+          "anchor": "Модели",
+          "href": "https://speshu.ai/",
+          "icon": "microchip"
         },
         {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "anchor": "Консоль",
+          "href": "https://speshu.ai/",
+          "icon": "gauge"
+        },
+        {
+          "anchor": "Обновления",
+          "href": "https://speshu.ai/",
+          "icon": "clock-rotate-left"
         }
       ]
     }

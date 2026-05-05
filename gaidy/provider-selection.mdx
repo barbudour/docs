@@ -1,0 +1,152 @@
+---
+title: "Выбор провайдера"
+description: "Как выбирать и переключаться между провайдерами моделей"
+icon: "server"
+---
+
+Polza.ai предоставляет доступ к моделям от разных провайдеров. В этом гайде вы узнаете, как выбирать оптимального провайдера для ваших задач.
+
+## Что такое провайдер?
+
+Провайдер — это компания или сервис, предоставляющий доступ к AI моделям. Одна и та же модель может быть доступна через разных провайдеров с разной ценой, скоростью и доступностью.
+
+## Доступные провайдеры
+
+| Провайдер | Модели |
+|-----------|--------|
+| OpenAI | GPT-4o, GPT-4o-mini, o3 и др. |
+| Anthropic | Claude Sonnet, Claude Opus и др. |
+| Google | Gemini Pro, Gemini Flash и др. |
+| Meta* | Llama и др. |
+| DeepSeek | DeepSeek V3, DeepSeek R1 и др. |
+| Другие | Mistral, Qwen и др. |
+
+## Как выбрать провайдера
+
+### Автоматический выбор (рекомендуется)
+
+По умолчанию Polza.ai автоматически выбирает оптимального провайдера на основе доступности, скорости и стоимости. Не нужно передавать параметр `provider` — система сама определит лучший вариант.
+
+```typescript
+// Автоматический выбор провайдера — ничего указывать не нужно
+const completion = await openai.chat.completions.create({
+  model: 'openai/gpt-4o',
+  messages: [{ role: 'user', content: 'Привет!' }]
+});
+```
+
+```python
+# Автоматический выбор провайдера — ничего указывать не нужно
+completion = client.chat.completions.create(
+    model="openai/gpt-4o",
+    messages=[{"role": "user", "content": "Привет!"}]
+)
+```
+
+### Параметр `provider`
+
+Для управления выбором провайдера передайте объект `provider` в запросе:
+
+| Поле | Тип | Описание |
+| --- | --- | --- |
+| `order` | string[] | Приоритетный порядок провайдеров |
+| `only` | string[] | Белый список — использовать только указанных провайдеров |
+| `ignore` | string[] | Чёрный список — исключить указанных провайдеров |
+| `sort` | string | Сортировка: `price`, `latency` или `throughput` |
+| `max_price` | object | Максимальные цены (см. ниже) |
+| `allow_fallbacks` | boolean | Разрешить фолбэк на другие провайдеры при ошибке |
+
+### Поля `max_price`
+
+| Поле | Тип | Описание |
+| --- | --- | --- |
+| `prompt` | number | Макс. цена за промпт (RUB за миллион токенов) |
+| `completion` | number | Макс. цена за completion (RUB за миллион токенов) |
+| `image` | number | Макс. цена за изображение (RUB) |
+| `audio` | number | Макс. цена за аудио (RUB за миллион токенов) |
+| `request` | number | Макс. цена за запрос (RUB) |
+
+## Примеры
+
+### Приоритет провайдеров
+
+Укажите предпочтительный порядок провайдеров. Если первый недоступен — запрос уйдёт ко второму.
+
+```typescript
+const completion = await openai.chat.completions.create({
+  model: 'openai/gpt-4o',
+  messages: [{ role: 'user', content: 'Привет!' }],
+  provider: {
+    order: ['OpenAI', 'Anthropic'],
+    allow_fallbacks: true
+  }
+});
+```
+
+```python
+completion = client.chat.completions.create(
+    model="openai/gpt-4o",
+    messages=[{"role": "user", "content": "Привет!"}],
+    extra_body={
+        "provider": {
+            "order": ["OpenAI", "Anthropic"],
+            "allow_fallbacks": True
+        }
+    }
+)
+```
+
+### Белый список (only)
+
+Ограничьте запрос только указанными провайдерами:
+
+```json
+{
+  "provider": {
+    "only": ["OpenAI"]
+  }
+}
+```
+
+### Чёрный список (ignore)
+
+Исключите определённых провайдеров:
+
+```json
+{
+  "provider": {
+    "ignore": ["DeepInfra", "Together"]
+  }
+}
+```
+
+### Сортировка по цене / скорости
+
+```json
+// Самый дешёвый
+{ "provider": { "sort": "price" } }
+
+// Самый быстрый (задержка)
+{ "provider": { "sort": "latency" } }
+
+// Самый быстрый (пропускная способность)
+{ "provider": { "sort": "throughput" } }
+```
+
+### Фильтрация по максимальной цене
+
+```json
+{
+  "provider": {
+    "sort": "price",
+    "max_price": {
+      "prompt": 10,
+      "completion": 20
+    }
+  }
+}
+```
+
+---
+
+\* Meta признана экстремистской организацией и запрещена в Российской Федерации.

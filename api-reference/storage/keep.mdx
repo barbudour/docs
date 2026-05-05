@@ -1,0 +1,46 @@
+---
+title: "Сохранить файл навсегда"
+description: "Перевод файла в постоянное хранение"
+---
+
+## Описание
+
+Переводит временный файл в постоянное хранение. После этого файл:
+
+- Не будет автоматически удалён
+- Будет учитываться в лимите хранилища организации
+
+Используйте для сохранения результатов AI генераций, которые нужно хранить дольше 7 дней.
+
+## Пример
+
+```bash
+curl -X PATCH "https://polza.ai/api/v1/storage/files/file_abc123/keep" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+## Ответ (200)
+
+```json
+{
+  "id": "file_abc123",
+  "fileType": "IMAGE",
+  "mimeType": "image/png",
+  "source": "AI_GENERATION",
+  "storagePolicy": "PERMANENT",
+  "url": "https://cdn.polza.ai/files/file_abc123.png",
+  "size": 245760,
+  "externalUserId": null,
+  "expiresAt": null,
+  "createdAt": "2025-01-15T10:30:00Z",
+  "updatedAt": "2025-01-15T12:00:00Z"
+}
+```
+
+## Разница между TEMP_UPLOAD и TEMP_GENERATION
+
+| Политика | Источник | Срок хранения |
+| --- | --- | --- |
+| `TEMP_UPLOAD` | Загрузка через API | 24 часа |
+| `TEMP_GENERATION` | Результат генерации | 7 дней |
+| `PERMANENT` | После вызова keep | Бессрочно |

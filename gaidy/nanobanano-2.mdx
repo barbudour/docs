@@ -1,0 +1,119 @@
+---
+title: "Nano Banana 2"
+description: "Генерация изображений до 4K — полный API-гайд"
+icon: "image"
+---
+
+Nano Banana 2 (`google/gemini-3.1-flash-image-preview`) — модель генерации и редактирования изображений с поддержкой до 4K разрешения, точным рендерингом текста и возможностью передавать до 8 референс-изображений.
+
+## Характеристики
+
+| Характеристика       | Nano Banana                     | Nano Banana 2                           |
+| -------------------- | ------------------------------- | --------------------------------------- |
+| ID модели            | `google/gemini-2.5-flash-image` | `google/gemini-3.1-flash-image-preview` |
+| Max prompt           | 20 000 символов                 | 20 000 символов                         |
+| Разрешения           | —                               | 1K, 2K, 4K                              |
+| Aspect ratio         | 10 вариантов                    | 11 вариантов                            |
+| Референс-изображения | до 8                            | до 8                                    |
+
+## Примеры
+
+### Редактирование с референс-изображением
+
+```typescript
+const response = await fetch('https://polza.ai/api/v1/media', {
+  method: 'POST',
+  headers: {
+    'Authorization': 'Bearer <POLZA_AI_API_KEY>',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    model: 'google/gemini-3.1-flash-image-preview',
+    input: {
+      prompt: "Добавь текст 'SALE 50%' крупными буквами в центре",
+      image_resolution: '4K',
+      images: [
+        { type: 'url', data: 'https://example.com/banner.jpg' }
+      ]
+    }
+  })
+});
+```
+
+```python
+import requests
+
+response = requests.post(
+    'https://polza.ai/api/v1/media',
+    headers={'Authorization': 'Bearer <POLZA_AI_API_KEY>'},
+    json={
+        'model': 'google/gemini-3.1-flash-image-preview',
+        'input': {
+            'prompt': "Добавь текст 'SALE 50%' крупными буквами в центре",
+            'image_resolution': '4K',
+            'images': [
+                {'type': 'url', 'data': 'https://example.com/banner.jpg'}
+            ]
+        }
+    }
+)
+```
+
+```bash
+curl -X POST "https://polza.ai/api/v1/media" \
+  -H "Authorization: Bearer <POLZA_AI_API_KEY>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "google/gemini-3.1-flash-image-preview",
+    "input": {
+      "prompt": "Добавь текст SALE 50% крупными буквами в центре",
+      "image_resolution": "4K",
+      "images": [
+        { "type": "url", "data": "https://example.com/banner.jpg" }
+      ]
+    }
+  }'
+```
+
+## Ответ
+
+API возвращает объект с ID задачи:
+
+```json
+{
+  "id": "aig_abc123",
+  "object": "media.generation",
+  "status": "pending",
+  "created": 1703001244,
+  "model": "google/gemini-3.1-flash-image-preview"
+}
+```
+
+Опросите статус через `GET /v1/media/{id}`:
+
+```bash
+curl "https://polza.ai/api/v1/media/aig_abc123" \
+  -H "Authorization: Bearer <POLZA_AI_API_KEY>"
+```
+
+### Статусы
+
+| Статус       | Описание                                   |
+| ------------ | ------------------------------------------ |
+| `pending`    | В очереди                                  |
+| `processing` | Генерация выполняется                      |
+| `completed`  | Готово, URL результата в поле `output.url` |
+| `failed`     | Ошибка, описание в поле `error`            |
+
+> **Note:** Результаты хранятся **7 дней**. Для постоянного хранения используйте [Storage API](/api-reference/storage/upload) с политикой `PERMANENT`.
+
+## Советы
+
+### 4K для печати
+Для полиграфии и баннеров выбирайте `image_resolution: "4K"` — это максимальное качество модели.
+
+### Точный рендеринг текста
+Nano Banana 2 хорошо рендерит текст на изображениях. Указывайте шрифт, размер и расположение в промпте.
+
+### Детализируйте освещение
+Модель отлично обрабатывает сложные световые схемы — описывайте их подробно: студийный свет, боковое освещение, время суток.
