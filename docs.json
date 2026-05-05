@@ -56,7 +56,7 @@
                 ]
               },
               {
-                "group": "Продвинутое",
+                "group": "Продвинутые настройки",
                 "pages": [
                   "gaidy/provider-selection",
                   "gaidy/tool-calling",

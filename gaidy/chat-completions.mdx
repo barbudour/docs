@@ -1,13 +1,13 @@
 ---
-title: "Текстовые запросы"
+title: "Как работать с текстом"
 description: "Отправка запросов к текстовым моделям через Chat Completions API"
 icon: "comments"
 ---
 
-В этом гайде вы узнаете как отправлять текстовые запросы к AI моделям и получать ответы.
+В этом разделе вы узнаете, как отправлять запросы к текстовым моделям через SpeShu.AI и получать ответы.
 
 <Note>
-  Полная документация endpoint доступна в [API Reference](/api-reference/chat/completions).
+  Подробное описание endpoint — в [API Reference](/api-reference/chat/completions).
 </Note>
 
 ## Endpoint
@@ -16,71 +16,68 @@ icon: "comments"
 POST https://speshu.ai/api/v1/chat/completions
 ```
 
-Отправляет диалог (массив сообщений) в модель и получает ответ.
+Этот метод принимает историю диалога и возвращает ответ модели.
 
-## Базовые параметры
+## Основные параметры
 
-| Параметр      | Тип     | Обязательный | Описание                                        |
-| ------------- | ------- | ------------ | ----------------------------------------------- |
-| `model`       | string  | Да           | ID модели (например, `openai/gpt-5.4`)           |
-| `messages`    | array   | Да\*         | Массив сообщений диалога                        |
-| `prompt`      | string  | Да\*         | Текстовый промпт (альтернатива `messages`)      |
-| `temperature` | number  | Нет          | Креативность ответа (0.0-2.0, по умолчанию 1.0) |
-| `max_tokens`  | number  | Нет          | Максимальное количество токенов в ответе        |
-| `stream`      | boolean | Нет          | Включить потоковую передачу (SSE)               |
+| Параметр | Описание |
+| --- | --- |
+| `model` | ID модели (например, `openai/gpt-5.4`) |
+| `messages` | массив сообщений диалога |
+| `prompt` | строка с текстом (можно использовать вместо messages) |
+| `temperature` | влияет на вариативность ответа (по умолчанию 1.0) |
+| `max_tokens` | ограничение длины ответа |
+| `stream` | включает потоковую выдачу |
 
 <Note>
-  \* Укажите `messages` **или** `prompt`. При передаче `prompt` он автоматически преобразуется в `messages` с ролью `user`.
+  Нужно передать либо `messages`, либо `prompt`. Если используется `prompt`, он автоматически превращается в сообщение от пользователя.
 </Note>
 
-## Дополнительные параметры
+## Дополнительные настройки
 
-| Параметр                | Тип           | Описание                                                         |
-| ----------------------- | ------------- | ---------------------------------------------------------------- |
-| `max_completion_tokens` | number        | Альтернатива `max_tokens`                                        |
-| `top_p`                 | number        | Nucleus sampling (0.0-1.0)                                       |
-| `frequency_penalty`     | number        | Штраф за частоту токенов (-2.0 до 2.0)                           |
-| `presence_penalty`      | number        | Штраф за присутствие токенов (-2.0 до 2.0)                       |
-| `response_format`       | object        | Формат ответа ([structured output](/gaidy/structured-output))    |
-| `tools`                 | array         | Определения функций ([tool calling](/gaidy/tool-calling))        |
-| `tool_choice`           | string/object | Выбор инструмента: `none`, `auto`, `required`                    |
-| `reasoning`             | object        | Настройки reasoning ([reasoning](/osobennosti/reasoning-tokens)) |
-| `web_search_options`    | object        | Встроенный веб-поиск                                             |
-| `provider`              | object        | Выбор провайдера ([подробнее](/gaidy/provider-selection))        |
-| `user`                  | string        | ID конечного пользователя                                        |
+| Параметр | Описание |
+| --- | --- |
+| `max_completion_tokens` | аналог max_tokens |
+| `top_p` | параметр выборки токенов |
+| `frequency_penalty` | снижает повторения |
+| `presence_penalty` | поощряет новые темы |
+| `response_format` | задаёт структуру ответа |
+| `tools` и `tool_choice` | работа с функциями |
+| `reasoning` | параметры reasoning |
+| `web_search_options` | встроенный поиск |
+| `provider` | выбор провайдера |
+| `user` | идентификатор пользователя |
 
-## Структура messages
+## Формат messages
 
 Каждое сообщение содержит роль и содержимое:
 
-| Поле      | Тип                     | Описание                             |
-| --------- | ----------------------- | ------------------------------------ |
-| `role`    | string                  | Роль отправителя (см. ниже)          |
-| `content` | string \| array \| null | Текст, массив content parts или null |
+| Поле | Описание |
+| --- | --- |
+| `role` | кто отправил сообщение |
+| `content` | текст или массив частей |
 
-### Роли сообщений
+### Роли
 
-| Роль        | Описание                                                                                    |
-| ----------- | ------------------------------------------------------------------------------------------- |
-| `system`    | Системное сообщение, задающее контекст и поведение модели                                   |
-| `developer` | Инструкции разработчика (аналог `system` для некоторых моделей)                             |
-| `user`      | Сообщение от пользователя                                                                   |
-| `assistant` | Ответ модели (для продолжения диалога). `content` может быть `null`, если есть `tool_calls` |
-| `tool`      | Результат вызова инструмента. Требуется поле `tool_call_id`                                 |
+| Роль | Описание |
+| --- | --- |
+| `system` | задаёт поведение модели |
+| `developer` | дополнительные инструкции |
+| `user` | запрос пользователя |
+| `assistant` | ответ модели |
+| `tool` | результат работы инструмента |
 
-### Типы content
-
-Поле `content` может быть строкой или массивом content parts для передачи медиа:
+### Примеры content
 
 ```json theme={null}
-// Строка
+// обычный текст
 { "role": "user", "content": "Привет!" }
 
-// Массив content parts (для медиа)
+// с медиа
 {
   "role": "user",
   "content": [
-    { "type": "text", "text": "Что на картинке?" },
+    { "type": "text", "text": "Что изображено?" },
     { "type": "image_url", "image_url": { "url": "https://example.com/img.jpg" } }
   ]
 }
@@ -178,28 +175,24 @@ POST https://speshu.ai/api/v1/chat/completions
 }
 ```
 
-### Описание полей ответа
+### Что в ответе
 
-| Поле                         | Тип    | Описание                                      |
-| ---------------------------- | ------ | --------------------------------------------- |
-| `id`                         | string | Уникальный идентификатор запроса              |
-| `provider`                   | string | Провайдер, обработавший запрос                |
-| `choices[0].message.content` | string | Текст ответа модели                           |
-| `choices[0].finish_reason`   | string | Причина завершения генерации                  |
-| `usage.prompt_tokens`        | number | Количество токенов во входных сообщениях      |
-| `usage.completion_tokens`    | number | Количество токенов в ответе                   |
-| `usage.total_tokens`         | number | Общее количество токенов                      |
-| `usage.cost_rub`             | number | Стоимость запроса в рублях                    |
-| `usage.cost`                 | number | Стоимость запроса в рублях (алиас `cost_rub`) |
+| Поле | Описание |
+| --- | --- |
+| `id` | идентификатор запроса |
+| `provider` | кто обработал запрос |
+| `choices[0].message.content` | текст ответа |
+| `finish_reason` | почему завершилась генерация |
+| `usage` | статистика токенов и стоимость |
 
-### Значения finish\_reason
+### Значения finish_reason
 
-| Значение         | Описание                                        |
-| ---------------- | ----------------------------------------------- |
-| `stop`           | Модель завершила генерацию естественным образом |
-| `length`         | Достигнут лимит `max_tokens`                    |
-| `tool_calls`     | Модель запросила вызов функции                  |
-| `content_filter` | Контент заблокирован модерацией                 |
+| Значение | Описание |
+| --- | --- |
+| `stop` | генерация завершена |
+| `length` | достигнут лимит |
+| `tool_calls` | модель хочет вызвать функцию |
+| `content_filter` | ответ отфильтрован
 
 ## Стриминг
 
@@ -304,28 +297,107 @@ POST https://speshu.ai/api/v1/chat/completions
   ```
 </CodeGroup>
 
-## Советы по использованию
+## Стриминг
 
-<AccordionGroup>
-  <Accordion title="Используйте system message" icon="gear">
-    System message задаёт контекст и поведение модели. Например:
+Если нужен ответ по частям, включите `stream: true`:
 
-    * «Ты опытный Python-разработчик»
-    * «Отвечай кратко, в 2-3 предложениях»
-    * «Всегда приводи примеры кода»
-  </Accordion>
+<CodeGroup>
+  ```typescript TypeScript theme={null}
+  const stream = await openai.chat.completions.create({
+    model: 'openai/gpt-5.4',
+    messages: [{ role: 'user', content: 'Напиши короткую историю' }],
+    stream: true
+  });
 
-  <Accordion title="Настройте temperature" icon="temperature-half">
-    * **Низкая (0.0-0.3)** — для точных, детерминированных ответов (код, факты)
-    * **Средняя (0.5-0.7)** — баланс между точностью и разнообразием
-    * **Высокая (0.8-1.0)** — для креативных задач (тексты, идеи)
-  </Accordion>
+  for await (const chunk of stream) {
+    const content = chunk.choices[0]?.delta?.content;
+    if (content) {
+      process.stdout.write(content);
+    }
+  }
+  ```
 
-  <Accordion title="Ограничивайте max_tokens" icon="scissors">
-    Установка `max_tokens` помогает:
+  ```python Python theme={null}
+  stream = client.chat.completions.create(
+      model="openai/gpt-5.4",
+      messages=[{"role": "user", "content": "Напиши короткую историю"}],
+      stream=True
+  )
 
-    * Экономить средства на коротких ответах
-    * Ускорять время ответа
-    * Контролировать длину генерации
-  </Accordion>
-</AccordionGroup>
+  for chunk in stream:
+      content = chunk.choices[0].delta.content
+      if content:
+          print(content, end="", flush=True)
+  ```
+</CodeGroup>
+
+## Диалог
+
+Чтобы модель учитывала предыдущие сообщения, передавайте их вместе:
+
+<CodeGroup>
+  ```typescript TypeScript theme={null}
+  const messages = [
+    { role: 'system', content: 'Ты помощник по программированию.' },
+    { role: 'user', content: 'Как создать массив в JavaScript?' },
+    { role: 'assistant', content: 'const arr = [1, 2, 3];' },
+    { role: 'user', content: 'Как добавить элемент?' }
+  ];
+
+  const completion = await openai.chat.completions.create({
+    model: 'openai/gpt-5.4',
+    messages
+  });
+
+  console.log(completion.choices[0].message.content);
+  ```
+
+  ```python Python theme={null}
+  messages = [
+      {"role": "system", "content": "Ты помощник по программированию."},
+      {"role": "user", "content": "Как создать массив в JavaScript?"},
+      {"role": "assistant", "content": "const arr = [1, 2, 3];"},
+      {"role": "user", "content": "Как добавить элемент?"}
+  ]
+
+  completion = client.chat.completions.create(
+      model="openai/gpt-5.4",
+      messages=messages
+  )
+
+  print(completion.choices[0].message.content)
+  ```
+
+  ```bash cURL theme={null}
+  curl -X POST "https://speshu.ai/api/v1/chat/completions" \
+    -H "Authorization: Bearer <SPESHU_AI_API_KEY>" \
+    -H "Content-Type: application/json" \
+    -d '{
+      "model": "openai/gpt-5.4",
+      "messages": [
+        {"role": "system", "content": "Ты помощник по программированию."},
+        {"role": "user", "content": "Как создать массив в JavaScript?"},
+        {"role": "assistant", "content": "const arr = [1, 2, 3];"},
+        {"role": "user", "content": "Как добавить элемент?"}
+      ]
+    }'
+  ```
+</CodeGroup>
+
+## Практические моменты
+
+### System-сообщение
+
+Через него задаётся стиль и формат ответа. Например: указать язык, длину ответа или формат.
+
+### Temperature
+
+| Значение | Результат |
+| --- | --- |
+| 0.0–0.3 | точные ответы |
+| 0.5–0.7 | баланс |
+| 0.8+ | более свободная генерация |
+
+### Ограничение длины
+
+`max_tokens` помогает контролировать размер ответа и расходы.
