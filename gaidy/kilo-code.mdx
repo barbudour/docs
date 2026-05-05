@@ -1,6 +1,6 @@
 ---
 title: "Kilo Code (VS Code / PyCharm)"
-description: "Интеграция Speshu с Kilo Code — AI-ассистент для VS Code и PyCharm"
+description: "Интеграция SpeShu.AI с Kilo Code — AI-ассистент для VS Code и PyCharm"
 icon: "k"
 ---
 
@@ -22,15 +22,13 @@ Kilo Code — open source AI-ассистент с поддержкой авто
         2. **Найдите Kilo Code**
         Введите `Kilo Code` в поиске расширений.
 
-        <img src="https://mintcdn.com/polza/zYHtnihje8-Izexu/images/kilo-code/kilocode-install.png?fit=max&auto=format&n=zYHtnihje8-Izexu&q=85&s=1986c4652054ee17d677f8abe518607d" alt="Установка Kilo Code из VS Code Marketplace" width="1535" height="986" data-path="images/kilo-code/kilocode-install.png" />
-
         3. **Установите расширение**
         Нажмите **Install** на расширении "Kilo Code: AI Coding Agent, Copilot, and Autocomplete".
 
         4. **Откройте Kilo Code**
         После установки нажмите на иконку Kilo Code в боковой панели.
 
-        ## Настройка подключения к Speshu
+        ## Настройка подключения к SpeShu.AI
 
         1. **Откройте настройки Kilo Code**
         Нажмите на иконку шестерёнки в панели Kilo Code — откроется **Kilo Settings**.
@@ -38,15 +36,13 @@ Kilo Code — open source AI-ассистент с поддержкой авто
         2. **Перейдите во вкладку Providers**
         В левом меню настроек выберите **Providers**.
 
-        <img src="https://mintcdn.com/polza/zYHtnihje8-Izexu/images/kilo-code/kilocode-providers.png?fit=max&auto=format&n=zYHtnihje8-Izexu&q=85&s=10f0d9e2503f88c85d7bf41b27141368" alt="Вкладка Providers в настройках Kilo Code" width="1538" height="989" data-path="images/kilo-code/kilocode-providers.png" />
-
         3. **Подключите Custom provider**
         Прокрутите список вниз до раздела **Custom provider** и нажмите **Connect**.
 
         4. **Заполните настройки подключения**
 
         * **Provider ID:** `speshu`
-        * **Display name:** `Speshu`
+        * **Display name:** `SpeShu.AI`
         * **Base URL:** `https://speshu.ai/api/v1`
         * **API key:** Ваш ключ с [speshu.ai/profile](https://speshu.ai/profile)
         * **Models:** Например, `moonshotai/kimi-k2.5`
@@ -55,7 +51,6 @@ Kilo Code — open source AI-ассистент с поддержкой авто
             После ввода Base URL список моделей подгрузится автоматически. Если этого не произошло — введите Model ID вручную.
         </Note>
 
-        <img src="https://mintcdn.com/polza/zYHtnihje8-Izexu/images/kilo-code/kilocode-connection-settings.png?fit=max&auto=format&n=zYHtnihje8-Izexu&q=85&s=276e52e00377a855ba8d6daf0f01f4f1" alt="Настройки подключения Speshu в Kilo Code" width="1538" height="986" data-path="images/kilo-code/kilocode-connection-settings.png" />
 
         ## Возможности
 
@@ -77,7 +72,7 @@ Kilo Code — open source AI-ассистент с поддержкой авто
 
             <Accordion title="Модель не найдена">
                 * Проверьте правильность Model ID
-                * Актуальный список: [speshu.ai/models](https://speshu.ai/models)
+                * Актуальный список: [`/v1/models`](/api-reference/models/list)
                 * Попробуйте ввести Base URL повторно — список моделей подгрузится заново
             </Accordion>
 
@@ -107,15 +102,13 @@ Kilo Code — open source AI-ассистент с поддержкой авто
         3. **Найдите Kilo Code**
         В строке поиска введите `Kilo Code`.
 
-        <img src="https://mintcdn.com/polza/zYHtnihje8-Izexu/images/kilo-code/kilocode-pycharm-marketplace.png?fit=max&auto=format&n=zYHtnihje8-Izexu&q=85&s=f91c1e3c09dd406dec112a55037730cd" alt="Поиск плагина Kilo Code в Marketplace PyCharm" width="1222" height="916" data-path="images/kilo-code/kilocode-pycharm-marketplace.png" />
-
         4. **Установите плагин**
         Нажмите **Install** рядом с плагином "Kilo Code" и дождитесь завершения установки.
 
         5. **Примените изменения**
         Нажмите **OK** и перезапустите PyCharm если потребуется.
 
-        ## Настройка подключения к Speshu
+        ## Настройка подключения к SpeShu.AI
 
         1. **Откройте панель Kilo Code**
         После установки иконка Kilo Code появится на правой боковой панели PyCharm. Нажмите на неё.
@@ -124,7 +117,7 @@ Kilo Code — open source AI-ассистент с поддержкой авто
         В панели Kilo Code нажмите на иконку настроек (**Settings**).
 
         3. **Создайте Configuration Profile**
-        В разделе **Providers** нажмите **+** рядом с полем **Configuration Profile**. Введите название, например `Speshu`.
+        В разделе **Providers** нажмите **+** рядом с полем **Configuration Profile**. Введите название, например `SpeShu.AI`.
 
         4. **Заполните настройки подключения**
 
@@ -136,8 +129,6 @@ Kilo Code — open source AI-ассистент с поддержкой авто
         <Note>
             После ввода Base URL список моделей подгрузится автоматически.
         </Note>
-
-        <img src="https://mintcdn.com/polza/zYHtnihje8-Izexu/images/kilo-code/kilocode-pycharm-provider-settings.png?fit=max&auto=format&n=zYHtnihje8-Izexu&q=85&s=7cadfd9c46bf85e58d003f3170d9a06e" alt="Настройки провайдера Speshu в Kilo Code для PyCharm" width="1634" height="926" data-path="images/kilo-code/kilocode-pycharm-provider-settings.png" />
 
         5. **Сохраните настройки**
         Нажмите **Save**.
@@ -162,7 +153,7 @@ Kilo Code — open source AI-ассистент с поддержкой авто
 
             <Accordion title="Модель не найдена">
                 * Проверьте правильность Model ID
-                * Актуальный список: [speshu.ai/models](https://speshu.ai/models)
+                * Актуальный список: [`/v1/models`](/api-reference/models/list)
                 * Попробуйте ввести Base URL повторно — список моделей подгрузится заново
             </Accordion>
 
@@ -191,5 +182,5 @@ Kilo Code — open source AI-ассистент с поддержкой авто
 | DeepSeek V3       | `deepseek/deepseek-v3`        | 72–74%    | Самая экономичная из топовых         |
 
 <Note>
-    Актуальный список всех моделей: [speshu.ai/models](https://speshu.ai/models)
+    Актуальный список всех моделей: [`/v1/models`](/api-reference/models/list)
 </Note>

@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
+  "theme": "luma",
   "name": "Документация SpeShu.AI",
   "api": {
     "mdx": {
@@ -12,9 +12,12 @@
     }
   },
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#ff7819",
+    "light": "#ff9038",
+    "dark": "#ff7819"
+  },
+  "appearance": {
+    "default": "light"
   },
   "favicon": "/favicon.svg",
   "navigation": {
@@ -62,9 +65,7 @@
                   "gaidy/web-search",
                   "gaidy/reasoning-tokens",
                   "gaidy/caching",
-                  "gaidy/usage",
-                  "gaidy/oauth-pkce",
-                  "gaidy/mcp"
+                  "gaidy/usage"
                 ]
               },
               {
@@ -173,17 +174,17 @@
       "anchors": [
         {
           "anchor": "Модели",
-          "href": "https://speshu.ai/",
+          "href": "/gaidy/models",
           "icon": "microchip"
         },
         {
-          "anchor": "Консоль",
-          "href": "https://speshu.ai/",
+          "anchor": "Профиль",
+          "href": "https://speshu.ai/profile",
           "icon": "gauge"
         },
         {
           "anchor": "Обновления",
-          "href": "https://speshu.ai/",
+          "href": "https://speshu.ai",
           "icon": "clock-rotate-left"
         }
       ]
@@ -197,25 +198,19 @@
     "links": [
       {
         "label": "Поддержка",
-        "href": "https://speshu.ai/"
+        "href": "/support"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Консоль",
-      "href": "https://speshu.ai/"
+      "label": "Профиль",
+      "href": "https://speshu.ai/profile"
     }
   },
   "contextual": {
     "options": [
       "copy",
-      "view",
-      "chatgpt",
-      "claude",
-      "perplexity",
-      "mcp",
-      "cursor",
-      "vscode"
+      "view"
     ]
   },
   "footer": {

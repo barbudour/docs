@@ -1,4 +1,21 @@
 {
+  "global": [
+    {
+      "anchor": "Модели",
+      "href": "https://speshu.ai/",
+      "icon": "microchip"
+    },
+    {
+      "anchor": "Профиль",
+      "href": "https://speshu.ai/profile",
+      "icon": "gauge"
+    },
+    {
+      "anchor": "Обновления",
+      "href": "https://speshu.ai/",
+      "icon": "clock-rotate-left"
+    }
+  ],
   "menu": [
     {
       "group": "Изображения",

@@ -1,6 +1,6 @@
 ---
 title: "Cline (VS Code / Cursor)"
-description: "Интеграция Speshu с Cline - AI-ассистент для VS Code и Cursor"
+description: "Интеграция SpeShu.AI с Cline - AI-ассистент для VS Code и Cursor"
 icon: "code"
 ---
 
@@ -22,9 +22,6 @@ Cline — AI-ассистент для VS Code и Cursor с поддержкой
     <Step title="Найдите Cline">
         Введите "Cline" в поиске расширений.
 
-        <Frame>
-            <img src="https://mintcdn.com/polza/5hd_BdpSImo9gQ0k/images/cline/cline-install.png?fit=max&auto=format&n=5hd_BdpSImo9gQ0k&q=85&s=c46e883726d72d59917169f32cd5f883" alt="Установка Cline из VS Code Marketplace" width="3474" height="2170" data-path="images/cline/cline-install.png" />
-        </Frame>
     </Step>
 
     <Step title="Установите расширение">
@@ -36,7 +33,7 @@ Cline — AI-ассистент для VS Code и Cursor с поддержкой
     </Step>
 </Steps>
 
-## Настройка подключения к Speshu
+## Настройка подключения к SpeShu.AI
 
 <Steps>
     <Step title="Откройте настройки модели">
@@ -53,10 +50,6 @@ Cline — AI-ассистент для VS Code и Cursor с поддержкой
         * **Base URL:** `https://speshu.ai/api/v1`
         * **API Key:** Ваш ключ
         * **Model ID:** Например, `anthropic/claude-opus-4`
-
-        <Frame>
-            <img src="https://mintcdn.com/polza/5hd_BdpSImo9gQ0k/images/cline/cline-provider-settings.png?fit=max&auto=format&n=5hd_BdpSImo9gQ0k&q=85&s=5f1dfbff44fd325497d34b52f76ee67b" alt="Настройки провайдера Speshu в Cline" width="3570" height="2170" data-path="images/cline/cline-provider-settings.png" />
-        </Frame>
     </Step>
 </Steps>
 
@@ -65,8 +58,8 @@ Cline — AI-ассистент для VS Code и Cursor с поддержкой
 | Модель            | ID                            | Особенности              |
 | ----------------- | ----------------------------- | ------------------------ |
 | Claude Opus 4     | `anthropic/claude-opus-4`     | Лучшая для сложных задач |
-| Claude 3.5 Sonnet | `anthropic/claude-3-5-sonnet` | Оптимальный баланс       |
-| GPT-4o            | `openai/gpt-4o`               | Универсальная            |
+| Claude Sonnet 4.6 | `anthropic/claude-sonnet-4.6` | Оптимальный баланс       |
+| GPT-5.4           | `openai/gpt-5.4`               | Универсальная            |
 | DeepSeek V3       | `deepseek/deepseek-v3`        | Экономичная              |
 
 ## Возможности
@@ -100,7 +93,7 @@ Cline — AI-ассистент для VS Code и Cursor с поддержкой
 
     <Accordion title="Модель не найдена">
         * Проверьте правильность Model ID
-        * Актуальный список: [speshu.ai/models](https://speshu.ai/models)
+        * Актуальный список: [`/v1/models`](/api-reference/models/list)
     </Accordion>
 
     <Accordion title="Медленные ответы">

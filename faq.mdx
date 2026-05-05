@@ -1,17 +1,17 @@
 ---
 title: "Часто задаваемые вопросы"
-description: "Ответы на популярные вопросы о Speshu"
+description: "Ответы на популярные вопросы о SpeShu.AI"
 icon: "circle-question"
 ---
 ## Начало работы
 
 <AccordionGroup>
-  <Accordion title="Что такое Speshu?">
+  <Accordion title="Что такое SpeShu.AI?">
     Это удобный сервис с единым API для доступа ко всем популярным LLM-моделям. Мы агрегируем модели от OpenAI, Anthropic, Google, Meta\* и десятков других провайдеров.
   </Accordion>
 
-  <Accordion title="Как начать пользоваться Speshu?">
-    1. Создайте аккаунт на [speshu.ai/profile](https://speshu.ai/profile)
+  <Accordion title="Как начать пользоваться SpeShu.AI?">
+    1. Создайте аккаунт на [speshu.ai](https://speshu.ai)
     2. Пополните баланс в личном кабинете
     3. Создайте API-ключ
     4. Используйте наш API с любым OpenAI-совместимым SDK
@@ -25,26 +25,30 @@ icon: "circle-question"
 ## Модели и провайдеры
 
 <AccordionGroup>
-  <Accordion title="Какие модели доступны на Speshu?">
-    Полный список из 400+ моделей доступен в [каталоге](https://speshu.ai/models) или через [API моделей](/api-reference/models/list). Мы постоянно добавляем новые модели.
+  <Accordion title="Какие модели доступны на SpeShu.AI?">
+    Полный список из 400+ моделей доступен через [API моделей](/api-reference/models/list). Мы постоянно добавляем новые модели.
   </Accordion>
 
-  <Accordion title="Какие SDK поддерживает Speshu?">
-    Speshu полностью совместим с OpenAI API. Поэтому любые SDK, которые работают с OpenAI, будут работать и с нами — включая официальные библиотеки для Python, Node.js, Go и других языков.
+  <Accordion title="Какие SDK поддерживает SpeShu.AI?">
+      SpeShu.AI полностью совместим с OpenAI API. Поэтому любые SDK, которые работают с OpenAI, будут работать и с нами — включая официальные библиотеки для Python, Node.js, Go и других языков.
   </Accordion>
 </AccordionGroup>
 
 ## Технические вопросы
 
 <AccordionGroup>
-  <Accordion title="Какие конечные точки API поддерживает Speshu?">
+  <Accordion title="Какие конечные точки API поддерживает SpeShu.AI?">
     Мы реализуем спецификацию OpenAI для `/chat/completions`, а также дополнительные эндпоинты:
 
-    * `/api/v1/images/generations` — генерация изображений
-    * `/api/v1/videos/generations` — генерация видео
-    * `/api/v1/audio/transcriptions` — распознавание речи
-    * `/api/v1/audio/speech` — синтез речи
-    * `/api/v1/embeddings` — эмбеддинги
+    [//]: # (* `/api/v1/images/generations` — генерация изображений)
+
+[//]: # (* `/api/v1/videos/generations` — генерация видео)
+
+[//]: # (* `/api/v1/audio/transcriptions` — распознавание речи)
+
+[//]: # (* `/api/v1/audio/speech` — синтез речи)
+
+[//]: # (* `/api/v1/embeddings` — эмбеддинги)
     * `/api/v1/models` — список моделей
     * `/api/v1/balance` — баланс аккаунта
   </Accordion>
@@ -61,12 +65,12 @@ icon: "circle-question"
 ## Конфиденциальность и данные
 
 <AccordionGroup>
-  <Accordion title="Какие данные сохраняет Speshu?">
+  <Accordion title="Какие данные сохраняет SpeShu.AI?">
     По-умолчанию, мы сохраняем только базовые метаданные запросов: время, используемая модель и количество токенов. Содержимое запросов и ответов не сохраняется. При создании/редактировании API ключа можно дополнительно включить функцию логирования (срок хранения логов 30 дней).
   </Accordion>
 
-  <Accordion title="Как Speshu обрабатывает данные провайдерам?">
-    Мы передаём запросы провайдерам и работаем с ними, чтобы гарантировать неиспользование данных для обучения моделей. Подробнее в разделе [Конфиденциальность](/osobennosti/privacy).
+  <Accordion title="Как SpeShu.AI обрабатывает данные провайдерам?">
+    Мы передаём запросы провайдерам и работаем с ними, чтобы гарантировать неиспользование данных для обучения моделей. Подробнее в разделе [Конфиденциальность](/privacy).
   </Accordion>
 </AccordionGroup>
 
@@ -82,14 +86,14 @@ icon: "circle-question"
   </Accordion>
 
   <Accordion title="Какова политика возврата?">
-    Возврат неиспользованных средств возможен в течение 24 часов после оплаты. Обратитесь в [службу поддержки](/glavnoe/support).
+    Возврат неиспользованных средств возможен в течение 24 часов после оплаты. Обратитесь в [службу поддержки](/support).
   </Accordion>
 
   <Accordion title="Как отслеживать расходы?">
     Используйте страницу [speshu.ai/profile](https://speshu.ai/profile) или [API баланса](/api-reference/other/balance) для актуальной информации.
   </Accordion>
 
-  <Accordion title="Предлагает ли Speshu скидки за объём?">
+  <Accordion title="Предлагает ли SpeShu.AI скидки за объём?">
     Стандартных скидок нет, но возможны индивидуальные условия для крупных клиентов. Свяжитесь с нами для обсуждения.
   </Accordion>
 </AccordionGroup>
@@ -98,11 +102,11 @@ icon: "circle-question"
 
 <AccordionGroup>
   <Accordion title="Как удалить аккаунт?">
-    Обратитесь в [службу поддержки](/glavnoe/support). Обратите внимание: неиспользованные средства будут потеряны.
+    Обратитесь в [службу поддержки](/support). Обратите внимание: неиспользованные средства будут потеряны.
   </Accordion>
 
   <Accordion title="Как связаться с поддержкой?">
-    * [Страница поддержки](/glavnoe/support)
+    * [Страница поддержки](/support)
   </Accordion>
 </AccordionGroup>
 

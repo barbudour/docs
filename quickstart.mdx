@@ -6,9 +6,9 @@ icon: "rocket"
 
 ## Шаг 1: Получите API ключ
 
-1. Зарегистрируйтесь на [speshu.ai/profile](https://speshu.ai/profile)
+1. Зарегистрируйтесь на [speshu.ai](https://speshu.ai)
 2. Пополните баланс в личном кабинете
-3. Создайте API-ключ в разделе [API Keys](https://speshu.ai/profile/api-keys)
+3. Создайте API-ключ в разделе [API-ключи](https://speshu.ai/profile)
 
 ## Шаг 2: Используйте API
 
@@ -23,7 +23,7 @@ icon: "rocket"
 
   async function main() {
     const completion = await openai.chat.completions.create({
-      model: 'openai/gpt-4o',
+      model: 'openai/gpt-5.4',
       messages: [{
         role: 'user',
         content: 'Что думаешь об этой жизни?',
@@ -44,7 +44,7 @@ icon: "rocket"
   )
 
   completion = client.chat.completions.create(
-    model="openai/gpt-4o",
+    model="openai/gpt-5.4",
     messages=[{
       "role": "user",
       "content": "Что думаешь об этой жизни?"
@@ -59,7 +59,7 @@ icon: "rocket"
     -H "Authorization: Bearer <SPESHU_AI_API_KEY>" \
     -H "Content-Type: application/json" \
     -d '{
-      "model": "openai/gpt-4o",
+      "model": "openai/gpt-5.4",
       "messages": [{"role": "user", "content": "Привет!"}]
     }'
   ```
@@ -67,7 +67,7 @@ icon: "rocket"
 
 ## Шаг 3: Выберите модель
 
-Полный каталог моделей доступен на [speshu.ai/models](https://speshu.ai/models) или через API:
+Полный каталог моделей доступен через API:
 
 ```bash theme={null}
 curl https://speshu.ai/api/v1/models
@@ -77,9 +77,9 @@ curl https://speshu.ai/api/v1/models
 
 | Модель            | ID                              | Описание                  |
 | ----------------- | ------------------------------- | ------------------------- |
-| GPT-4o            | `openai/gpt-4o`                 | Флагманская модель OpenAI |
-| Claude 3.5 Sonnet | `anthropic/claude-3-5-sonnet`   | Лучшая модель Anthropic   |
-| Gemini 2.5 Pro    | `google/gemini-2.5-pro-preview` | Продвинутая модель Google |
+| GPT-5.4           | `openai/gpt-5.4`                | Флагманская модель OpenAI |
+| Claude Sonnet 4.6 | `anthropic/claude-sonnet-4.6`   | Лучший баланс Anthropic   |
+| Gemini 3.1 Pro    | `google/gemini-3.1-pro`         | Продвинутая модель Google |
 | Llama 3.3 70B     | `meta-llama/llama-3.3-70b`      | Open-source модель Meta\* |
 
 ## Следующие шаги
@@ -89,7 +89,7 @@ curl https://speshu.ai/api/v1/models
     Изучите полную документацию API
   </Card>
 
-  <Card title="Интеграции" icon="plug" href="/integracii/cline">
+  <Card title="Интеграции" icon="plug" href="/gaidy/claude-code">
     Подключите к вашим инструментам
   </Card>
 </CardGroup>

@@ -1,15 +1,15 @@
 ---
 title: "N8N"
-description: "Интеграция Speshu с N8N для автоматизации рабочих процессов"
+description: "Интеграция SpeShu.AI с N8N для автоматизации рабочих процессов"
 icon: "n"
 ---
 
-N8N — это визуальная платформа для автоматизации рабочих процессов. С помощью интеграции Speshu вы можете использовать сотни AI-моделей прямо в ваших N8N workflows через стандартный OpenAI-совместимый интерфейс.
+N8N — это визуальная платформа для автоматизации рабочих процессов. С помощью интеграции SpeShu.AI вы можете использовать сотни AI-моделей прямо в ваших N8N workflows через стандартный OpenAI-совместимый интерфейс.
 
 ## Требования
 
 * Установленный N8N (локально или в облаке)
-* API-ключ Speshu из [speshu.ai/profile](https://speshu.ai/profile)
+* API-ключ SpeShu.AI из [speshu.ai/profile](https://speshu.ai/profile)
 * Базовое знание работы с N8N
 
 ## Настройка
@@ -17,52 +17,36 @@ N8N — это визуальная платформа для автоматиз
 <Steps>
     <Step title="Добавьте OpenAI Chat Model">
         В N8N найдите и добавьте ноду "OpenAI Chat Model" в ваш workflow. Для этого введите "openai" в поиске при добавлении ноды.
-
-        <Frame>
-            <img src="https://mintcdn.com/polza/5hd_BdpSImo9gQ0k/images/n8n/n8n-search-openai.png?fit=max&auto=format&n=5hd_BdpSImo9gQ0k&q=85&s=bb2f7602cfca3ed05484331078e225c2" alt="Поиск OpenAI Chat Model в N8N" width="4246" height="2550" data-path="images/n8n/n8n-search-openai.png" />
-        </Frame>
     </Step>
 
     <Step title="Создайте credentials">
         Нажмите на создание новых credentials и заполните:
 
-        * **API Key:** Ваш API-ключ Speshu
+        * **API Key:** Ваш API-ключ SpeShu.AI
         * **Base URL:** `https://speshu.ai/api/v1`
-
-        <Frame>
-            <img src="https://mintcdn.com/polza/5hd_BdpSImo9gQ0k/images/n8n/n8n-credentials.png?fit=max&auto=format&n=5hd_BdpSImo9gQ0k&q=85&s=a757ff068956fd719037cc2e37a5da07" alt="Настройка credentials для Speshu" width="4246" height="2550" data-path="images/n8n/n8n-credentials.png" />
-        </Frame>
     </Step>
 
     <Step title="Выберите модель">
         В поле Model введите ID модели, например:
 
         * `deepseek/deepseek-r1` — для reasoning задач
-        * `openai/gpt-4o` — универсальная модель
-        * `anthropic/claude-3.5-sonnet` — для кодинга
-        * `google/gemini-2.5-pro-preview` — мультимодальная
-
-        <Frame>
-            <img src="https://mintcdn.com/polza/5hd_BdpSImo9gQ0k/images/n8n/n8n-model-settings.png?fit=max&auto=format&n=5hd_BdpSImo9gQ0k&q=85&s=7eed917e2e91362c0bec42ec4414e47e" alt="Выбор модели в настройках" width="4246" height="2550" data-path="images/n8n/n8n-model-settings.png" />
-        </Frame>
+        * `openai/gpt-5.4` — универсальная модель
+        * `anthropic/claude-sonnet-4.6` — для кодинга
+        * `google/gemini-3.1-pro` — мультимодальная
     </Step>
 
     <Step title="Готово!">
-        Теперь вы можете использовать AI-модели Speshu в ваших N8N workflows.
-
-        <Frame>
-            <img src="https://mintcdn.com/polza/5hd_BdpSImo9gQ0k/images/n8n/n8n-workflow-chat.png?fit=max&auto=format&n=5hd_BdpSImo9gQ0k&q=85&s=f6c859a698e1bb2e11f7026d15030018" alt="Рабочий workflow с чатом" width="4246" height="2550" data-path="images/n8n/n8n-workflow-chat.png" />
-        </Frame>
+        Теперь вы можете использовать AI-модели SpeShu.AI в ваших N8N workflows.
     </Step>
 </Steps>
 
 <Note>
-    Speshu поддерживает **Responses API** в beta-режиме. Если при использовании возникают проблемы, попробуйте отключить опцию "Use Responses API" в настройках модели.
+    SpeShu.AI поддерживает **Responses API** в beta-режиме. Если при использовании возникают проблемы, попробуйте отключить опцию "Use Responses API" в настройках модели.
 </Note>
 
 ### Мультимодальные запросы
 
-С мультимодальными моделями (GPT-4o, Claude 3.5) можно обрабатывать изображения.
+С мультимодальными моделями (GPT-5, Claude 4) можно обрабатывать изображения.
 
 ## Расширенные настройки
 
@@ -99,7 +83,7 @@ N8N — это визуальная платформа для автоматиз
 
     <Accordion title="Модель не найдена">
         * Проверьте правильность написания ID модели
-        * Актуальный список моделей: [speshu.ai/models](https://speshu.ai/models)
+        * Актуальный список моделей: [`/v1/models`](/api-reference/models/list)
     </Accordion>
 
     <Accordion title="Превышен лимит токенов">

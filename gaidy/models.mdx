@@ -118,8 +118,8 @@ GET https://speshu.ai/api/v1/models
 {
   "data": [
     {
-      "id": "openai/gpt-4o",
-      "name": "GPT-4o",
+      "id": "openai/gpt-5.4",
+      "name": "GPT-5.4",
       "type": "chat",
       "short_description": "Флагманская мультимодальная модель OpenAI",
       "created": 1715367049,
@@ -211,13 +211,13 @@ ID модели из ответа используется в параметре
 
 ```typescript theme={null}
 const completion = await openai.chat.completions.create({
-  model: 'openai/gpt-4o',  // ID модели из /models
+  model: 'openai/gpt-5.4',  // ID модели из /models
   messages: [...]
 });
 ```
 
 ## Следующие шаги
 
-<Card title="Текстовые запросы" icon="comments" href="/chat-completions">
+<Card title="Текстовые запросы" icon="comments" href="/gaidy/chat-completions">
   Научитесь отправлять запросы к текстовым моделям
 </Card>

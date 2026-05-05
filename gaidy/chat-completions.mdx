@@ -22,7 +22,7 @@ POST https://speshu.ai/api/v1/chat/completions
 
 | Параметр      | Тип     | Обязательный | Описание                                        |
 | ------------- | ------- | ------------ | ----------------------------------------------- |
-| `model`       | string  | Да           | ID модели (например, `openai/gpt-4o`)           |
+| `model`       | string  | Да           | ID модели (например, `openai/gpt-5.4`)           |
 | `messages`    | array   | Да\*         | Массив сообщений диалога                        |
 | `prompt`      | string  | Да\*         | Текстовый промпт (альтернатива `messages`)      |
 | `temperature` | number  | Нет          | Креативность ответа (0.0-2.0, по умолчанию 1.0) |
@@ -100,7 +100,7 @@ POST https://speshu.ai/api/v1/chat/completions
   });
 
   const completion = await openai.chat.completions.create({
-    model: 'openai/gpt-4o',
+    model: 'openai/gpt-5.4',
     messages: [
       { role: 'system', content: 'Ты полезный ассистент.' },
       { role: 'user', content: 'Напиши хайку о программировании' }
@@ -121,7 +121,7 @@ POST https://speshu.ai/api/v1/chat/completions
   )
 
   completion = client.chat.completions.create(
-      model="openai/gpt-4o",
+      model="openai/gpt-5.4",
       messages=[
           {"role": "system", "content": "Ты полезный ассистент."},
           {"role": "user", "content": "Напиши хайку о программировании"}
@@ -138,7 +138,7 @@ POST https://speshu.ai/api/v1/chat/completions
     -H "Authorization: Bearer <SPESHU_AI_API_KEY>" \
     -H "Content-Type: application/json" \
     -d '{
-      "model": "openai/gpt-4o",
+      "model": "openai/gpt-5.4",
       "messages": [
         {"role": "system", "content": "Ты полезный ассистент."},
         {"role": "user", "content": "Напиши хайку о программировании"}
@@ -156,7 +156,7 @@ POST https://speshu.ai/api/v1/chat/completions
   "id": "gen_581761234567890123",
   "object": "chat.completion",
   "created": 1703001234,
-  "model": "openai/gpt-4o",
+  "model": "openai/gpt-5.4",
   "provider": "openai-direct",
   "choices": [
     {
@@ -208,7 +208,7 @@ POST https://speshu.ai/api/v1/chat/completions
 <CodeGroup>
   ```typescript TypeScript theme={null}
   const stream = await openai.chat.completions.create({
-    model: 'openai/gpt-4o',
+    model: 'openai/gpt-5.4',
     messages: [{ role: 'user', content: 'Напиши короткую историю' }],
     stream: true
   });
@@ -223,7 +223,7 @@ POST https://speshu.ai/api/v1/chat/completions
 
   ```python Python theme={null}
   stream = client.chat.completions.create(
-      model="openai/gpt-4o",
+      model="openai/gpt-5.4",
       messages=[{"role": "user", "content": "Напиши короткую историю"}],
       stream=True
   )
@@ -256,7 +256,7 @@ POST https://speshu.ai/api/v1/chat/completions
   ];
 
   const completion = await openai.chat.completions.create({
-    model: 'openai/gpt-4o',
+    model: 'openai/gpt-5.4',
     messages: messages
   });
 
@@ -280,7 +280,7 @@ POST https://speshu.ai/api/v1/chat/completions
   ]
 
   completion = client.chat.completions.create(
-      model="openai/gpt-4o",
+      model="openai/gpt-5.4",
       messages=messages
   )
 
@@ -293,7 +293,7 @@ POST https://speshu.ai/api/v1/chat/completions
     -H "Authorization: Bearer <SPESHU_AI_API_KEY>" \
     -H "Content-Type: application/json" \
     -d '{
-      "model": "openai/gpt-4o",
+      "model": "openai/gpt-5.4",
       "messages": [
         {"role": "system", "content": "Ты помощник по программированию."},
         {"role": "user", "content": "Как создать массив в JavaScript?"},

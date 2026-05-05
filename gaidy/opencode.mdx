@@ -1,10 +1,8 @@
 ---
 title: "OpenCode"
-description: "Интеграция Speshu с OpenCode — терминальным AI-ассистентом"
+description: "Интеграция SpeShu.AI с OpenCode — терминальным AI-ассистентом"
 icon: "terminal"
 ---
-
-<img src="https://mintcdn.com/polza/7DXGrHr-MeM25YhS/images/opencode.png?fit=max&auto=format&n=7DXGrHr-MeM25YhS&q=85&s=7f39a86c64821e94671669617d1ab07e" alt="OpenCode" width="2510" height="1778" data-path="images/opencode.png" />
 
 [OpenCode](https://opencode.ai) — терминальный AI-ассистент для разработчиков. Работает прямо в терминале, понимает контекст проекта и помогает писать, редактировать и отлаживать код.
 
@@ -40,7 +38,7 @@ icon: "terminal"
 
 ## Быстрая настройка
 
-Используйте скрипт автонастройки для подключения Speshu к OpenCode:
+Используйте скрипт автонастройки для подключения SpeShu.AI к OpenCode:
 
 ```bash theme={null}
 curl -fsSL https://s3.speshu.ai/scripts/opencode.sh | bash
@@ -52,7 +50,7 @@ curl -fsSL https://s3.speshu.ai/scripts/opencode.sh | bash
     </Step>
 
     <Step title="Введите API-ключ">
-        Получите ключ в [личном кабинете](https://speshu.ai/profile/api-keys) и вставьте его в терминал.
+        Получите ключ в [личном кабинете](https://speshu.ai/profile) и вставьте его в терминал.
     </Step>
 
     <Step title="Готово">
@@ -146,7 +144,7 @@ opencode
 
     <Accordion title="Модель не найдена">
         * Проверьте правильность Model ID
-        * Актуальный список моделей: [speshu.ai/models](https://speshu.ai/models)
+        * Актуальный список моделей: [`/v1/models`](/api-reference/models/list)
         * Перезапустите скрипт настройки для обновления списка
     </Accordion>
 
@@ -165,4 +163,4 @@ opencode
 ## Поддержка
 
 * [Документация OpenCode](https://opencode.ai/docs)
-* [Страница поддержки Speshu](/glavnoe/support)
+* [Страница поддержки SpeShu.AI](/support)
